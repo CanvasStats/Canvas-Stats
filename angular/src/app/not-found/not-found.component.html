@@ -1,0 +1,13 @@
+<app-header [year]="2024" [showSearch]="true"/>
+<main>
+    <h2 class="404-error">Something went wrong</h2>
+    <p>Sorry, something went wrong and the page you are looking for can not be found.</p>
+    <p>Here are some pages you might find helpful:</p>
+    <ul>
+        @for (year of years; track $index) {
+            <li><a routerLink="/users" [queryParams]="{year: year}">{{year}} user list</a></li>
+            <li><a routerLink="/graphs" [queryParams]="{year: year}">{{year}} graphs</a></li>
+        }
+    </ul>
+</main>
+<app-footer />

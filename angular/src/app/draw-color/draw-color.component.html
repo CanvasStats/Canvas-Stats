@@ -1,0 +1,8 @@
+<app-header [year]="year" [showSearch]="true"/>
+<main>
+    <p>Here are all of the {{colorName}} pixels drawn durning the {{year}} event.</p>
+    <div class="img-wrapper">
+        <img [src]="imgSRC" [alt]="colorName"/>
+    </div>
+</main>
+<app-footer />

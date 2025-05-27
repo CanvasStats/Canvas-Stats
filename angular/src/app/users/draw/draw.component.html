@@ -1,0 +1,36 @@
+<app-header [year]="year" [showSearch]="true"/>
+@if(!finishedDrawing) {
+    <div class="popup-container">
+        <div class="popup">
+            <app-loading />
+        </div>
+    </div>
+        
+
+}
+@if (errorMessage) {
+        <div class="error rose clickable"  (click)="sendUserToStats()">{{errorMessage}}</div>
+}
+@if (!errorMessage) {
+    <main>
+    <div id="main-canvas">
+    <section id="space-between-wrapper">
+        <button class="btn blue" (click)="sendUserToStats()"><span class="material-symbols-outlined">
+            arrow_back
+        </span> Back to {{username}} {{year}} Stats</button>
+    <button (click)="downloadImage()" class="btn mauve">Download your pixels as a PNG</button>
+    </section>
+    <p>The image below is all of the pixels you placed during the {{year}} event. <span class="responsive-warning">The image
+            might look weird because your browser window is too narrow to display your image in its full width. The
+            downloaded image will look normal.</span></p>
+    
+        <canvas #pixelCanvas id="myCanvas" [height]="canvasHeight" [width]="canvasWidth"></canvas>
+    <hr />
+    <p>If you would like an image created such as the top 100 users, the canvas in reversed order, all pixels from an
+        instance, all pixels within an area, or really any other combination of pixels you can think of, just message <a href="https://sh.itjust.works/u/the_real_monte">&#64;the_real_monte</a>
+        and we'll send you an image of your request.</p>
+</div>
+</main>
+}
+
+<app-footer />

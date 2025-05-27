@@ -1,0 +1,21 @@
+<app-header [year]="year" [showSearch]="true"/>
+    @if (loading) {
+    <app-loading />
+}
+@if (!loading) {
+    @if (searchTerm) {
+        <h2>{{users.length}} usernames matching "{{searchTerm}}" that participated in the {{year}} Canvas event:</h2>
+    }
+    @if (!searchTerm) {
+        <h2>Here are all the users that participated in the {{year}} Canvas event:</h2>
+    }
+    @for (user of users; track user) {
+        <article (click)="goToUser(user.username)">
+            {{user.userRank}}: {{user.username}}
+        </article>
+    }
+    @if (users.length === 0) {
+        <article>0 matches found</article>
+    }
+}
+<app-footer />

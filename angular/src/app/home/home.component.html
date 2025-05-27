@@ -1,0 +1,54 @@
+@if (showYear === 2025) {
+    <app-header [year]="showYear" [showSearch]="false" />
+}
+@if (showYear !== 2025) {
+    <app-header [year]="showYear" [showSearch]="true"/>
+}
+@if (showYear !== 2025) {
+<main>
+    <h2>Welcome to the {{showYear}} Canvas Stats page!</h2>
+    <p>To see how you did during the event, enter your username in the search bar above (if you are unsure of the full username, you can enter a partial username).</p>
+    @for (tag of yearOverview.tags; track tag.id) {
+        @if (tag.type === 'p') {
+            @for (paragraph of tag.content; track $index) {
+                <p>{{paragraph}}</p>
+            }
+        }
+        @if (tag.type === 'ul') {
+            <ul>
+                @for (username of tag.content; track $index) {
+                    <li>{{username}}</li>
+                }
+            </ul>
+        }
+        @if (tag.type == 'colorCounts') {
+            <div class="colors-wrapper">
+            @for (color of yearOverview.colorCounts; track $index) {
+                <span [className]="color.colorVariable" (click)="showColorIMG(color.colorVariable)">{{color.colorName}}: {{color.count}}</span>
+            }
+            </div>
+        }
+    }
+    <section class="btn-wrapper">
+        @for (link of yearOverview.links; track link.id) {
+            @if (link.external) {
+                <a [href]="link.onClick" [className]="link.classes" target="_blank">{{link.linkText}}</a>
+            }
+            @if (!link.external) {
+                <a [routerLink]="link.onClick" [queryParams]="link.queryParams" [queryParamsHandling]="'replace'" [className]="link.classes">{{link.linkText}}</a>
+            }
+        }
+    </section>
+    <img [src]="yearOverview.finalCanvas.imageURL" [alt]="yearOverview.finalCanvas.imageAlt" class="full" />
+</main>
+}
+@if (showYear === 2025) {
+    <main>
+        <div id="coming-soon">
+            <h1>Canvas</h1>
+            <img src="https://raw.githubusercontent.com/TheRealMonte/images/main/2025/logo2025.png" alt="2025" />
+        </div>
+        <p>A date for canvas 2025 has not yet been set.</p>
+    </main>
+}
+<app-footer />

@@ -1,0 +1,100 @@
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { CanvasService } from '../../canvas.service';
+import { ColorsCounts, User } from '../../models';
+import { HeaderComponent } from "../../header/header.component";
+import { LoadingComponent } from "../../loading/loading.component";
+import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
+import { FooterComponent } from "../../footer/footer.component";
+
+class YearStats {
+  constructor(
+    public year: number,
+    public numberOfusers: number,
+    public otherYears: number[]
+  ) { }
+}
+
+@Component({
+  selector: 'app-user-stats',
+  imports: [HeaderComponent, LoadingComponent, CommonModule, FooterComponent],
+  templateUrl: './user-stats.component.html',
+  styleUrl: './user-stats.component.css'
+})
+export class UserStatsComponent implements OnInit {
+  year: number = 0;
+  username: string = "";
+  showResults: boolean = false;
+  user!: User;
+  userColors!: ColorsCounts;
+  wasUserFound: boolean = true;
+  loading: boolean = true;
+  years = [new YearStats(2024, 1914, [2023]), new YearStats(2023, 2208, [2024])];
+  yearStat!: YearStats;
+  buttonColors: string[] = ['btn magenta', 'btn azure', 'btn rust', 'btn red'];
+  queryParamsSubscription: Subscription | undefined;
+
+  constructor(
+    private canvasService: CanvasService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
+
+  ngOnInit(): void {
+    // set the number of users for the year and the other years to link to
+    this.queryParamsSubscription = this.route.queryParams.subscribe(params => {
+      const paramYear = params['year'];
+      if (paramYear) {
+        this.year = +paramYear;
+        let getYearStats = this.years.find(year => {
+          return year.year === this.year;
+        });
+        if (getYearStats != null) {
+          this.yearStat = getYearStats;
+        } else {
+          this.yearStat = this.years[0];
+          this.year = this.yearStat.year;
+        }
+      }
+      // get user data
+      let paramUsername = this.route.snapshot.paramMap.get('username');
+      if (paramUsername) {
+        this.username = paramUsername;
+        this.getUserData(this.year);
+      }
+    });
+
+  }
+
+  getUserData(year: number) {
+    //get user stats execpt for color counts
+    this.canvasService.getUserByUsername(this.year, this.username).subscribe({
+      next: (data) => {
+        this.user = data!;
+        //get color counts for user
+        this.canvasService.getColorCountsForUsername(this.year, this.username).subscribe({
+          next: (data) => {
+            this.userColors = data!;
+            this.loading = false;
+          }
+        });
+      }
+    });
+
+  }
+
+  sendToUsersList() {
+    this.router.navigate(['/users'], { queryParams: { year: this.year } });
+  }
+
+  sendUserToAnotherStatsYear(year: number) {
+    this.canvasService.clearData();
+    this.router.navigate([`./users/${this.username}`], { queryParams: { year: year } });
+  }
+
+  sendUserToDraw() {
+    this.router.navigate([`./users/${this.username}/draw`], { queryParams: { year: this.year } });
+  }
+
+}
