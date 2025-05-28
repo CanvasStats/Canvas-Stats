@@ -46,6 +46,16 @@ body {
     font-family: "Roboto Slab", serif;
     overscroll-behavior: none;
     position: relative;
+    z-index: 1;
+}
+
+body.no-scroll-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Still needed to prevent scroll on the body itself */
 }
 
 header {
@@ -427,12 +437,17 @@ a {
     nav a, .changeYear {
         background-color: var(--nav-background-color);
         color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 45%;
+         height: 50px;
         font-size: 20px;
-        padding: 20px 0;
         margin: 5px;
-        text-align: center;
         text-decoration: none;
+        box-sizing: border-box;
+        text-align: center;
+        border: 0;
     }
     .search-wrapper {
         flex-wrap: wrap;

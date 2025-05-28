@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CanvasService } from '../canvas.service';
 
 @Component({
@@ -13,17 +13,21 @@ import { CanvasService } from '../canvas.service';
 export class HeaderComponent implements OnInit {
   @Input() selectedYear: number = 2024;
   @Input() username: string = '';
-  searchString: string = '';
   @Input() showSearch: boolean = true;
   years: number[] = [];
+  showChangeYear: boolean = false;
+  searchString: string = '';
+  private scrollbarWidth: number = 0;
+  
   constructor(
     private router: Router,
-    private canvasService: CanvasService
+    private canvasService: CanvasService,
+    private activatedRoute: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
-    this.years = this.canvasService.years;
-    console.log(this.years);
+    console.log(`header componet is reloading. selected year is ${this.selectedYear}`)
+    this.years = this.canvasService.years.filter(year => year != this.selectedYear);
   }
 
   onSubmit() {
@@ -44,8 +48,21 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['./'], { queryParams: { year: this.selectedYear } })
   }
 
-  changeYear(year: number) {
-    this.canvasService.clearData();
-    this.router.navigate(['./'], { queryParams: {year: year} })
+  changeYear(year: number): void {
+    this.selectedYear = year;
+    this.showChangeYear = false;
+    document.body.classList.remove('no-scroll-fixed');
+    this.years = this.canvasService.years.filter(year => year != this.selectedYear);
+    this.router.navigate(['./'], {
+      relativeTo: this.activatedRoute,
+      queryParams: { year: this.selectedYear },
+      queryParamsHandling: 'merge'
+    });
+  }
+
+  showYearSelection() {
+    document.body.classList.add('no-scroll-fixed');
+    this.showChangeYear = true;
+    console.log("Change Year should be open")
   }
 }

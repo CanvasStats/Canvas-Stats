@@ -10,7 +10,7 @@ export class CanvasService {
     private userDataCache: User[] | null = null;
     private userColorCountDataCashe: ColorsCounts[] | null = null;
     private year: number = 0;
-    years: number[] = [2024, 2023];
+    years: number[] = [2024, 2023, 2025];
 
     constructor(private http: HttpClient) { }
 
