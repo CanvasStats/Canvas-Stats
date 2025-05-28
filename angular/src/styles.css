@@ -82,8 +82,7 @@ header h1 {
     justify-content: center;
     flex-wrap: nowrap;
 }
-input[type="text"],
-select {
+input[type="text"] {
     width: 70%;
     padding: 12px 20px;
     display: inline-block;
@@ -358,12 +357,18 @@ a {
         justify-content: space-around;
     }
 
-    nav a {
+    nav a, .changeYear {
         margin: 0 10px;
         color: white;
         font-size: 20px;
         text-decoration: none;
         position: relative;
+    }
+
+    .changeYear {
+        background-color: transparent;
+        border: 0;
+        cursor: pointer;
     }
 
     nav a,
@@ -419,7 +424,7 @@ a {
         border-radius: 5px;
     }
 
-    nav a {
+    nav a, .changeYear {
         background-color: var(--nav-background-color);
         color: white;
         width: 45%;

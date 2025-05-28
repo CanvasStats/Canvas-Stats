@@ -1,8 +1,8 @@
 @if (showYear === 2025) {
-    <app-header [year]="showYear" [showSearch]="false" />
+    <app-header [selectedYear]="showYear" [showSearch]="false" />
 }
 @if (showYear !== 2025) {
-    <app-header [year]="showYear" [showSearch]="true"/>
+    <app-header [selectedYear]="showYear" [showSearch]="true"/>
 }
 @if (showYear !== 2025) {
 <main>
