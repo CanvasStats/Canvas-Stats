@@ -32,7 +32,7 @@
 
 @font-face {
   font-family: icons;
-  src: url("https://github.com/TheRealMonte/therealmonte.github.io/raw/refs/heads/main/icons.ttf") format("opentype");
+  src: url('https://github.com/TheRealMonte/therealmonte.github.io/raw/refs/heads/main/fonts/icons.ttf') format("opentype");
 }
 
 
@@ -90,24 +90,6 @@ header h1 {
     bottom: 0;
     right: 0;
     z-index: 2;
-}
-
-.search-wrapper {
-    max-width: 900px;
-    margin: 10px auto;
-    display: flex;
-    justify-content: center;
-    flex-wrap: nowrap;
-}
-input[type="text"] {
-    width: 70%;
-    padding: 12px 20px;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    background-color: var(--main-background-color);
-    color: var(--body-color);
 }
 
 .active {
@@ -456,9 +438,7 @@ a {
         text-align: center;
         border: 0;
     }
-    .search-wrapper {
-        flex-wrap: wrap;
-    }
+   
     input[type="text"],
     select {
         width: 100%;
