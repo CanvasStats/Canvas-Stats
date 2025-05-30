@@ -30,13 +30,6 @@
     }
 }
 
-@font-face {
-  font-family: icons;
-  src: url('https://github.com/TheRealMonte/therealmonte.github.io/raw/refs/heads/main/fonts/icons.ttf') format("opentype");
-}
-
-
-
 .material-symbols-outlined {
     vertical-align: middle !important;
     line-height: 1 !important;

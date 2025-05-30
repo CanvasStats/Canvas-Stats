@@ -56,23 +56,6 @@
     color: var(--main-background-color);
 }
 
-.custom-icon {
-      font-family: icons;
-      font-style: normal;
-      font-weight: normal;
-      display: inline-block;
-      text-decoration: inherit;
-      width: 1em;
-      margin-right: 10px;
-      text-align: center;
-      font-variant: normal;
-      text-transform: none;
-      line-height: 1em;
-      margin-left: .2em;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
 @media only screen and (max-width: 720px) {
     .changeYearPopup ul {
         flex-direction: column;
@@ -88,17 +71,11 @@
         flex-grow: 1;
         width: 100%;
     }
-    .mobile-icon {
-        margin-right: 10px;
-    }
 }
 
 @media only screen and (min-width: 721px) {
     .search-form-group {
         margin: 20px auto;
-    }
-    .mobile-icon, .custom-icon {
-        display: none;
     }
 }
 
