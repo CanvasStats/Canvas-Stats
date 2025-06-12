@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.showYear = +paramYear;
         this.loadOverviewData(this.showYear);
       } else {
-        this.showYear = 2024;
+        this.showYear = 2025;
         this.loadOverviewData(this.showYear);
       }
     });
