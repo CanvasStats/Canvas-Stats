@@ -365,11 +365,15 @@ a {
 
     nav a,
     nav a:after,
-    nav a:before {
+    nav a:before,
+    .changeYear,
+    .changeYear:after,
+    .changeYear:before {
         transition: all 0.5s;
     }
 
-    nav a:after {
+    nav a:after,
+    .changeYear:after {
         position: absolute;
         bottom: 0;
         left: 0;
@@ -382,7 +386,8 @@ a {
         height: 1px;
     }
 
-    nav a:hover:after {
+    nav a:hover:after,
+    .changeYear:hover:after {
         width: 100%;
     }
     .btn {
@@ -397,6 +402,9 @@ a {
 }
 
 @media only screen and (max-width: 720px) {
+    .changeYearPopup ul {
+        flex-direction: column;
+    }
     header h1 {
         font-size: 40px;
     }
@@ -442,4 +450,62 @@ a {
     .large-screens-only {
         display: none;
     }
+}
+
+.changeYearContainer {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.75);
+    overflow: hidden;
+    padding-right: var(--scrollbar-width, 0);
+}
+
+.changeYearPopup {
+    text-align: center;
+    margin: 20px;
+    width: 900px;
+    z-index: 3;
+    background-color: var(--main-background-color);
+    padding: 20px;
+    border-radius: 5px;
+    font-size: 25px;
+}
+
+.changeYearPopup ul {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.changeYearPopup ul li {
+    flex: 1;
+    text-align: center;
+    background-color: transparent;
+}
+
+.changeYearPopup ul li button {
+    width: 100%;
+    height: 100%;
+    font-size: 25px;
+    padding: 10px;
+    background-color: var(--nav-background-color);
+    color: white;
+    border: 0;
+    cursor: pointer;
+}
+
+.changeYearPopup ul button:hover {
+    background-color: var(--body-color);
+    color: var(--main-background-color);
 }

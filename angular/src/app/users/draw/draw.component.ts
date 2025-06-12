@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CanvasService } from '../../canvas.service';
-import { Pixel } from '../../models';
 import { Subject, takeUntil } from 'rxjs';
 import { HeaderComponent } from "../../header/header.component";
 import { LoadingComponent } from "../../loading/loading.component";

@@ -26,7 +26,6 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(`header componet is reloading. selected year is ${this.selectedYear}`)
     this.years = this.canvasService.years.filter(year => year != this.selectedYear);
   }
 

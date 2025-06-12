@@ -6,6 +6,9 @@
 }
 @if (showYear !== 2025) {
 <main>
+    @if (error) {
+        <p>{{error}}</p>
+    }
     <h2>Welcome to the {{showYear}} Canvas Stats page!</h2>
     <p>To see how you did during the event, enter your username in the search bar above (if you are unsure of the full username, you can enter a partial username).</p>
     @for (tag of yearOverview.tags; track tag.id) {
@@ -48,8 +51,36 @@
             <h1>Canvas</h1>
             <img src="https://raw.githubusercontent.com/TheRealMonte/images/main/2025/logo2025.png" alt="2025" />
         </div>
-        <p>A date for canvas 2025 has not yet been set.</p>
-        <p>Grant has said it will be sometime during the months of June - August.</p>
+        @if (!eventInProgress) {
+            <h2 style="text-align: center;">Starting in {{ timeRemaining.days }}d {{ timeRemaining.hours }}h {{ timeRemaining.minutes }}m {{ timeRemaining.seconds }}s</h2>
+            <p><a [href]="canvas2025?.endpoints?.open" target="_blank">Canvas 2025</a> will take place {{start}} through {{end}}. This website will have semi-frequent updates on the state of the canvas during the event and hopefully live user rankings. More info about the event can be found on <a [href]="canvas2025?.endpoints?.more_info" target="_blank">Fediverse.events</a>.</p>
+        }
+        @if (eventInProgress) {
+            <h2>The event has started!</h2>
+            <p>Go to the <a [href]="canvas2025?.endpoints?.open">canvas website</a> and place some pixels!</p>
+            <p>Live rankings and stats coming soon. Check back later.</p>
+        }
+        
+        <p>Follow canvas on socials for updates:</p>
+        <ul>
+            @for (social of canvas2025?.social; track $index) {
+                <li><a [href]="social.url" target="_blank">{{social.icon}}</a></li>
+            }
+        </ul>
+        <section class="btn-wrapper"><button class="btn green" (click)="showYearSelection()">View Previous Year's Stats</button></section>
     </main>
 }
 <app-footer />
+
+@if (showChangeYear) {
+    <div class="changeYearContainer">
+        <div class="changeYearPopup">
+            <h2>Select a year:</h2>
+            <ul>
+                @for (year of years; track $index) {
+                <li><button (click)="changeYear(year)">{{year}}</button></li>
+            }
+            </ul>
+        </div>
+    </div>
+}
