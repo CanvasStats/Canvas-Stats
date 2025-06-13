@@ -2,21 +2,20 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Event } from './event.model';
+import { Beta } from './beta.model';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class CanvasEventsService {
-    private canvas2025: string = "https://api.fediverse.events/v1/events/CANVAS-2025";
+export class BetaService {
+  private url: string = "https://raw.githubusercontent.com/TheRealMonte/data-files/refs/heads/main/2025/beta-data.json"
 
   constructor(private http: HttpClient) { }
 
-
-  getData(): Observable<Event> {
-    return this.http.get<Event>(this.canvas2025).pipe(
+  getData(): Observable<Beta> {
+    return this.http.get<Beta>(this.url).pipe(
       catchError(this.handleError)
-    );
+    )
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -29,4 +28,5 @@ export class CanvasEventsService {
     console.error(errorMessage);
     return throwError(() => new Error(errorMessage));
   }
+  
 }

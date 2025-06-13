@@ -1,0 +1,16 @@
+<app-header [selectedYear]="year" [showSearch]="false" />
+<main>
+    @if (error) {
+        <p>{{error}}</p>
+    }
+    <h2>The Beta Canvas ({{betaData?.canvasXDimension}}px X {{betaData?.canvasYDimension}}px) as of {{betaData?.timestamp}}</h2>
+    <p>The canvas is {{betaData?.percentCovered}} covered.</p>
+    <p>Here are the color counts:</p>
+    <div class="colors-wrapper">
+    @for (color of betaData?.colors; track $index) {
+        <span [class]="color.className">{{color.name}}: {{color.count}}</span>
+    }
+    </div>
+</main>
+
+<app-footer />
