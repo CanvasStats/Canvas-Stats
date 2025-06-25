@@ -1,86 +1,206 @@
 @if (showYear === 2025) {
-    <app-header [selectedYear]="showYear" [showSearch]="false" />
+<app-header [selectedYear]="showYear" [showSearch]="false" />
 }
 @if (showYear !== 2025) {
-    <app-header [selectedYear]="showYear" [showSearch]="true"/>
+<app-header [selectedYear]="showYear" [showSearch]="true" />
 }
 @if (showYear !== 2025) {
 <main>
+
     @if (error) {
-        <p>{{error}}</p>
+    <p>{{error}}</p>
     }
-    <h2>Welcome to the {{showYear}} Canvas Stats page!</h2>
-    <p>To see how you did during the event, enter your username in the search bar above (if you are unsure of the full username, you can enter a partial username).</p>
-    @for (tag of yearOverview.tags; track tag.id) {
-        @if (tag.type === 'p') {
-            @for (paragraph of tag.content; track $index) {
-                <p>{{paragraph}}</p>
-            }
-        }
-        @if (tag.type === 'ul') {
-            <ul>
-                @for (username of tag.content; track $index) {
-                    <li>{{username}}</li>
+    @if (showYear != 2025) {
+    <article class="left">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                person
+            </span>
+        </div>
+        <section>
+            <p class="text">{{yearStat?.userCount}} users from {{yearStat?.instanceCount}} instances placed pixels on
+                the canvas</p>
+        </section>
+    </article>
+    <article class="right">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                grid_view
+            </span>
+        </div>
+        <section>
+            <p class="text">{{yearStat?.totalPixels}} total pixels placed on the canvas</p>
+        </section>
+    </article>
+    <article class="right">
+        <section>
+            <h3 style="text-align: center;">Pixels by color <br />(click on the color to view all of the pixels of
+                that color)</h3>
+            <div class="colors-wrapper">
+                @for (color of yearStat?.colorCounts; track $index) {
+                <span [className]="color.colorVariable" (click)="showColorIMG(color.colorVariable)">{{color.colorName}}:
+                    {{color.count}}</span>
+                }
+            </div>
+        </section>
+    </article>
+    <article class="left">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                layers
+            </span>
+        </div>
+        <section>
+            <p class="text">409046 are the final pixels on the
+                canvas, making the canvas 81.8092% covered at the end of the event</p>
+        </section>
+    </article>
+    <article class="right">
+        <section>
+            <h3 style="text-align: center;">Pixels placed per minute</h3>
+            <a [href]="yearStat?.pixelPerMinuteURL" target="_blank" title="Click to enlarge"><img class="graph" [src]="yearStat?.pixelPerMinuteURL" alt="a graph of the pixels placed per minute" /></a>
+        </section>
+    </article>
+    <article class="right">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                kid_star
+            </span>
+        </div>
+        <section>
+            <p class="text">{{yearStat?.topCoordinateCount}} pixels were placed at {{yearStat?.topCoordinate}} making it
+                the coordinate with the most
+                pixels
+        </section>
+    </article>
+    <article class="right">
+        <section>
+            <p class="text">The users that contributed to the top pixel were:</p>
+            <ul class="top-users">
+                @for (user of yearStat?.topCoordinateUsers; track $index) {
+                <li>{{user}}</li>
                 }
             </ul>
-        }
-        @if (tag.type == 'colorCounts') {
-            <div class="colors-wrapper">
-            @for (color of yearOverview.colorCounts; track $index) {
-                <span [className]="color.colorVariable" (click)="showColorIMG(color.colorVariable)">{{color.colorName}}: {{color.count}}</span>
-            }
-            </div>
-        }
+        </section>
+    </article>
+    <article class="right">
+        <section>
+            <h3 style="text-align: center;">Pixel Heat Map</h3>
+            <a [href]="yearStat?.pixelHeatMapURL" target="_blank" title="Click to enlarge"><img class="graph" [src]="yearStat?.pixelHeatMapURL" alt="heat map of the pixels placed" /></a>
+        </section>
+    </article>
+    <article class="left">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                delete
+            </span>
+        </div>
+        <section>
+            <p class="text">{{yearStat?.pixelsDeleted}} pixels were deleted by {{yearStat?.usersWhoDeleted}} users
+            </p>
+        </section>
+    </article>
+    @if (yearStat?.usersDeletedAll) {
+    <article class="right">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                delete_forever
+            </span>
+        </div>
+        <section>
+            <p class="text">{{yearStat?.usersDeletedAll}} users deleted every pixel they placed</p>
+        </section>
+    </article>
+    <article class="left">
+        <section>
+            <a [href]="yearStat?.canvasImageURL" target="_blank" title="Click to enlarge"><img class="graph" [src]="yearStat?.canvasImageURL" alt="The final canvas" /></a>
+        </section>
+    </article>
     }
-    <section class="btn-wrapper">
-        @for (link of yearOverview.links; track link.id) {
-            @if (link.external) {
-                <a [href]="link.onClick" [className]="link.classes" target="_blank">{{link.linkText}}</a>
-            }
-            @if (!link.external) {
-                <a [routerLink]="link.onClick" [queryParams]="link.queryParams" [queryParamsHandling]="'replace'" [className]="link.classes">{{link.linkText}}</a>
-            }
-        }
-    </section>
-    <img [src]="yearOverview.finalCanvas.imageURL" [alt]="yearOverview.finalCanvas.imageAlt" class="full" />
+    @if (yearStat?.canvasAtlasURL) {
+        <section class="btn-wrapper">
+            <p class="text"><a [href]="yearStat?.canvasAtlasURL" target="_blank" class="btn aqua">View the {{showYear}} Atlas</a></p>
+        </section>
+    }
+    }
 </main>
 }
 @if (showYear === 2025) {
-    <main>
-        <div id="coming-soon">
-            <h1>Canvas</h1>
-            <img src="https://raw.githubusercontent.com/TheRealMonte/images/main/2025/logo2025.png" alt="2025" />
+<main>
+    <h2 style="text-align: center;"></h2>
+    @if (!eventInProgress) {
+    <article class="left">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                calendar_today
+            </span>
         </div>
-        @if (!eventInProgress) {
-            <h2 style="text-align: center;">Starting in {{ timeRemaining.days }}d {{ timeRemaining.hours }}h {{ timeRemaining.minutes }}m {{ timeRemaining.seconds }}s</h2>
-            <p><a [href]="canvas2025?.endpoints?.open" target="_blank">Canvas 2025</a> will take place {{start}} through {{end}}. This website will have semi-frequent updates on the state of the canvas during the event and hopefully live user rankings. More info about the event can be found on <a [href]="canvas2025?.endpoints?.more_info" target="_blank">Fediverse.events</a>.</p>
-        }
-        @if (eventInProgress) {
-            <h2>The event has started!</h2>
-            <p>Go to the <a [href]="canvas2025?.endpoints?.open">canvas website</a> and place some pixels!</p>
-            <p>Live rankings and stats coming soon. Check back later.</p>
-        }
-        
-        <p>Follow canvas on socials for updates:</p>
-        <ul>
-            @for (social of canvas2025?.social; track $index) {
+        <section>
+            <p class="text">
+                <a [href]="canvas2025?.endpoints?.open" target="_blank">Canvas 2025</a> will take place {{start}}
+                through {{end}}
+            </p>
+        </section>
+    </article>
+    <article class="right">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                hourglass_bottom
+            </span>
+        </div>
+        <section>
+            <p class="countdown">
+                Starting in {{ timeRemaining.days }}d {{ timeRemaining.hours }}h {{ timeRemaining.minutes }}m {{
+                timeRemaining.seconds }}s
+            </p>
+        </section>
+    </article>
+
+    <article class="left">
+        <section>
+            <p class="text">
+                This website will have semi-frequent updates on the state of the canvas during the event and hopefully
+                live user rankings.
+            </p>
+            <p class="text">
+                More info about the event can be found on <a [href]="canvas2025?.endpoints?.more_info"
+                    target="_blank">Fediverse.events</a>
+            </p>
+            <p class="text">Follow canvas on socials for updates:</p>
+            <ul class="top-users">
+                @for (social of canvas2025?.social; track $index) {
                 <li><a [href]="social.url" target="_blank">{{social.icon}}</a></li>
-            }
-        </ul>
-        <section class="btn-wrapper"><button class="btn green" (click)="showYearSelection()">View Previous Year's Stats</button></section>
-    </main>
+                }
+            </ul>
+        </section>
+    </article>
+    }
+    @if (eventInProgress) {
+        <article class="left">
+            <section>
+                <p class="text">
+                    The event has started!
+                </p>
+                <p class="text">Go to the <a [href]="canvas2025?.endpoints?.open">canvas website</a> and place some pixels!</p>
+                <p class="text">Live rankings and stats coming soon. Check back later.</p>
+            </section>
+        </article>
+    }
+    <section class="btn-wrapper"><button class="btn green" (click)="showYearSelection()">View Previous Year's
+            Stats</button></section>
+</main>
 }
 <app-footer />
 
 @if (showChangeYear) {
-    <div class="changeYearContainer">
-        <div class="changeYearPopup">
-            <h2>Select a year:</h2>
-            <ul>
-                @for (year of years; track $index) {
-                <li><button (click)="changeYear(year)">{{year}}</button></li>
+<div class="changeYearContainer">
+    <div class="changeYearPopup">
+        <h2>Select a year:</h2>
+        <ul>
+            @for (year of years; track $index) {
+            <li><button (click)="changeYear(year)">{{year}}</button></li>
             }
-            </ul>
-        </div>
+        </ul>
     </div>
+</div>
 }

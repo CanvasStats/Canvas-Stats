@@ -102,3 +102,24 @@ export class Image {
         public imageAlt: string
     ) {}
 }
+
+export class YearStat {
+    constructor(
+        public userCount: number,
+        public instanceCount: number,
+        public totalPixels: number,
+        public colorCounts: ColorCount[],
+        public topPixels: number,
+        public percentCovered: number,
+        public pixelPerMinuteURL: string,
+        public topCoordinate: string,
+        public topCoordinateCount: number,
+        public topCoordinateUsers: string[],
+        public pixelHeatMapURL: string,
+        public pixelsDeleted: number,
+        public usersWhoDeleted: number,
+        public usersDeletedAll: number | undefined,
+        public canvasImageURL: string,
+        public canvasAtlasURL: string | undefined
+    ) {}
+}

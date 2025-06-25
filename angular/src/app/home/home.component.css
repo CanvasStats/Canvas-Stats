@@ -27,19 +27,15 @@
     margin: 10px auto;
 }
 
-#coming-soon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+
+@media only screen and (max-width: 720px) {
+    .countdown {
+    font-size: 40px
 }
-#coming-soon img {
-    height: 70px;
 }
 
-#coming-soon h1 {
-    font-size: 100px;
-    margin: 0 10px;
-    font-family: "Pixelify Sans", sans-serif;
-    color: var(--body-color);
+@media only screen and (min-width: 721px) {
+    .countdown {
+    font-size: 50px;
+}
 }

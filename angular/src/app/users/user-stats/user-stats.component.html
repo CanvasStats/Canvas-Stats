@@ -1,68 +1,121 @@
-<app-header [selectedYear]="year" [showSearch]="true"/>
+<app-header [selectedYear]="year" [showSearch]="true" />
 @if (loading) {
-    <app-loading />
+<app-loading />
 }
 
-    @if (!loading) {
-        
-        @if (user) {
-            <main>
-        <h2>Hello, {{user.username}}! Here is how you did in {{year}}</h2>
-        <p>Your ranking: {{user.userRank}} out of {{yearStat.numberOfusers}} users.</p>
-        <p>The coordinate you placed the most pixels on was ({{user.xCord}}, {{user.yCord}}) - {{user.cordCount}} times (including the pixels you deleted).</p>
-        <p>You placed {{user.pixelCount}} pixels throughout the event! Here is how many of each color you placed:</p>
-        <div class="colors-wrapper">
-            <span class="white count">White: {{userColors.white}}</span>
-            <span class="count light-grey">Light Grey: {{userColors.lightGrey}}</span>
-            <span class="count medium-grey">Medium Grey: {{userColors.mediumGrey}}</span>
-            <span class="count deep-grey">Deep Grey: {{userColors.deepGrey}}</span>
-            <span class="count dark-grey">Dark Grey: {{userColors.darkGrey}}</span>
-            <span class="count black">Black: {{userColors.black}}</span>
-            @if (year !== 2023) {
-                <span class="count dark-chocolate">Dark Chocolate: {{userColors.darkChocolate}}</span>
-            }
-            <span class="count chocolate">Chocolate: {{userColors.chocolate}}</span>
-            <span class="count brown">Brown: {{userColors.brown}}</span>
-            <span class="count peach">Peach: {{userColors.peach}}</span>
-            <span class="count beige">Beige: {{userColors.beige}}</span>
-            <span class="count pink">Pink: {{userColors.pink}}</span>
-            <span class="count magenta">Magenta: {{userColors.magenta}}</span>
-            <span class="count mauve">Mauve: {{userColors.mauve}}</span>
-            <span class="count purple">Purple: {{userColors.purple}}</span>
-            @if (year !== 2023) {
-                <span class="count dark-purple">Dark Purple: {{userColors.darkPurple}}</span>
-            }
-            <span class="count navy">Navy: {{userColors.navy}}</span>
-            <span class="count blue">Blue: {{userColors.blue}}</span>
-            <span class="count azure">Azure: {{userColors.azure}}</span>
-            <span class="count aqua">Aqua: {{userColors.aqua}}</span>
-            <span class="count light-teal">Light Teal: {{userColors.lightTeal}}</span>
-            <span class="count dark-teal">Dark Teal: {{userColors.darkTeal}}</span>
-            <span class="count forest">Forest: {{userColors.forest}}</span>
-            <span class="count dark-green">Dark Green: {{userColors.darkGreen}}</span>
-            <span class="count green">Green: {{userColors.green}}</span>
-            <span class="count lime">Lime: {{userColors.lime}}</span>
-            <span class="count pastel-yellow">Pastel Yellow: {{userColors.pastelYellow}}</span>
-            <span class="count yellow">Yellow: {{userColors.yellow}}</span>
-            <span class="count orange">Orange: {{userColors.orange}}</span>
-            <span class="count rust">Rust: {{userColors.rust}}</span>
-            <span class="count maroon">Maroon: {{userColors.maroon}}</span>
-            <span class="count rose">Rose: {{userColors.rose}}</span>
-            <span class="count red">Red: {{userColors.red}}</span>
-            <span class="count watermelon">Watermelon: {{userColors.watermelon}}</span>
+@if (!loading) {
+
+@if (user) {
+<main>
+    <article class="left">
+        <div class="icon">
+            <h2>{{user.userRank}}</h2>
         </div>
-        <section class="btn-wrapper">
-                <button (click)="sendUserToDraw()" class="btn dark-green">Your pixels placed in {{year}}</button>
-            @for (yearLink of yearStat.otherYears; track $index) {
-                 <button (click)="sendUserToAnotherStatsYear(yearLink)" [ngClass]="buttonColors[$index]">Your {{yearLink}} Stats</button>
-            }
+        <section>
+            <p class="text">You ranked {{user.userRank}} out of {{yearStat.numberOfusers}} users in {{year}}</p>
         </section>
-        </main>
-    }
-    }
-    @if (!user) {
-        <main>
-        <p>Sorry, it looks like you didn't place any pixels during the {{year}} event. <a (click)="sendToUsersList()" class="link">Click here</a> to view the list of users for {{year}} and see if you can find your username. If you still can't find your username and you truely believe you did participate in 2024, send a DM to <a href="https://sh.itjust.works/u/the_real_monte">&#64;the_real_monte</a> and we can check the database.</p>
-        </main>
-    }
+    </article>
+    <article class="right">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                grid_view
+            </span>
+        </div>
+        <section>
+            <p class="text">
+                You placed {{user.pixelCount}} pixels throughout the event
+            </p>
+        </section>
+    </article>
+    <article class="left">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                kid_star
+            </span>
+        </div>
+        <section>
+            <p class="text">
+                The coordinate you placed the most pixels on was ({{user.xCord}}, {{user.yCord}}) - {{user.cordCount}}
+                times (including the pixels you deleted)
+            </p>
+        </section>
+    </article>
+    <article class="left">
+        <section>
+            <h3 style="text-align: center;">Here is how many of each color you placed:</h3>
+            <div class="colors-wrapper">
+                <span class="white count">White: {{userColors.white}}</span>
+                <span class="count light-grey">Light Grey: {{userColors.lightGrey}}</span>
+                <span class="count medium-grey">Medium Grey: {{userColors.mediumGrey}}</span>
+                <span class="count deep-grey">Deep Grey: {{userColors.deepGrey}}</span>
+                <span class="count dark-grey">Dark Grey: {{userColors.darkGrey}}</span>
+                <span class="count black">Black: {{userColors.black}}</span>
+                @if (year !== 2023) {
+                <span class="count dark-chocolate">Dark Chocolate: {{userColors.darkChocolate}}</span>
+                }
+                <span class="count chocolate">Chocolate: {{userColors.chocolate}}</span>
+                <span class="count brown">Brown: {{userColors.brown}}</span>
+                <span class="count peach">Peach: {{userColors.peach}}</span>
+                <span class="count beige">Beige: {{userColors.beige}}</span>
+                <span class="count pink">Pink: {{userColors.pink}}</span>
+                <span class="count magenta">Magenta: {{userColors.magenta}}</span>
+                <span class="count mauve">Mauve: {{userColors.mauve}}</span>
+                <span class="count purple">Purple: {{userColors.purple}}</span>
+                @if (year !== 2023) {
+                <span class="count dark-purple">Dark Purple: {{userColors.darkPurple}}</span>
+                }
+                <span class="count navy">Navy: {{userColors.navy}}</span>
+                <span class="count blue">Blue: {{userColors.blue}}</span>
+                <span class="count azure">Azure: {{userColors.azure}}</span>
+                <span class="count aqua">Aqua: {{userColors.aqua}}</span>
+                <span class="count light-teal">Light Teal: {{userColors.lightTeal}}</span>
+                <span class="count dark-teal">Dark Teal: {{userColors.darkTeal}}</span>
+                <span class="count forest">Forest: {{userColors.forest}}</span>
+                <span class="count dark-green">Dark Green: {{userColors.darkGreen}}</span>
+                <span class="count green">Green: {{userColors.green}}</span>
+                <span class="count lime">Lime: {{userColors.lime}}</span>
+                <span class="count pastel-yellow">Pastel Yellow: {{userColors.pastelYellow}}</span>
+                <span class="count yellow">Yellow: {{userColors.yellow}}</span>
+                <span class="count orange">Orange: {{userColors.orange}}</span>
+                <span class="count rust">Rust: {{userColors.rust}}</span>
+                <span class="count maroon">Maroon: {{userColors.maroon}}</span>
+                <span class="count rose">Rose: {{userColors.rose}}</span>
+                <span class="count red">Red: {{userColors.red}}</span>
+                <span class="count watermelon">Watermelon: {{userColors.watermelon}}</span>
+            </div>
+        </section>
+    </article>
+
+    <section class="btn-wrapper">
+        <button (click)="sendUserToDraw()" class="btn dark-green">Your pixels placed in {{year}}</button>
+        @for (yearLink of yearStat.otherYears; track $index) {
+        <button (click)="sendUserToAnotherStatsYear(yearLink)" [ngClass]="buttonColors[$index]">Your {{yearLink}}
+            Stats</button>
+        }
+    </section>
+</main>
+}
+}
+@if (!user) {
+<main>
+    <article class="left">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                person_cancel
+            </span>
+        </div>
+        <section>
+            <p class="text">Sorry, it looks like you didn't place any pixels during the {{year}} event</p>
+        </section>
+    </article>
+    <article class="left">
+        <section>
+            <p class="text"><a (click)="sendToUsersList()"
+            class="link">Click here</a> to view the list of users for {{year}} and see if you can find your username</p>
+            <p class="text">If you still can't find your username and you truely believe you did participate in 2024, send a DM to <a
+            href="https://sh.itjust.works/u/the_real_monte">&#64;the_real_monte</a> and we can check the database.</p>
+        </section>
+    </article>
+</main>
+}
 <app-footer />

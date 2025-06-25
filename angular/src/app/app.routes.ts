@@ -4,7 +4,6 @@ import { UsersComponent } from './users/users.component';
 import { UserStatsComponent } from './users/user-stats/user-stats.component';
 import { DrawComponent } from './users/draw/draw.component';
 import { DrawColorComponent } from './draw-color/draw-color.component';
-import { GraphsComponent } from './graphs/graphs.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { BetaComponent } from './beta/beta.component';
 
@@ -14,7 +13,6 @@ export const routes: Routes = [
     {path: 'users/:username', component: UserStatsComponent},
     {path: 'users/:username/draw', component: DrawComponent},
     {path: 'draw', component: DrawColorComponent},
-    {path: 'graphs', component: GraphsComponent},
     {path: 'beta', component: BetaComponent},
     {path: 'not-found', component: NotFoundComponent},
     {path: '**', component: NotFoundComponent}

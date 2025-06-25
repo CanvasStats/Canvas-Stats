@@ -1,15 +1,10 @@
-import { Overview, Tag, ColorCount, Link, Image } from "../models";
+import { ColorCount, YearStat } from "../models";
 
-const canvas2024: Overview = new Overview(
-    2024,
-    new Image(1, 'https://raw.githubusercontent.com/TheRealMonte/images/main/2024/final2024.png', 'Final Canvas 2024'),
-    [
-        new Tag(1, 'p', ['1912 users from 305 instances participated in the event in 2024.', 'There were 642643 pixels placed on the canvas. Of those pixels, 409046 are the final pixels on the canvas, making the canvas 81.8092% covered at the end of the event. Here are the counts for each color pixel placed, click on the color to view all of the pixels of that color:']),
-        new Tag(2, 'colorCounts', []),
-        new Tag(3, 'p', ['The coordinate with the most pixels placed on was (10,262) with 1427 placed. The users who placed pixels on (10,262) are:']),
-        new Tag(4, 'ul', ['142446@toast.ooo: 1414 times', 'Kelo@lemmy.world: 7 times', 'hemko@lemmy.dbzer0.com: 2 times', 'ategon@programming.dev: 1 time', 'grant@grants.cafe: 1 time', 'EXtremeExploit@lemmy.world: 1 time', 'hdggDalton@toast.ooo: 1 time']),
-        new Tag(5, 'p', ['1101 users deleted a total of 15724 pixels. 13 users deleted all of their pixels.'])
-    ],
+
+export const canvas2024: YearStat = new YearStat(
+    1912,
+    305,
+    642643,
     [
         new ColorCount('white', 'White', 55152),
         new ColorCount('light-grey', 'Light Grey', 20011),
@@ -45,24 +40,33 @@ const canvas2024: Overview = new Overview(
         new ColorCount('rose', 'Rose', 8750),
         new ColorCount('red', 'Red', 54053),
         new ColorCount('watermelon', 'Watermelon', 3711)
-    ],
+      ],
+    409046,
+    81.8092,
+    "https://raw.githubusercontent.com/TheRealMonte/images/main/2024/graphs/pixels-placed-per-minute.png",
+    "(10,262)",
+    1427,
     [
-        new Link(1, 'View the 2024 Graphs', '/graphs', 'btn azure', false, {year: '2024'}),
-        new Link(2, 'View the 2024 Atlas', 'https://atlas.mariusdavid.fr', 'btn dark-purple', true)
-    ]
-
+        '142446@toast.ooo: 1414 times', 
+        'Kelo@lemmy.world: 7 times', 
+        'hemko@lemmy.dbzer0.com: 2 times', 
+        'ategon@programming.dev: 1 time', 
+        'grant@grants.cafe: 1 time', 
+        'EXtremeExploit@lemmy.world: 1 time', 
+        'hdggDalton@toast.ooo: 1 time'
+    ],
+    "https://raw.githubusercontent.com/TheRealMonte/images/main/2024/graphs/heatmap-with-legend.png",
+    15724,
+    1101,
+    13,
+    'https://raw.githubusercontent.com/TheRealMonte/images/main/2024/final2024.png',
+    "https://atlas.mariusdavid.fr/"
 );
 
-const canvas2023: Overview = new Overview(
-    2023,
-    new Image(1, 'https://raw.githubusercontent.com/TheRealMonte/images/main/2023/final2023.png', 'Final Canvas 2023',),
-    [
-        new Tag(1, 'p', ['2208 users from 132 instances participated in the event in 2023.', 'There were 628416 pixels placed on the canvas. Of those pixels, 541666 are the final pixels on the canvas, making the canvas 54.1666% covered at the end of the event. Here are the counts for each color pixel placed:']),
-        new Tag(2, 'colorCounts', []),
-        new Tag(3, 'p', ['The coordinate with the most pixels placed on was (175, 171) with 170 placed. The users who placed pixels on (175, 171) are:']),
-        new Tag(4, 'ul', ['Depress_mode@lemmy.world: 83 times', 'Kalcifer@lemmy.world: 77 times', 'anonymous1691293996@lemmy.world: 4 times', 'anonymous1691294527@lemmy.world: 3 times', 'anonymous1691296202@lemmy.world: 1 time', 'bstix@feddit.dk: 1 time', 'Wilker@lemmy.blahaj.zone: 1 time']),
-        new Tag(5, 'p', ['1000 users deleted a total of 10715 pixels.'])
-    ],
+export const canvas2023: YearStat = new YearStat(
+    2208,
+    132,
+    628416,
     [
         new ColorCount('white', 'White', 22488),
         new ColorCount('light-grey', 'Light Grey', 20308), 
@@ -97,15 +101,24 @@ const canvas2023: Overview = new Overview(
         new ColorCount('red', 'Red', 55683), 
         new ColorCount('watermelon', 'Watermelon', 7213)
     ],
-    [new Link(1, 'View the 2023 Graphs', '/graphs', 'btn azure', false, {year: '2023'})]
-);
-
-const canvas2025: Overview = new Overview(
-    2025,
-    new Image(1, '', ''),
-    [],
-    [],
-    []
-);
-
-export const overviewData: Overview[] = [canvas2024, canvas2023, canvas2025]
+    541666,
+    54.1666,
+    "https://raw.githubusercontent.com/TheRealMonte/images/main/2023/graphs/pixels-placed-per-minute.png",
+    "(175, 171)",
+    170,
+    [
+        'Depress_mode@lemmy.world: 83 times', 
+        'Kalcifer@lemmy.world: 77 times', 
+        'anonymous1691293996@lemmy.world: 4 times', 
+        'anonymous1691294527@lemmy.world: 3 times', 
+        'anonymous1691296202@lemmy.world: 1 time', 
+        'bstix@feddit.dk: 1 time', 
+        'Wilker@lemmy.blahaj.zone: 1 time'
+    ],
+    "https://raw.githubusercontent.com/TheRealMonte/images/main/2023/graphs/heatmap-with-legend.png",
+    10715,
+    1000,
+    undefined,
+    "https://raw.githubusercontent.com/TheRealMonte/images/main/2023/final2023.png",
+    undefined
+)

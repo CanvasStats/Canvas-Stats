@@ -97,4 +97,8 @@ export class UserStatsComponent implements OnInit {
     this.router.navigate([`./users/${this.username}/draw`], { queryParams: { year: this.year } });
   }
 
+  // getRanking() {
+  //   if (this.user.userRank)
+  // }
+
 }

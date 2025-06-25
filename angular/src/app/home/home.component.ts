@@ -1,27 +1,27 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from "../footer/footer.component";
-import { Overview } from '../models';
-import { overviewData } from './overviewData';
+import { Overview, YearStat } from '../models';
 import { CommonModule } from '@angular/common';
 import { Subscription, interval } from 'rxjs';
 import { CanvasEventsService } from './canvas-events.service';
 import { Event } from './event.model';
 import { map } from 'rxjs/operators';
 import { CanvasService } from '../canvas.service';
+import { canvas2024, canvas2023 } from './year-stats';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FormsModule, HeaderComponent, FooterComponent, CommonModule, RouterLink],
+  imports: [FormsModule, HeaderComponent, FooterComponent, CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit, OnDestroy {
   showYear: number = 2025;
-  yearOverview!: Overview;
+  yearStat: YearStat | undefined;
   queryParamsSubscription: Subscription | undefined;
   error: string | null = null;
   canvas2025: Event | null = null;
@@ -51,16 +51,15 @@ export class HomeComponent implements OnInit, OnDestroy {
 
       if (paramYear) {
         this.showYear = +paramYear;
-        this.loadOverviewData(this.showYear);
+        if (this.showYear === 2024) {
+          this.yearStat = canvas2024;
+        } else if (this.showYear === 2023) {
+          this.yearStat = canvas2023;
+        }
       } else {
         this.showYear = 2025;
-        this.loadOverviewData(this.showYear);
       }
     });
-
-    if (!this.route.snapshot.queryParams['year']) {
-      this.loadOverviewData(this.showYear);
-    }
   }
 
   fetchCanvas2025Data() {
@@ -84,15 +83,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.intervalSubscription?.unsubscribe();
     if (this.queryParamsSubscription) {
       this.queryParamsSubscription.unsubscribe();
-    }
-  }
-
-  loadOverviewData(year: number): void {
-    const findOverview = overviewData.find(overview => overview.year === year);
-    if (findOverview) {
-      this.yearOverview = findOverview;
-    } else {
-      this.router.navigateByUrl('/not-found');
     }
   }
 
