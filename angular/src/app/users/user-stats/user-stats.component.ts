@@ -97,8 +97,23 @@ export class UserStatsComponent implements OnInit {
     this.router.navigate([`./users/${this.username}/draw`], { queryParams: { year: this.year } });
   }
 
-  // getRanking() {
-  //   if (this.user.userRank)
-  // }
+  getRanking(): string {
+  const rank: number = this.user.userRank;
+  const lastTwoDigits: number = rank % 100;
+  if (lastTwoDigits >= 11 && lastTwoDigits <= 13) {
+    return rank + "th";
+  }
+  const lastDigit: number = rank % 10;
+  switch (lastDigit) {
+    case 1:
+      return rank + "st";
+    case 2:
+      return rank + "nd";
+    case 3:
+      return rank + "rd";
+    default:
+      return rank + "th";
+  }
+}
 
 }

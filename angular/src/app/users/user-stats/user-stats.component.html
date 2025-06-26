@@ -9,10 +9,10 @@
 <main>
     <article class="left">
         <div class="icon">
-            <h2>{{user.userRank}}</h2>
+            <h2>{{getRanking()}}</h2>
         </div>
         <section>
-            <p class="text">You ranked {{user.userRank}} out of {{yearStat.numberOfusers}} users in {{year}}</p>
+            <p class="text">You ranked {{getRanking()}} out of {{yearStat.numberOfusers}} users in {{year}}</p>
         </section>
     </article>
     <article class="right">

@@ -6,7 +6,6 @@
     <ul>
         @for (year of years; track $index) {
             <li><a routerLink="/users" [queryParams]="{year: year}">{{year}} user list</a></li>
-            <li><a routerLink="/graphs" [queryParams]="{year: year}">{{year}} graphs</a></li>
         }
     </ul>
 </main>
