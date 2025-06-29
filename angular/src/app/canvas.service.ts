@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { ColorsCounts, Pixel, User } from "./models";
+import { ColorsCounts, Pixel, User, UserMain } from "./models";
 import { Observable, throwError, catchError, of, forkJoin, map, tap  } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
@@ -8,6 +8,7 @@ export class CanvasService {
     private baseURL: string = "https://raw.githubusercontent.com/TheRealMonte/data-files/main";
     private pixelDataCache: Pixel[] | null = null;
     private userDataCache: User[] | null = null;
+    private allUsersCache: UserMain[] | null = null;
     private userColorCountDataCashe: ColorsCounts[] | null = null;
     private year: number = 0;
     years: number[] = [2025, 2024, 2023];
@@ -88,6 +89,45 @@ export class CanvasService {
         }
     }
 
+    getAllUsers(): Observable<UserMain[]> {
+        return this.http.get("https://raw.githubusercontent.com/TheRealMonte/data-files/refs/heads/main/allUsers.csv", { responseType: 'text' })
+            .pipe(
+                map(csvData => this.parseAllUserData(csvData)),
+                tap(data => this.allUsersCache = data),
+                catchError(this.handleError<UserMain[]>('getAllUsers', []))
+            )
+    }
+
+    private parseAllUserData(csvData: string): UserMain[] {
+        const lines = csvData.trim().split('\n');
+        if (lines.length <= 1) {
+            console.log("can't find headers");
+            return [];
+        }
+        const header = lines[0].split(',').map(h => h.trim());
+        const usernameIndex = header.indexOf('username');
+        const canvas2023Index = header.indexOf('canvas2023');
+        const canvas2024Index = header.indexOf('canvas2024');
+
+        const userList: UserMain[] = [];
+        for (let i = 1; i < lines.length; i++) {
+            const values = lines[i].split(',');
+            if (values.length === header.length) {
+                const user: UserMain = {
+                    type: 'UserMain',
+                    username: values[usernameIndex]?.trim() || '',
+                    canvas2023: +values[canvas2023Index]?.trim() == 1 || false,
+                    canvas2024: +values[canvas2024Index]?.trim() == 1 || false,
+                }
+                userList.push(user)
+            } else {
+                console.warn(`Skipping row ${i + 1} due to incorrect number of columns.`);
+            }
+        }
+        console.log("Loaded user data from csv");
+        return userList;
+    }
+
 
     getUsersForYear(year: number): Observable<User[]> {
         this.year = year;
@@ -98,6 +138,7 @@ export class CanvasService {
                 catchError(this.handleError<User[]>('getUsersForYear', []))
             );
     }
+
 
     private parseUserData(csvData: string): User[] {
         const lines = csvData.trim().split('\n');
@@ -118,6 +159,7 @@ export class CanvasService {
             const values = lines[i].split(',');
             if (values.length === header.length) {
                 const user: User = {
+                    type: 'User',
                     username: values[usernameIndex]?.trim() || '',
                     userRank: +values[userRankIndex]?.trim() || 0,
                     pixelCount: +values[pixelCountIndex]?.trim() || 0,

@@ -64,7 +64,7 @@ export const canvas2024: YearStat = new YearStat(
 );
 
 export const canvas2023: YearStat = new YearStat(
-    2208,
+    2204,
     132,
     628416,
     [
@@ -118,7 +118,7 @@ export const canvas2023: YearStat = new YearStat(
     "https://raw.githubusercontent.com/TheRealMonte/images/main/2023/graphs/heatmap-with-legend.png",
     10715,
     1000,
-    undefined,
+    4,
     "https://raw.githubusercontent.com/TheRealMonte/images/main/2023/final2023.png",
     undefined
 )

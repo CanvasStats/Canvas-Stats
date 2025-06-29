@@ -8,6 +8,7 @@ export class Pixel {
 }
 
 export class User {
+    public readonly type = 'User';
     constructor(
         public username: string,
         public userRank: number,
@@ -121,5 +122,14 @@ export class YearStat {
         public usersDeletedAll: number | undefined,
         public canvasImageURL: string,
         public canvasAtlasURL: string | undefined
+    ) {}
+}
+
+export class UserMain {
+    public readonly type = 'UserMain';
+    constructor(
+        public username: string,
+        public canvas2023: boolean,
+        public canvas2024: boolean
     ) {}
 }

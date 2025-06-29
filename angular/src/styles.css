@@ -163,6 +163,7 @@ h2 {
 .btn-wrapper {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .btn {
@@ -180,6 +181,11 @@ h2 {
 .btn:active {
     box-shadow: 0 0 #ffffff;
     transform: translateY(4px);
+}
+
+.main-color {
+    background-color: var(--main-background-color);
+    color: var(--body-color);
 }
 
 .white {

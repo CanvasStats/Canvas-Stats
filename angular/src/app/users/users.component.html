@@ -1,21 +1,46 @@
-<app-header [selectedYear]="year" [showSearch]="true"/>
-    @if (loading) {
-    <app-loading />
+<app-header [selectedYear]="year" [showSearch]="true" />
+@if (loading) {
+<app-loading />
 }
 @if (!loading) {
-    @if (searchTerm) {
-        <h2>{{users.length}} usernames matching "{{searchTerm}}" that participated in the {{year}} Canvas event:</h2>
+<section class="btn-wrapper">
+    <h2>Filter users:</h2>
+    <button class="btn blue" (click)="getAllUsers()">All Users</button>
+    <button class="btn pink" (click)="getUsersForYear(2023)">2023</button>
+    <button class="btn purple" (click)="getUsersForYear(2024)">2024</button>
+</section>
+@if (searchTerm) {
+<h2>Displaying {{userListLength}} usernames matching "{{searchTerm}}":</h2>
+}
+@if (!searchTerm) {
+@if (showAllUsers) {
+    <h2>Displaying {{userListLength}} users by alphabetical order:</h2>
+} @else {
+    <h2>Displaying {{userListLength}} users by {{year}} rankings:</h2>
+}
+}
+@if (showAllUsers) {
+@for (user of AllUsers; track $index) {
+<div class="row">
+    <article class="main-color full">{{user.username}}</article>
+    @if (user.canvas2023) {
+    <article (click)="goToUser(user.username, 2023)" class="clickable pink">2023</article>
     }
-    @if (!searchTerm) {
-        <h2>Here are all the users that participated in the {{year}} Canvas event:</h2>
+    @if (user.canvas2024) {
+    <article (click)="goToUser(user.username, 2024)" class="clickable purple">2024</article>
     }
-    @for (user of users; track user) {
-        <article (click)="goToUser(user.username)">
-            {{user.userRank}}: {{user.username}}
-        </article>
+</div>
+}
+} @else {
+    @for (user of usersForYear; track $index) {
+        <div class="row">
+        <article (click)="goToUser(user.username, year)" class="clickable full main-color">{{user.userRank}}: {{user.username}}</article>
+    </div>
     }
-    @if (users.length === 0) {
-        <article>0 matches found</article>
-    }
+}
+
+@if (userListLength === 0) {
+<article>0 matches found</article>
+}
 }
 <app-footer />

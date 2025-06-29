@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HeaderComponent } from "../header/header.component";
-import { User } from '../models';
+import { User, UserMain } from '../models';
 import { CanvasService } from '../canvas.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingComponent } from "../loading/loading.component";
@@ -14,10 +14,13 @@ import { Subscription } from 'rxjs';
   styleUrl: './users.component.css'
 })
 export class UsersComponent implements OnInit, OnDestroy {
-  users: User[] = [];
+  usersForYear: User[] = [];
+  AllUsers: UserMain[] = [];
+  showAllUsers: boolean = true;
+  userListLength: number = 0;
   year: number = 0;
   loading: boolean = false;
-  searchTerm: string | undefined;
+  searchTerm: string = "";
   queryParamsSubscription: Subscription | undefined;
 
   constructor(
@@ -29,25 +32,18 @@ export class UsersComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loading = true;
     this.queryParamsSubscription = this.route.queryParams.subscribe(params => {
-      this.searchTerm = undefined;
+      this.searchTerm = "";
       const paramYear = params['year'];
+      const paramSearchTerm = params['search'];
+      if (paramSearchTerm) {
+        this.searchTerm = paramSearchTerm;
+      }
       if (paramYear) {
         this.year = this.canvasService.checkIfYearHasStats(+paramYear);
       } else {
         this.year = this.canvasService.checkIfYearHasStats(new Date().getFullYear());
       }
-      const paramSearchTerm = params['search'];
-      this.canvasService.getUsersForYear(this.year).subscribe({
-        next: (data) => {
-          if (paramSearchTerm) {
-            this.searchTerm = paramSearchTerm;
-            this.users = data.filter(user => user.username.toLowerCase().includes(paramSearchTerm.toLowerCase()));
-          } else {
-            this.users = data;
-          }
-          this.loading = false;
-        }
-      });
+      this.getAllUsers();
     });
   }
 
@@ -57,8 +53,43 @@ export class UsersComponent implements OnInit, OnDestroy {
     }
   }
 
-  goToUser(username: string) {
-    this.router.navigate([`./users/${username}`], { queryParams: { year: this.year } });
+  getAllUsers() {
+    this.showAllUsers = true;
+    this.canvasService.getAllUsers().subscribe({
+      next: (data) => {
+        if (this.searchTerm.length > 0) {
+          this.AllUsers = data.filter(user => user.username.toLowerCase().includes(this.searchTerm.toLowerCase()));
+        } else {
+          this.AllUsers = data;
+        }
+        this.userListLength = this.AllUsers.length;
+        this.loading = false;
+      }
+    });
+  }
+
+  getUsersForYear(year: number) {
+    this.showAllUsers = false;
+    this.year = year;
+    this.canvasService.getUsersForYear(year).subscribe({
+      next: (data) => {
+        if (this.searchTerm.length > 0) {
+          this.usersForYear = data.filter(user => user.username.toLowerCase().includes(this.searchTerm.toLowerCase()));
+        } else {
+          this.usersForYear = data;
+        }
+        this.userListLength = this.usersForYear.length;
+        this.loading = false;
+      }
+    });
+  }
+
+  goToUser(username: string, year: number) {
+    this.router.navigate([`./users/${username}`], { queryParams: { year: year } });
+  }
+
+   isUserMain(user: UserMain | User): boolean {
+    return user.type === 'UserMain';
   }
 
 }
