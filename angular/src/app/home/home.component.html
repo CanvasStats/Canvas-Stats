@@ -36,7 +36,7 @@
         <section>
             <h3 style="text-align: center;">Pixels by color <br />(click on the color to view all of the pixels of
                 that color)</h3>
-            <div class="colors-wrapper">
+            <div class="colors-wrapper clickable">
                 @for (color of yearStat?.colorCounts; track $index) {
                 <span [className]="color.colorVariable" (click)="showColorIMG(color.colorVariable)">{{color.colorName}}:
                     {{color.count}}</span>

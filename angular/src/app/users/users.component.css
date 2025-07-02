@@ -19,3 +19,12 @@ h2 {
 .full {
     width: 100%;
 }
+
+
+
+@media only screen and (max-width: 721px) {
+    .username {
+    word-wrap: break-word;
+    max-width: 200px;
+}
+}

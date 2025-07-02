@@ -22,7 +22,7 @@
 @if (showAllUsers) {
 @for (user of AllUsers; track $index) {
 <div class="row">
-    <article class="main-color full">{{user.username}}</article>
+    <article class="main-color full "><span class="username">{{user.username}}</span></article>
     @if (user.canvas2023) {
     <article (click)="goToUser(user.username, 2023)" class="clickable pink">2023</article>
     }
