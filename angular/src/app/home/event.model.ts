@@ -25,3 +25,24 @@ export class Social {
         public url: string
     ) {}
 }
+
+export class LiveStats {
+    constructor(
+        public timestamp: string,
+        public canvasXDimension: number,
+        public canvasYDimension: number,
+        public percentCovered: string,
+        public colors: Color[],
+        public usersOnline: number,
+        public mostUsersOnline: number,
+        public mostUsersOnlineTime: string
+    ) {}
+}
+
+export class Color {
+    constructor(
+        public name: string,
+        public className: string,
+        public count: number
+    ) {}
+}

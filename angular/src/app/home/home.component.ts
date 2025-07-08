@@ -7,7 +7,7 @@ import { Overview, YearStat } from '../models';
 import { CommonModule } from '@angular/common';
 import { Subscription, interval } from 'rxjs';
 import { CanvasEventsService } from './canvas-events.service';
-import { Event } from './event.model';
+import { Event, Color, LiveStats } from './event.model';
 import { map } from 'rxjs/operators';
 import { CanvasService } from '../canvas.service';
 import { canvas2024, canvas2023 } from './year-stats';
@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   queryParamsSubscription: Subscription | undefined;
   error: string | null = null;
   canvas2025: Event | null = null;
+  liveStats: LiveStats | null = null;
   start: string = "";
   end: string = "";
   startTime: Date = new Date('2025-07-12T04:00:00.000Z');
@@ -45,6 +46,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fetchCanvas2025Data();
+    this.fetchLiveStats();
     this.years = this.canvasService.years;
     this.queryParamsSubscription = this.route.queryParams.subscribe(params => {
       const paramYear = params['year'];
@@ -72,6 +74,18 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.endTime = new Date(data.end);
         this.start = this.formatDateTimeManual(data.start);
         this.end = this.formatDateTimeManual(data.end);
+      }, error: (err) => {
+        this.error = err.message;
+        console.error('Error fetching data:', err);
+      }
+    })
+  }
+
+  fetchLiveStats() {
+    this.error = null;
+    this.eventService.getLiveStats().subscribe({
+      next: (data) => {
+        this.liveStats = data;
       }, error: (err) => {
         this.error = err.message;
         console.error('Error fetching data:', err);

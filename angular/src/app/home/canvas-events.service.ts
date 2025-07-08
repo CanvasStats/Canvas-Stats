@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Event } from './event.model';
+import { Event, LiveStats } from './event.model';
 
 @Injectable({
   providedIn: 'root',
@@ -28,5 +28,11 @@ export class CanvasEventsService {
     }
     console.error(errorMessage);
     return throwError(() => new Error(errorMessage));
+  }
+
+  getLiveStats(): Observable<LiveStats> {
+    return this.http.get<LiveStats>("https://raw.githubusercontent.com/TheRealMonte/data-files/refs/heads/main/2025/live-data.json").pipe(
+      catchError(this.handleError)
+    );
   }
 }

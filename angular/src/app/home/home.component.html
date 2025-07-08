@@ -58,7 +58,8 @@
     <article class="right">
         <section>
             <h3 style="text-align: center;">Pixels placed per minute</h3>
-            <a [href]="yearStat?.pixelPerMinuteURL" target="_blank" title="Click to enlarge"><img class="graph" [src]="yearStat?.pixelPerMinuteURL" alt="a graph of the pixels placed per minute" /></a>
+            <a [href]="yearStat?.pixelPerMinuteURL" target="_blank" title="Click to enlarge"><img class="graph"
+                    [src]="yearStat?.pixelPerMinuteURL" alt="a graph of the pixels placed per minute" /></a>
         </section>
     </article>
     <article class="right">
@@ -86,7 +87,8 @@
     <article class="right">
         <section>
             <h3 style="text-align: center;">Pixel Heat Map</h3>
-            <a [href]="yearStat?.pixelHeatMapURL" target="_blank" title="Click to enlarge"><img class="graph" [src]="yearStat?.pixelHeatMapURL" alt="heat map of the pixels placed" /></a>
+            <a [href]="yearStat?.pixelHeatMapURL" target="_blank" title="Click to enlarge"><img class="graph"
+                    [src]="yearStat?.pixelHeatMapURL" alt="heat map of the pixels placed" /></a>
         </section>
     </article>
     <article class="left">
@@ -113,14 +115,16 @@
     </article>
     <article class="left">
         <section>
-            <a [href]="yearStat?.canvasImageURL" target="_blank" title="Click to enlarge"><img class="graph" [src]="yearStat?.canvasImageURL" alt="The final canvas" /></a>
+            <a [href]="yearStat?.canvasImageURL" target="_blank" title="Click to enlarge"><img class="graph"
+                    [src]="yearStat?.canvasImageURL" alt="The final canvas" /></a>
         </section>
     </article>
     }
     @if (yearStat?.canvasAtlasURL) {
-        <section class="btn-wrapper">
-            <p class="text"><a [href]="yearStat?.canvasAtlasURL" target="_blank" class="btn aqua">View the {{showYear}} Atlas</a></p>
-        </section>
+    <section class="btn-wrapper">
+        <p class="text"><a [href]="yearStat?.canvasAtlasURL" target="_blank" class="btn aqua">View the {{showYear}}
+                Atlas</a></p>
+    </section>
     }
     }
 </main>
@@ -176,15 +180,73 @@
     </article>
     }
     @if (eventInProgress) {
-        <article class="left">
-            <section>
-                <p class="text">
-                    The event has started!
-                </p>
-                <p class="text">Go to the <a [href]="canvas2025?.endpoints?.open">canvas website</a> and place some pixels!</p>
-                <p class="text">Live rankings and stats coming soon. Check back later.</p>
-            </section>
-        </article>
+    <article class="left">
+        <section>
+            <p class="text">
+                The event has started!
+            </p>
+            <p class="text">Go to the <a [href]="canvas2025?.endpoints?.open">canvas website</a> and place some pixels!
+            </p>
+        </section>
+    </article>
+    <article class="rigt">
+        <section>
+            <p class="text" style="text-align: center;">The Canvas ({{liveStats?.canvasXDimension}} X
+                {{liveStats?.canvasYDimension}}) as of {{liveStats?.timestamp}}</p>
+        </section>
+    </article>
+    <article class="left">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                layers
+            </span>
+        </div>
+        <section>
+            <p class="text">Not counting white pixels, the canvas is {{liveStats?.percentCovered}} covered</p>
+        </section>
+    </article>
+    <article class="right">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                person
+            </span>
+        </div>
+        <section>
+            <p class="text">{{liveStats?.usersOnline}} were online when this site last updated</p>
+        </section>
+    </article>
+    <article class="left">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                kid_star
+            </span>
+        </div>
+        <section>
+            <p class="text">The highest number of users online was {{liveStats?.mostUsersOnline}} at {{liveStats?.mostUsersOnlineTime}}
+        </section>
+    </article>
+    <article class="right">
+        <section>
+            <h3 style="text-align: center;">Pixels by color</h3>
+            <div class="colors-wrapper">
+                @for (color of liveStats?.colors; track $index) {
+                <span [className]="color.className">{{color.name}}:
+                    {{color.count}}</span>
+                }
+            </div>
+        </section>
+    </article>
+    <article class="right">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                info
+            </span>
+        </div>
+        <section>
+            <p class="text">Full stats inculding graphs and user ranking will be added to the site after the event has
+                ended</p>
+        </section>
+    </article>
     }
     <section class="btn-wrapper"><button class="btn green" (click)="showYearSelection()">View Previous Year's
             Stats</button></section>
