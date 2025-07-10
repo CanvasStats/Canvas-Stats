@@ -452,6 +452,11 @@ section {
     width: 100%;
 }
 
+.graph-live {
+    height: 400px;
+    max-width: 100%;
+}
+
 .top-users {
     font-size: 20px;
 }

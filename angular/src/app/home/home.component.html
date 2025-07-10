@@ -133,7 +133,7 @@
 <main>
     <h2 style="text-align: center;"></h2>
     @if (!eventInProgress) {
-    <article class="left">
+    <article class="right">
         <div class="icon">
             <span class="material-symbols-outlined">
                 calendar_today
@@ -146,7 +146,7 @@
             </p>
         </section>
     </article>
-    <article class="right">
+    <article class="left">
         <div class="icon">
             <span class="material-symbols-outlined">
                 hourglass_bottom
@@ -159,17 +159,8 @@
             </p>
         </section>
     </article>
-
-    <article class="left">
+    <article class="right">
         <section>
-            <p class="text">
-                This website will have semi-frequent updates on the state of the canvas during the event and hopefully
-                live user rankings.
-            </p>
-            <p class="text">
-                More info about the event can be found on <a [href]="canvas2025?.endpoints?.more_info"
-                    target="_blank">Fediverse.events</a>
-            </p>
             <p class="text">Follow canvas on socials for updates:</p>
             <ul class="top-users">
                 @for (social of canvas2025?.social; track $index) {
@@ -178,24 +169,75 @@
             </ul>
         </section>
     </article>
+    <article class="left">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                info
+            </span>
+        </div>
+        <section>
+            <p class="text">
+                This website will have semi-frequent updates on the state of the canvas during the event. Full stats, graphs, and user rankings will be added after the event concludes.</p>
+            
+        </section>
+    </article>
+    <article class="right">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                link
+            </span>
+        </div>
+        <section>
+            <p class="text">
+                More info about the event can be found on <a [href]="canvas2025?.endpoints?.more_info"
+                    target="_blank">Fediverse.events</a>
+            </p>
+        </section>
+    </article>
     }
     @if (eventInProgress) {
     <article class="left">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                info
+            </span>
+        </div>
         <section>
-            <p class="text">
-                The event has started!
-            </p>
-            <p class="text">Go to the <a [href]="canvas2025?.endpoints?.open">canvas website</a> and place some pixels!
+            <p class="text">This site was last updated at {{liveStats?.timestamp}}
+                <br />The Canvas is currently ({{liveStats?.canvasXDimension}} X
+                {{liveStats?.canvasYDimension}})
             </p>
         </section>
     </article>
-    <article class="rigt">
+    <article class="right">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                link
+            </span>
+        </div>
         <section>
-            <p class="text" style="text-align: center;">The Canvas ({{liveStats?.canvasXDimension}} X
-                {{liveStats?.canvasYDimension}}) as of {{liveStats?.timestamp}}</p>
+            <p class="text">Go to the <a [href]="canvas2025?.endpoints?.open">canvas website</a> and place some pixels!</p>
         </section>
     </article>
     <article class="left">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                hourglass_bottom
+            </span>
+        </div>
+        <section>
+            <p class="countdown"> Time remaining:<br />
+                {{ timeRemaining.days }}d {{ timeRemaining.hours }}h {{ timeRemaining.minutes }}m {{
+                timeRemaining.seconds }}s
+            </p>
+        </section>
+    </article>
+    <article class="left">
+        <section>
+
+        </section>
+    </article>
+    <article class="right">
         <div class="icon">
             <span class="material-symbols-outlined">
                 layers
@@ -205,27 +247,7 @@
             <p class="text">Not counting white pixels, the canvas is {{liveStats?.percentCovered}} covered</p>
         </section>
     </article>
-    <article class="right">
-        <div class="icon">
-            <span class="material-symbols-outlined">
-                person
-            </span>
-        </div>
-        <section>
-            <p class="text">{{liveStats?.usersOnline}} were online when this site last updated</p>
-        </section>
-    </article>
     <article class="left">
-        <div class="icon">
-            <span class="material-symbols-outlined">
-                kid_star
-            </span>
-        </div>
-        <section>
-            <p class="text">The highest number of users online was {{liveStats?.mostUsersOnline}} at {{liveStats?.mostUsersOnlineTime}}
-        </section>
-    </article>
-    <article class="right">
         <section>
             <h3 style="text-align: center;">Pixels by color</h3>
             <div class="colors-wrapper">
@@ -236,7 +258,38 @@
             </div>
         </section>
     </article>
+    <article class="left">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                person
+            </span>
+        </div>
+        <section>
+            <p class="text">{{liveStats?.usersOnline}} were online when this site last updated</p>
+        </section>
+    </article>
     <article class="right">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                kid_star
+            </span>
+        </div>
+        <section>
+            <p class="text">The highest number of users online was {{liveStats?.mostUsersOnline}} at
+                {{liveStats?.mostUsersOnlineTime}}
+        </section>
+    </article>
+    <article class="left">
+        <section>
+            <h3 style="text-align: center;">Users Online Over Time</h3>
+            <div class="btn-wrapper">
+                <img class="graph-live"
+                    src="https://raw.githubusercontent.com/TheRealMonte/data-files/refs/heads/main/2025/usersOnline.png"
+                    alt="Users Online Over Time" />
+            </div>
+        </section>
+    </article>
+    <article class="left">
         <div class="icon">
             <span class="material-symbols-outlined">
                 info
