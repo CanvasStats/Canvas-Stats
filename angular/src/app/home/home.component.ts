@@ -26,8 +26,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   error: string | null = null;
   canvas2025: Event | null = null;
   liveStats: LiveStats | null = null;
-  start: string = "";
-  end: string = "";
+  start: string = "July 12";
+  end: string = "July 13";
   startTime: Date = new Date('2025-07-12T04:00:00.000Z');
   endTime: Date = new Date('2025-07-14T04:00:00.000Z');
   timeRemaining: any = {};
@@ -78,8 +78,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.countdown();
         this.startTime = new Date(data.start);
         this.endTime = new Date(data.end);
-        this.start = this.formatDateTimeManual(data.start);
-        this.end = this.formatDateTimeManual(data.end);
       }, error: (err) => {
         this.error = err.message;
         console.error('Error fetching data:', err);
