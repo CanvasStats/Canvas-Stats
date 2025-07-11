@@ -141,7 +141,7 @@
         </div>
         <section>
             <p class="text">
-                <a [href]="canvas2025?.endpoints?.open" target="_blank">Canvas 2025</a> will take place {{start}}
+                <a href="https://canvas.fediverse.events/" target="_blank">Canvas 2025</a> will take place {{start}}
                 through {{end}}
             </p>
         </section>
@@ -154,19 +154,14 @@
         </div>
         <section>
             <p class="countdown">
-                {{ timeRemaining.days }}d {{ timeRemaining.hours }}h {{ timeRemaining.minutes }}m {{
+                @if (timeRemaining.days > 0) {
+                    {{ timeRemaining.days }}d
+                    } 
+                @if (timeRemaining.hours > 0) {
+                    {{ timeRemaining.hours }}h
+                } {{ timeRemaining.minutes }}m {{
                 timeRemaining.seconds }}s
             </p>
-        </section>
-    </article>
-    <article class="right">
-        <section>
-            <p class="text">Follow canvas on socials for updates:</p>
-            <ul class="top-users">
-                @for (social of canvas2025?.social; track $index) {
-                <li><a [href]="social.url" target="_blank">{{social.icon}}</a></li>
-                }
-            </ul>
         </section>
     </article>
     <article class="left">
@@ -178,7 +173,6 @@
         <section>
             <p class="text">
                 This website will have semi-frequent updates on the state of the canvas during the event. Full stats, graphs, and user rankings will be added after the event concludes.</p>
-            
         </section>
     </article>
     <article class="right">
@@ -189,7 +183,7 @@
         </div>
         <section>
             <p class="text">
-                More info about the event can be found on <a [href]="canvas2025?.endpoints?.more_info"
+                More info about the event can be found on <a href="https://fediverse.events/"
                     target="_blank">Fediverse.events</a>
             </p>
         </section>
@@ -216,7 +210,7 @@
             </span>
         </div>
         <section>
-            <p class="text">Go to the <a [href]="canvas2025?.endpoints?.open">canvas website</a> and place some pixels!</p>
+            <p class="text">Go to the <a href="https://canvas.fediverse.events/?2025">canvas website</a> and place some pixels!</p>
         </section>
     </article>
     <article class="left">
@@ -227,7 +221,12 @@
         </div>
         <section>
             <p class="countdown"> Time remaining:<br />
-                {{ timeRemaining.days }}d {{ timeRemaining.hours }}h {{ timeRemaining.minutes }}m {{
+                @if (timeRemaining.days > 0) {
+                    {{ timeRemaining.days }}d
+                    } 
+                @if (timeRemaining.hours > 0) {
+                    {{ timeRemaining.hours }}h
+                } {{ timeRemaining.minutes }}m {{
                 timeRemaining.seconds }}s
             </p>
         </section>

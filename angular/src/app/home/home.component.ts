@@ -45,7 +45,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.fetchCanvas2025Data();
     this.fetchLiveStats();
     this.years = this.canvasService.years;
     let diff = this.endTime.getTime() - new Date().getTime();
@@ -68,6 +67,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.showYear = 2025;
       }
     });
+    this.countdown();
   }
 
   fetchCanvas2025Data() {
