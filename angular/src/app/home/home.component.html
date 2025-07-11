@@ -131,21 +131,7 @@
 }
 @if (showYear === 2025) {
 <main>
-    <h2 style="text-align: center;"></h2>
     @if (!eventInProgress) {
-    <article class="right">
-        <div class="icon">
-            <span class="material-symbols-outlined">
-                calendar_today
-            </span>
-        </div>
-        <section>
-            <p class="text">
-                <a href="https://canvas.fediverse.events/" target="_blank">Canvas 2025</a> will take place {{start}}
-                through {{end}}
-            </p>
-        </section>
-    </article>
     <article class="left">
         <div class="icon">
             <span class="material-symbols-outlined">
@@ -161,6 +147,19 @@
                     {{ timeRemaining.hours }}h
                 } {{ timeRemaining.minutes }}m {{
                 timeRemaining.seconds }}s
+            </p>
+        </section>
+    </article>
+    <article class="right">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                calendar_today
+            </span>
+        </div>
+        <section>
+            <p class="text">
+                <a href="https://canvas.fediverse.events/" target="_blank">Canvas 2025</a> will take place {{start}}
+                through {{end}}
             </p>
         </section>
     </article>
@@ -252,7 +251,7 @@
             <div class="colors-wrapper">
                 @for (color of liveStats?.colors; track $index) {
                 <span [className]="color.className">{{color.name}}:
-                    {{color.count}}</span>
+                    {{calculate_percantage(color.count)}}%</span>
                 }
             </div>
         </section>

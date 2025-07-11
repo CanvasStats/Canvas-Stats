@@ -164,4 +164,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     console.log("Change Year should be open")
   }
 
+  calculate_percantage(numPixels: number) {
+    let totalNumPixels: number = this.liveStats?.canvasXDimension! * this.liveStats?.canvasYDimension!
+    let percent: number = (numPixels / totalNumPixels) * 100;
+    return percent.toFixed(2);
+  }
+
 }
