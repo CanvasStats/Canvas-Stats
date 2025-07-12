@@ -49,9 +49,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.years = this.canvasService.years;
     let diff = this.endTime.getTime() - new Date().getTime();
     if (diff > 0) {
-      this.eventInProgress = false;
-    } else {
       this.eventInProgress = true;
+    } else {
+      this.eventInProgress = false;
     }
     this.queryParamsSubscription = this.route.queryParams.subscribe(params => {
       const paramYear = params['year'];
@@ -126,11 +126,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       .pipe(
         map(() => {
           let diff = 0;
-          if (this.eventInProgress) {
-            diff = this.endTime.getTime() - new Date().getTime();
-          } else {
-            diff = this.startTime.getTime() - new Date().getTime();
-          }
+          diff = this.endTime.getTime() - new Date().getTime();
           if (diff > 0) {
             this.timeRemaining.days = Math.floor(diff / (1000 * 60 * 60 * 24));
             this.timeRemaining.hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
