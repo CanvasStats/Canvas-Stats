@@ -134,7 +134,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             this.timeRemaining.seconds = Math.floor((diff % (1000 * 60)) / 1000);
           } else {
             this.timeRemaining = { days: 0, hours: 0, minutes: 0, seconds: 0 };
-            this.eventInProgress = true;
+            this.eventInProgress = false;
             this.intervalSubscription?.unsubscribe();
           }
           return this.timeRemaining

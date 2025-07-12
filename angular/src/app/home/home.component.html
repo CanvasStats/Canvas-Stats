@@ -133,58 +133,8 @@
 <main>
     @if (!eventInProgress) {
     <article class="left">
-        <div class="icon">
-            <span class="material-symbols-outlined">
-                hourglass_bottom
-            </span>
-        </div>
         <section>
-            <p class="countdown">
-                @if (timeRemaining.days > 0) {
-                    {{ timeRemaining.days }}d
-                    } 
-                @if (timeRemaining.hours > 0) {
-                    {{ timeRemaining.hours }}h
-                } {{ timeRemaining.minutes }}m {{
-                timeRemaining.seconds }}s
-            </p>
-        </section>
-    </article>
-    <article class="right">
-        <div class="icon">
-            <span class="material-symbols-outlined">
-                calendar_today
-            </span>
-        </div>
-        <section>
-            <p class="text">
-                <a href="https://canvas.fediverse.events/" target="_blank">Canvas 2025</a> will take place {{start}}
-                through {{end}}
-            </p>
-        </section>
-    </article>
-    <article class="left">
-        <div class="icon">
-            <span class="material-symbols-outlined">
-                info
-            </span>
-        </div>
-        <section>
-            <p class="text">
-                This website will have semi-frequent updates on the state of the canvas during the event. Full stats, graphs, and user rankings will be added after the event concludes.</p>
-        </section>
-    </article>
-    <article class="right">
-        <div class="icon">
-            <span class="material-symbols-outlined">
-                link
-            </span>
-        </div>
-        <section>
-            <p class="text">
-                More info about the event can be found on <a href="https://fediverse.events/"
-                    target="_blank">Fediverse.events</a>
-            </p>
+            <p class="text">Canvas 2024 has ended. Full stats coming soon.</p>
         </section>
     </article>
     }
@@ -228,11 +178,6 @@
                 } {{ timeRemaining.minutes }}m {{
                 timeRemaining.seconds }}s
             </p>
-        </section>
-    </article>
-    <article class="left">
-        <section>
-
         </section>
     </article>
     <article class="right">
@@ -285,6 +230,14 @@
                     src="https://raw.githubusercontent.com/TheRealMonte/data-files/refs/heads/main/2025/usersOnline.png"
                     alt="Users Online Over Time" />
             </div>
+        </section>
+    </article>
+    <article class="right">
+        <section>
+            <h3 style="text-align: center;">The first 12 hours</h3>
+            <section class="btn-wrapper">
+                <img src="https://raw.githubusercontent.com/TheRealMonte/therealmonte.github.io/refs/heads/main/screenshots/2025-timelapse.gif"/>
+            </section>
         </section>
     </article>
     <article class="left">
