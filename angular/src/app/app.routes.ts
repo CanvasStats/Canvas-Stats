@@ -6,14 +6,15 @@ import { DrawComponent } from './users/draw/draw.component';
 import { DrawColorComponent } from './draw-color/draw-color.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { BetaComponent } from './beta/beta.component';
+import { MaintenanceComponent } from './maintenance/maintenance.component';
 
 export const routes: Routes = [
-    {path: '', component: HomeComponent},
-    {path: 'users', component: UsersComponent},
-    {path: 'users/:username', component: UserStatsComponent},
-    {path: 'users/:username/draw', component: DrawComponent},
-    {path: 'draw', component: DrawColorComponent},
-    {path: 'beta', component: BetaComponent},
+    {path: '', component: MaintenanceComponent},
+    // {path: 'users', component: UsersComponent},
+    // {path: 'users/:username', component: UserStatsComponent},
+    // {path: 'users/:username/draw', component: DrawComponent},
+    // {path: 'draw', component: DrawColorComponent},
+    // {path: 'beta', component: BetaComponent},
     {path: 'not-found', component: NotFoundComponent},
     {path: '**', component: NotFoundComponent}
 ];

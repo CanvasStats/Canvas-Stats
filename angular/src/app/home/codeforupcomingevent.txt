@@ -54,3 +54,124 @@
             </p>
         </section>
     </article>
+
+
+------------------------------------------------------------------------------------------
+<main>
+    @if (!eventInProgress) {
+    <article class="left">
+        <section>
+            <p class="text">Canvas 2025 has ended. Full stats coming soon.<br/>(Are you happy now redjard?)</p>
+        </section>
+    </article>
+    <article class="right">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                layers
+            </span>
+        </div>
+        <section>
+            <p class="text">Not counting white pixels, the  final canvas is {{liveStats?.percentCovered}} covered. (More accurate percent will be availible once the database has been shared)</p>
+        </section>
+    </article>
+    <article class="left">
+        <section>
+            <h3 style="text-align: center;">Pixels by color</h3>
+            <div class="colors-wrapper">
+                @for (color of liveStats?.colors; track $index) {
+                <span [className]="color.className">{{color.name}}:
+                    {{calculate_percantage(color.count)}}%</span>
+                }
+            </div>
+        </section>
+    </article>
+    <article class="left">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                person
+            </span>
+        </div>
+        <section>
+            <p class="text">{{liveStats?.usersOnline}} were online when this site last updated</p>
+        </section>
+    </article>
+    <article class="right">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                kid_star
+            </span>
+        </div>
+        <section>
+            <p class="text">The highest number of users online was {{liveStats?.mostUsersOnline}} at
+                {{liveStats?.mostUsersOnlineTime}}
+        </section>
+    </article>
+    <article class="left">
+        <section>
+            <h3 style="text-align: center;">Users Online Over Time</h3>
+            <div class="btn-wrapper">
+                <img class="graph-live"
+                    src="https://raw.githubusercontent.com/TheRealMonte/data-files/refs/heads/main/2025/usersOnline.png"
+                    alt="Users Online Over Time" />
+            </div>
+        </section>
+    </article>
+    }
+    @if (eventInProgress) {
+    <article class="left">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                info
+            </span>
+        </div>
+        <section>
+            <p class="text">This site was last updated at {{liveStats?.timestamp}}
+                <br />The Canvas is currently ({{liveStats?.canvasXDimension}} X
+                {{liveStats?.canvasYDimension}})
+            </p>
+        </section>
+    </article>
+    <article class="right">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                link
+            </span>
+        </div>
+        <section>
+            <p class="text">Go to the <a href="https://canvas.fediverse.events/?2025">canvas website</a> and place some pixels!</p>
+        </section>
+    </article>
+    <article class="left">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                hourglass_bottom
+            </span>
+        </div>
+        <section>
+            <p class="countdown"> Time remaining:<br />
+                @if (timeRemaining.days > 0) {
+                    {{ timeRemaining.days }}d
+                    } 
+                @if (timeRemaining.hours > 0) {
+                    {{ timeRemaining.hours }}h
+                } {{ timeRemaining.minutes }}m {{
+                timeRemaining.seconds }}s
+            </p>
+        </section>
+    </article>
+    
+    <article class="left">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                info
+            </span>
+        </div>
+        <section>
+            <p class="text">Full stats inculding graphs and user ranking will be added to the site after the event has
+                ended</p>
+        </section>
+    </article>
+    }
+    <section class="btn-wrapper"><button class="btn green" (click)="showYearSelection()">View Previous Year's
+            Stats</button></section>
+</main>

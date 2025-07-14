@@ -10,7 +10,7 @@ import { CanvasEventsService } from './canvas-events.service';
 import { Event, Color, LiveStats } from './event.model';
 import { map } from 'rxjs/operators';
 import { CanvasService } from '../canvas.service';
-import { canvas2024, canvas2023 } from './year-stats';
+import { canvas2025, canvas2024, canvas2023 } from './year-stats';
 
 @Component({
   selector: 'app-home',
@@ -19,89 +19,42 @@ import { canvas2024, canvas2023 } from './year-stats';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit {
   showYear: number = 2025;
   yearStat: YearStat | undefined;
   queryParamsSubscription: Subscription | undefined;
   error: string | null = null;
-  canvas2025: Event | null = null;
-  liveStats: LiveStats | null = null;
-  start: string = "July 12";
-  end: string = "July 13";
-  startTime: Date = new Date('2025-07-12T04:00:00.000Z');
-  endTime: Date = new Date('2025-07-14T04:00:00.000Z');
-  timeRemaining: any = {};
-  eventInProgress: boolean = true;
-  intervalSubscription: Subscription | undefined;
   showChangeYear: boolean = false;
   years: number[] = [];
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private eventService: CanvasEventsService,
     private activatedRoute: ActivatedRoute,
     private canvasService: CanvasService
   ) { }
 
   ngOnInit(): void {
-    this.fetchLiveStats();
     this.years = this.canvasService.years;
-    let diff = this.endTime.getTime() - new Date().getTime();
-    if (diff > 0) {
-      this.eventInProgress = true;
-    } else {
-      this.eventInProgress = false;
-    }
     this.queryParamsSubscription = this.route.queryParams.subscribe(params => {
       const paramYear = params['year'];
 
       if (paramYear) {
         this.showYear = +paramYear;
-        if (this.showYear === 2024) {
+        if (this.showYear === 2025) {
+          this.yearStat = canvas2025;
+          console.log("yearstat should be set to 2025")
+        } else if (this.showYear === 2024) {
           this.yearStat = canvas2024;
+          console.log("yearstat should be set to 2024")
         } else if (this.showYear === 2023) {
           this.yearStat = canvas2023;
         }
       } else {
         this.showYear = 2025;
+        this.yearStat = canvas2025;
       }
     });
-    this.countdown();
-  }
-
-  fetchCanvas2025Data() {
-    this.error = null;
-    this.eventService.getData().subscribe({
-      next: (data) => {
-        this.canvas2025 = data;
-        this.countdown();
-        this.startTime = new Date(data.start);
-        this.endTime = new Date(data.end);
-      }, error: (err) => {
-        this.error = err.message;
-        console.error('Error fetching data:', err);
-      }
-    })
-  }
-
-  fetchLiveStats() {
-    this.error = null;
-    this.eventService.getLiveStats().subscribe({
-      next: (data) => {
-        this.liveStats = data;
-      }, error: (err) => {
-        this.error = err.message;
-        console.error('Error fetching data:', err);
-      }
-    })
-  }
-
-  ngOnDestroy(): void {
-    this.intervalSubscription?.unsubscribe();
-    if (this.queryParamsSubscription) {
-      this.queryParamsSubscription.unsubscribe();
-    }
   }
 
   navigateTo(link: string) {
@@ -112,35 +65,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.router.navigate(['./draw'], { queryParams: { year: this.showYear, color: color } });
   }
 
-  view2024Graphs() {
-    this.router.navigate(['./graphs'], { queryParams: { year: this.showYear } });
-  }
-
   formatDateTimeManual(dateString: string): string {
     let date = new Date(dateString);
     return date.toLocaleString('default', { month: 'long' }) + " " + (date.getDate() + 1) + ", " + date.getFullYear();
-  }
-
-  countdown() {
-    this.intervalSubscription = interval(1000)
-      .pipe(
-        map(() => {
-          let diff = 0;
-          diff = this.endTime.getTime() - new Date().getTime();
-          if (diff > 0) {
-            this.timeRemaining.days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            this.timeRemaining.hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            this.timeRemaining.minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            this.timeRemaining.seconds = Math.floor((diff % (1000 * 60)) / 1000);
-          } else {
-            this.timeRemaining = { days: 0, hours: 0, minutes: 0, seconds: 0 };
-            this.eventInProgress = false;
-            this.intervalSubscription?.unsubscribe();
-          }
-          return this.timeRemaining
-        })
-      )
-      .subscribe();
   }
 
   changeYear(year: number): void {
@@ -158,12 +85,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     document.body.classList.add('no-scroll-fixed');
     this.showChangeYear = true;
     console.log("Change Year should be open")
-  }
-
-  calculate_percantage(numPixels: number) {
-    let totalNumPixels: number = this.liveStats?.canvasXDimension! * this.liveStats?.canvasYDimension!
-    let percent: number = (numPixels / totalNumPixels) * 100;
-    return percent.toFixed(2);
   }
 
 }
