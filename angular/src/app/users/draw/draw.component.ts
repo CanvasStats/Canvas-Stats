@@ -38,6 +38,9 @@ export class DrawComponent implements AfterViewInit, OnInit, OnDestroy {
     } else if (this.year === 2024) {
       this.canvasHeight = 500;
       this.canvasWidth = 1000;
+    } else if (this.year === 2025) {
+        this.canvasHeight = 500;
+        this.canvasWidth = 500;
     }
     this.username = this.route.snapshot.paramMap.get('username') || "";
   }

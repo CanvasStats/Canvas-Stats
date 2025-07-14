@@ -130,6 +130,7 @@ export class UserMain {
     constructor(
         public username: string,
         public canvas2023: boolean,
-        public canvas2024: boolean
+        public canvas2024: boolean,
+        public canvas2025: boolean
     ) {}
 }

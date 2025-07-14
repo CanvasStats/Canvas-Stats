@@ -108,6 +108,7 @@ export class CanvasService {
         const usernameIndex = header.indexOf('username');
         const canvas2023Index = header.indexOf('canvas2023');
         const canvas2024Index = header.indexOf('canvas2024');
+        const canvas2025Index = header.indexOf('canvas2025');
 
         const userList: UserMain[] = [];
         for (let i = 1; i < lines.length; i++) {
@@ -118,6 +119,7 @@ export class CanvasService {
                     username: values[usernameIndex]?.trim() || '',
                     canvas2023: +values[canvas2023Index]?.trim() == 1 || false,
                     canvas2024: +values[canvas2024Index]?.trim() == 1 || false,
+                    canvas2025: +values[canvas2025Index]?.trim() == 1 || false,
                 }
                 userList.push(user)
             } else {
