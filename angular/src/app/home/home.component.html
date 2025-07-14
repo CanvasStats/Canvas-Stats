@@ -134,7 +134,59 @@
     @if (!eventInProgress) {
     <article class="left">
         <section>
-            <p class="text">Canvas 2024 has ended. Full stats coming soon.</p>
+            <p class="text">Canvas 2025 has ended. Full stats coming soon.<br/>(Are you happy now redjard?)</p>
+        </section>
+    </article>
+    <article class="right">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                layers
+            </span>
+        </div>
+        <section>
+            <p class="text">Not counting white pixels, the  final canvas is {{liveStats?.percentCovered}} covered. (More accurate percent will be availible once the database has been shared)</p>
+        </section>
+    </article>
+    <article class="left">
+        <section>
+            <h3 style="text-align: center;">Pixels by color</h3>
+            <div class="colors-wrapper">
+                @for (color of liveStats?.colors; track $index) {
+                <span [className]="color.className">{{color.name}}:
+                    {{calculate_percantage(color.count)}}%</span>
+                }
+            </div>
+        </section>
+    </article>
+    <article class="left">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                person
+            </span>
+        </div>
+        <section>
+            <p class="text">{{liveStats?.usersOnline}} were online when this site last updated</p>
+        </section>
+    </article>
+    <article class="right">
+        <div class="icon">
+            <span class="material-symbols-outlined">
+                kid_star
+            </span>
+        </div>
+        <section>
+            <p class="text">The highest number of users online was {{liveStats?.mostUsersOnline}} at
+                {{liveStats?.mostUsersOnlineTime}}
+        </section>
+    </article>
+    <article class="left">
+        <section>
+            <h3 style="text-align: center;">Users Online Over Time</h3>
+            <div class="btn-wrapper">
+                <img class="graph-live"
+                    src="https://raw.githubusercontent.com/TheRealMonte/data-files/refs/heads/main/2025/usersOnline.png"
+                    alt="Users Online Over Time" />
+            </div>
         </section>
     </article>
     }
@@ -180,66 +232,7 @@
             </p>
         </section>
     </article>
-    <article class="right">
-        <div class="icon">
-            <span class="material-symbols-outlined">
-                layers
-            </span>
-        </div>
-        <section>
-            <p class="text">Not counting white pixels, the canvas is {{liveStats?.percentCovered}} covered</p>
-        </section>
-    </article>
-    <article class="left">
-        <section>
-            <h3 style="text-align: center;">Pixels by color</h3>
-            <div class="colors-wrapper">
-                @for (color of liveStats?.colors; track $index) {
-                <span [className]="color.className">{{color.name}}:
-                    {{calculate_percantage(color.count)}}%</span>
-                }
-            </div>
-        </section>
-    </article>
-    <article class="left">
-        <div class="icon">
-            <span class="material-symbols-outlined">
-                person
-            </span>
-        </div>
-        <section>
-            <p class="text">{{liveStats?.usersOnline}} were online when this site last updated</p>
-        </section>
-    </article>
-    <article class="right">
-        <div class="icon">
-            <span class="material-symbols-outlined">
-                kid_star
-            </span>
-        </div>
-        <section>
-            <p class="text">The highest number of users online was {{liveStats?.mostUsersOnline}} at
-                {{liveStats?.mostUsersOnlineTime}}
-        </section>
-    </article>
-    <article class="left">
-        <section>
-            <h3 style="text-align: center;">Users Online Over Time</h3>
-            <div class="btn-wrapper">
-                <img class="graph-live"
-                    src="https://raw.githubusercontent.com/TheRealMonte/data-files/refs/heads/main/2025/usersOnline.png"
-                    alt="Users Online Over Time" />
-            </div>
-        </section>
-    </article>
-    <article class="right">
-        <section>
-            <h3 style="text-align: center;">First 36 Hours</h3>
-            <section class="btn-wrapper">
-                <img src="https://raw.githubusercontent.com/TheRealMonte/therealmonte.github.io/refs/heads/main/screenshots/2025-timelapse.gif" class="timelapse"/>
-            </section>
-        </section>
-    </article>
+    
     <article class="left">
         <div class="icon">
             <span class="material-symbols-outlined">
