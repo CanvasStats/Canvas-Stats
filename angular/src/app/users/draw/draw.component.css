@@ -1,5 +1,6 @@
 #myCanvas {
     width: 100%;
+    image-rendering: pixelated;
 }
 
 .popup-container {

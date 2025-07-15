@@ -86,9 +86,12 @@
             </div>
         </section>
     </article>
-
+    <h3 style="text-align: center;">View you pixels placed in {{year}}</h3>
     <section class="btn-wrapper">
-        <button (click)="sendUserToDraw()" class="btn dark-green">View your pixels placed in {{year}}</button>
+        <button (click)="sendUserToDraw(1)" class="btn white">with  white background</button>
+        <button (click)="sendUserToDraw(0)" class="btn black">with transparent background</button>
+    </section>
+    <section class="btn-wrapper">
         @for (yearLink of yearStat.otherYears; track $index) {
         <button (click)="sendUserToAnotherStatsYear(yearLink)" [ngClass]="buttonColors[$index]">Your {{yearLink}}
             Stats</button>

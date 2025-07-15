@@ -93,8 +93,15 @@ export class UserStatsComponent implements OnInit {
     this.router.navigate([`./users/${this.username}`], { queryParams: { year: year } });
   }
 
-  sendUserToDraw() {
-    this.router.navigate([`./users/${this.username}/draw`], { queryParams: { year: this.year } });
+  sendUserToDraw(backgroundChoice: number) {
+    if (backgroundChoice == 1) {
+      //send to white background
+      this.router.navigate([`./users/${this.username}/draw`], { queryParams: { year: this.year, background: 'white' } });
+    } else {
+      //send to transparent background
+      this.router.navigate([`./users/${this.username}/draw`], { queryParams: { year: this.year, background: 'transparent' } });
+    }
+    
   }
 
   getRanking(): string {

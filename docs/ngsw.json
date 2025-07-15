@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1752531927358,
+  "timestamp": 1752541862234,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main-I66TEZQF.js",
+        "/main-U5WLMKYP.js",
         "/manifest.webmanifest",
         "/polyfills-FFHMD2TL.js",
         "/styles-THA43QGI.css"
@@ -51,8 +51,8 @@
     "/icons/icon-512x512.png": "6d66b0f41bec440908d3b2f20ab86498573a8f89",
     "/icons/icon-72x72.png": "35f98d268c6116ee915f6bad8812fc385159722f",
     "/icons/icon-96x96.png": "c153522869e1b1b7d8b7b3e634701d359e32dc27",
-    "/index.html": "2f3a2a23770d611731d4b45c3a2692378cf6f23e",
-    "/main-I66TEZQF.js": "acca1d7822a26b713f0b2ed6e8075d30f3ade67e",
+    "/index.html": "b0cf89d31f74ec2385d0b7243d0983e07b251a99",
+    "/main-U5WLMKYP.js": "7a4c05c2e8e4e1c89e3756876974ffbf5f49d1a9",
     "/manifest.webmanifest": "8161517a17cac4cee617192ba090384de5c2155c",
     "/polyfills-FFHMD2TL.js": "f49b49a155bc7d192db62a4c15d0a612b460a667",
     "/styles-THA43QGI.css": "03f8cd78f362df15107323a32ec3b48de83f27e4"
