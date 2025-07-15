@@ -452,9 +452,9 @@ section {
     width: 100%;
 }
 
-.graph-live {
-    height: 400px;
-    max-width: 100%;
+.canvas-img {
+    width: 100%;
+    image-rendering: pixelated;
 }
 
 .top-users {
