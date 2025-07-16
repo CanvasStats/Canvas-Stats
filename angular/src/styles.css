@@ -452,7 +452,7 @@ section {
     width: 100%;
 }
 
-.canvas-img {
+.canvas {
     width: 100%;
     image-rendering: pixelated;
 }

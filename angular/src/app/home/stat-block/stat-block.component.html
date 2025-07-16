@@ -12,7 +12,7 @@
         <h3>{{stat?.header}}</h3>
         }
         @for (paragraph of stat?.content; track $index) {
-        <p class="text">{{paragraph.contentValue}}</p>
+        <p class="text" [innerText]="paragraph.contentValue"></p>
         }
     </section>
 </article>
@@ -46,34 +46,12 @@
 }
 
 @if (stat?.type === 'image') {
-
-    @if (image) {
-        <article [class]="stat?.direction">
-    @if (stat?.icon) {
-    <div class="icon">
-        <span class="material-symbols-outlined">
-            {{stat?.icon}}
-        </span>
-    </div>
-    }
-    <section>
-
-        <h3>{{stat?.header}}</h3>
-        <div class="center">
-            <a [href]="image.imageURL" target="_blank" title="Click to enlarge"><img [class]="image.imageClass"
-                    [src]="image.imageURL" [alt]="image.imageAlt" /></a>
-        </div>
-    </section>
-    </article>>
-    }
-    @else {
-        <article class="left">
-        <div class="icon">
-        <span class="material-symbols-outlined">
-            error
-        </span>
-    </div>
-    <section><p class="text">Couldn't load the image, please refresh the page</p></section>
+    <article [class]="stat?.direction">
+        <section>
+            <h3>{{stat?.header}}</h3>
+                @for (image of stat?.content; track $index) {
+                    <div class="center" [innerHTML]="image.contentValue"></div>
+                }
+        </section>
     </article>
-    }
 }
