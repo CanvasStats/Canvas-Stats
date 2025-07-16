@@ -35,14 +35,14 @@ export class StatBlockComponent implements OnInit, OnDestroy {
       } else {
         this.year = 2025
       }
-      this.updateColorCounts();
-    });
-    if (this.stat?.type === 'image') {
+      if (this.stat?.type === 'image') {
       this.imageType = this.stat.content[0].contentValue;
       this.imageURL = this.stat.content[1].contentKey;
       this.imageAlt = this.stat.content[1].contentValue;
       console.log(`StatBlockComponent: Image stat initialized for type: ${this.imageType}`);
     }
+      this.updateColorCounts();
+    });
   }
 
   private updateColorCounts(): void {
