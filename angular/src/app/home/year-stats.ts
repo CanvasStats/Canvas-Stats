@@ -1,4 +1,67 @@
-import { ColorCount, ContentPair, YearStat } from "../models";
+import { ColorCount, ContentPair, YearStat, StatImage } from "../models";
+
+export const image2025: StatImage[] = [
+    new StatImage(
+        'pixelsPerMinute2025',
+        'Pixels placed per minute',
+        'https://raw.githubusercontent.com/TheRealMonte/images/refs/heads/main/2025/pixelsPerMinute.png',
+        'graph'
+    ),
+    new StatImage(
+        'heatMap2025',
+        '2025 Pixel Heat Map',
+        'https://raw.githubusercontent.com/TheRealMonte/images/refs/heads/main/2025/heatmapPlaceholder.png', 
+        'graph'
+    ),
+    new StatImage(
+        'finalCanvas2025',
+        'Canvas 2025 at the end of the event',
+        'https://raw.githubusercontent.com/TheRealMonte/images/refs/heads/main/2025/final.png',
+        'canvas'
+    )
+    ]
+
+ 
+export const image2024: StatImage[] = [
+    new StatImage(
+        'pixelsPerMinute2024',
+        'Pixels placed per minute',
+        'https://raw.githubusercontent.com/TheRealMonte/images/main/2024/graphs/pixels-placed-per-minute.png',
+        'graph'
+    ),
+    new StatImage(
+        'heatMap2024',
+        '2024 Pixel Heat Map',
+        'https://raw.githubusercontent.com/TheRealMonte/images/main/2024/graphs/heatmap-with-legend.png',
+        'graph'
+    ),
+    new StatImage(
+        'canvasFinal2024',
+        'Canvas 2024 at the end of the event',
+        'https://raw.githubusercontent.com/TheRealMonte/images/refs/heads/main/2024/final2024.png',
+        'canvas'
+    )
+];
+export const image2023: StatImage[] = [
+    new StatImage(
+        'pixelsPerMinute2023',
+        'Pixels placed per minute',
+        'https://raw.githubusercontent.com/TheRealMonte/images/main/2023/graphs/pixels-placed-per-minute.png',
+        'graph'
+    ),
+    new StatImage(
+        'heatMap2023',
+        '2023 Pixel Heat Map',
+        'https://raw.githubusercontent.com/TheRealMonte/images/main/2023/graphs/heatmap-with-legend.png',
+        'graph'
+    ),
+    new StatImage(
+        'canvasFinal2023',
+        'Canvas 2023 at the end of the event',
+        'https://raw.githubusercontent.com/TheRealMonte/images/main/2023/final2023.png', 
+        'canvas'
+    )
+];
 
 export const canvas2025: YearStat[] = [
     new YearStat(
@@ -23,8 +86,7 @@ export const canvas2025: YearStat[] = [
     ),
     new YearStat(
         'image', 'right', undefined, 'Pixels placed per minute', [
-            new ContentPair('imageType', 'graph'),
-            new ContentPair('https://raw.githubusercontent.com/TheRealMonte/images/refs/heads/main/2025/pixelsPerMinute.png', 'Pixels placed per minute')
+            new ContentPair('graph', 'pixelsPerMinute2025'),
         ]
     ),
     new YearStat(
@@ -55,9 +117,7 @@ export const canvas2025: YearStat[] = [
     ),
     new YearStat(
         'image', 'right', 'thermometer', 'Pixel Heat Map', 
-        [
-            new ContentPair('imageType', 'graph'), 
-            new ContentPair('https://raw.githubusercontent.com/TheRealMonte/images/refs/heads/main/2025/heatmapPlaceholder.png', '2025 Pixel Heat Map')]
+        [new ContentPair('graph', 'heatMap2025')]
     ),
     new YearStat(
         'text', 'left', 'undo', undefined,
@@ -69,8 +129,7 @@ export const canvas2025: YearStat[] = [
     ),
     new YearStat(
         'image', 'left', undefined, undefined, [
-            new ContentPair('imageType', 'canvas'),
-            new ContentPair('https://raw.githubusercontent.com/TheRealMonte/images/refs/heads/main/2025/final.png', 'Canvas 2025 at the end of the event')
+            new ContentPair('canvas', 'finalCanvas2025')
         ]
     ),
     // new YearStat(
@@ -145,10 +204,7 @@ export const canvas2024: YearStat[] = [
         [new ContentPair('p', '409046 are the final pixels on the canvas, making the canvas 81.8092% covered at the end of the event. (Up 27.6436% from 2023, but the canvas was twice as big in 2023')]
     ),
     new YearStat(
-        'image', 'right', undefined, 'Pixels placed per minute', [
-            new ContentPair('imageType', 'graph'),
-            new ContentPair('https://raw.githubusercontent.com/TheRealMonte/images/main/2024/graphs/pixels-placed-per-minute.png', 'Pixels placed per minute')
-        ]
+        'image', 'right', undefined, 'Pixels placed per minute', [new ContentPair('graph', 'pixelsPerMinute2024')]
     ),
     new YearStat(
         'text', 'right', 'kid_star', undefined,
@@ -168,10 +224,7 @@ export const canvas2024: YearStat[] = [
     ),
     new YearStat(
         'image', 'right', undefined, 'Pixel Heat Map', 
-        [
-            new ContentPair('imageType', 'graph'),
-            new ContentPair('https://raw.githubusercontent.com/TheRealMonte/images/main/2024/graphs/heatmap-with-legend.png', '2024 Pixel Heat Map')
-        ]
+        [new ContentPair('graph', 'heatMap2024')]
     ),
     new YearStat(
         'text', 'left', 'undo', undefined,
@@ -182,10 +235,7 @@ export const canvas2024: YearStat[] = [
         [new ContentPair('p', '13 users undid every pixel they placed. (Up 9 users from 2023)')]
     ),
     new YearStat(
-        'image', 'left', undefined, undefined, [
-            new ContentPair('imageType', 'canvas'),
-            new ContentPair('https://raw.githubusercontent.com/TheRealMonte/images/refs/heads/main/2025/final.png', 'Canvas 2024 at the end of the event')
-        ]
+        'image', 'left', undefined, undefined, [new ContentPair('canvas', 'canvasFinal2024')]
     ),
     // Do I want to do custom images for 2024?
     new YearStat(
@@ -249,10 +299,7 @@ export const canvas2023: YearStat[] = [
         [new ContentPair('p', '541666 are the final pixels on the canvas, making the canvas 54.1666% covered at the end of the event')]
     ),
     new YearStat(
-        'image', 'right', undefined, 'Pixels placed per minute', [
-            new ContentPair('imageType', 'graph'),
-            new ContentPair('https://raw.githubusercontent.com/TheRealMonte/images/main/2023/graphs/pixels-placed-per-minute.png', 'Pixels placed per minute')
-        ]
+        'image', 'right', undefined, 'Pixels placed per minute', [new ContentPair('graph', 'pixelsPerMinute2023')]
     ),
     new YearStat(
         'text', 'right', 'kid_star', undefined,
@@ -272,10 +319,7 @@ export const canvas2023: YearStat[] = [
     ),
     new YearStat(
         'image', 'right', undefined, 'Pixel Heat Map', 
-        [
-            new ContentPair('imageType', 'graph'),
-            new ContentPair('https://raw.githubusercontent.com/TheRealMonte/images/main/2023/graphs/heatmap-with-legend.png', '2023 Pixel Heat Map')
-        ]
+        [new ContentPair('graph', 'heatMap2023')]
     ),
     new YearStat(
         'text', 'left', 'undo', undefined,
@@ -286,10 +330,7 @@ export const canvas2023: YearStat[] = [
         [new ContentPair('p', '4 users undid every pixel they placed')]
     ),
     new YearStat(
-        'image', 'left', undefined, undefined, [
-            new ContentPair('imageType', 'canvas'),
-            new ContentPair('https://raw.githubusercontent.com/TheRealMonte/images/main/2023/final2023.png', 'Canvas 2023 at the end of the event')
-        ]
+        'image', 'left', undefined, undefined, [new ContentPair('canvas', 'canvasFinal2023')]
     ),
     // Do I want to do custom images for 2023?
 ];

@@ -46,7 +46,9 @@
 }
 
 @if (stat?.type === 'image') {
-<article [class]="stat?.direction">
+
+    @if (image) {
+        <article [class]="stat?.direction">
     @if (stat?.icon) {
     <div class="icon">
         <span class="material-symbols-outlined">
@@ -55,11 +57,23 @@
     </div>
     }
     <section>
+
         <h3>{{stat?.header}}</h3>
         <div class="center">
-            <a [href]="imageURL" target="_blank" title="Click to enlarge"><img [class]="imageType"
-            [src]="imageURL" [alt]="imageAlt" /></a>
+            <a [href]="image.imageURL" target="_blank" title="Click to enlarge"><img [class]="image.imageClass"
+                    [src]="image.imageURL" [alt]="image.imageAlt" /></a>
         </div>
     </section>
-</article>
+    </article>>
+    }
+    @else {
+        <article class="left">
+        <div class="icon">
+        <span class="material-symbols-outlined">
+            error
+        </span>
+    </div>
+    <section><p class="text">Couldn't load the image, please refresh the page</p></section>
+    </article>
+    }
 }

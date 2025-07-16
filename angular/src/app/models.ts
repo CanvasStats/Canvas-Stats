@@ -130,3 +130,12 @@ export class UserMain {
         public canvas2025: boolean
     ) {}
 }
+
+export class StatImage {
+    constructor(
+        public imageName: string,
+        public imageAlt: string,
+        public imageURL: string,
+        public imageClass: string
+    ) {}
+}
