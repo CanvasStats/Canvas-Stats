@@ -92,7 +92,7 @@
         <button (click)="sendUserToDraw(0)" class="btn black">with transparent background</button>
     </section>
     <section class="btn-wrapper">
-        @for (yearLink of yearStat.otherYears; track $index) {
+        @for (yearLink of otherYearsForUser; track $index) {
         <button (click)="sendUserToAnotherStatsYear(yearLink)" [ngClass]="buttonColors[$index]">Your {{yearLink}}
             Stats</button>
         }

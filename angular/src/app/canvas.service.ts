@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { ColorsCounts, Pixel, User, UserMain } from "./models";
-import { Observable, throwError, catchError, of, forkJoin, map, tap  } from 'rxjs';
+import { Observable, throwError, catchError, of, forkJoin, map, tap, switchMap  } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class CanvasService {
@@ -188,6 +188,36 @@ export class CanvasService {
             );
         }
     }
+
+    getOtherYearsForUser(username: string, currentYear: number): Observable<number[]> {
+    if (this.allUsersCache === null || this.allUsersCache.length === 0) {
+      console.log("allUsersCache is null or empty. Calling getAllUsers() first.");
+      return this.getAllUsers().pipe(
+        switchMap(() => this.processOtherYearsForUser(username, currentYear))
+      );
+    } else {
+      return this.processOtherYearsForUser(username, currentYear);
+    }
+  }
+
+  private processOtherYearsForUser(username: string, currentYear: number): Observable<number[]> {
+    const user = this.allUsersCache?.find(u => u.username === username);
+    if (!user) {
+      console.warn(`User with username '${username}' not found in cache.`);
+      return of([]);
+    }
+    const otherYears: number[] = [];
+    if (user.canvas2023 && currentYear !== 2023) {
+      otherYears.push(2023);
+    }
+    if (user.canvas2024 && currentYear !== 2024) {
+      otherYears.push(2024);
+    }
+    if (user.canvas2025 && currentYear !== 2025) {
+      otherYears.push(2025);
+    }
+    return of(otherYears);
+  }
 
     private getColorCountsForYear(year: number): Observable<ColorsCounts[]> {
         const csvFile = `${this.baseURL}/${year}/color_count.csv`;

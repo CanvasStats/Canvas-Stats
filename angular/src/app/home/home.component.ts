@@ -1,27 +1,25 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from "../footer/footer.component";
-import { Overview, YearStat } from '../models';
+import { YearStat } from '../models';
 import { CommonModule } from '@angular/common';
-import { Subscription, interval } from 'rxjs';
-import { CanvasEventsService } from './canvas-events.service';
-import { Event, Color, LiveStats } from './event.model';
-import { map } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 import { CanvasService } from '../canvas.service';
 import { canvas2025, canvas2024, canvas2023 } from './year-stats';
+import { StatBlockComponent } from "./stat-block/stat-block.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FormsModule, HeaderComponent, FooterComponent, CommonModule],
+  imports: [FormsModule, HeaderComponent, FooterComponent, CommonModule, StatBlockComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
   showYear: number = 2025;
-  yearStat: YearStat | undefined;
+  yearStats: YearStat[] | undefined;
   queryParamsSubscription: Subscription | undefined;
   error: string | null = null;
   showChangeYear: boolean = false;
@@ -41,28 +39,23 @@ export class HomeComponent implements OnInit {
 
       if (paramYear) {
         this.showYear = +paramYear;
-        if (this.showYear === 2025) {
-          this.yearStat = canvas2025;
-          console.log("yearstat should be set to 2025")
-        } else if (this.showYear === 2024) {
-          this.yearStat = canvas2024;
-          console.log("yearstat should be set to 2024")
+        if (this.showYear === 2024) {
+          this.yearStats = canvas2024;
         } else if (this.showYear === 2023) {
-          this.yearStat = canvas2023;
+          this.yearStats = canvas2023;
+        } else {
+          this.showYear = 2025;
+          this.yearStats = canvas2025;
         }
       } else {
         this.showYear = 2025;
-        this.yearStat = canvas2025;
+        this.yearStats = canvas2025;
       }
     });
   }
 
   navigateTo(link: string) {
     this.router.navigateByUrl(link);
-  }
-
-  showColorIMG(color: string) {
-    this.router.navigate(['./draw'], { queryParams: { year: this.showYear, color: color } });
   }
 
   formatDateTimeManual(dateString: string): string {

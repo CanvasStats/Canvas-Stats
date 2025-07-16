@@ -11,8 +11,7 @@ import { FooterComponent } from "../../footer/footer.component";
 class YearStats {
   constructor(
     public year: number,
-    public numberOfusers: number,
-    public otherYears: number[]
+    public numberOfusers: number
   ) { }
 }
 
@@ -30,7 +29,8 @@ export class UserStatsComponent implements OnInit {
   userColors!: ColorsCounts;
   wasUserFound: boolean = true;
   loading: boolean = true;
-  years = [new YearStats(2025, 638, [2023, 2024]), new YearStats(2024, 1914, [2023, 2025]), new YearStats(2023, 2208, [2024, 2025])];
+  years = [new YearStats(2025, 638), new YearStats(2024, 1914), new YearStats(2023, 2208)];
+  otherYearsForUser: number[] = [];
   yearStat!: YearStats;
   buttonColors: string[] = ['btn magenta', 'btn azure', 'btn rust', 'btn red'];
   queryParamsSubscription: Subscription | undefined;
@@ -62,6 +62,7 @@ export class UserStatsComponent implements OnInit {
       if (paramUsername) {
         this.username = paramUsername;
         this.getUserData(this.year);
+        this.getOtherYearsForUsers();
       }
     });
 
@@ -81,7 +82,14 @@ export class UserStatsComponent implements OnInit {
         });
       }
     });
+  }
 
+  getOtherYearsForUsers() {
+    this.canvasService.getOtherYearsForUser(this.username, this.year).subscribe({
+      next: (data) => {
+        this.otherYearsForUser = data;
+      }
+    })
   }
 
   sendToUsersList() {
