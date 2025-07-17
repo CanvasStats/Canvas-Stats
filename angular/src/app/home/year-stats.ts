@@ -11,7 +11,7 @@ export const canvas2025: YearStat[] = [
     new YearStat(
         'text', 'right', 'grid_view', undefined,
         [
-            new ContentPair('p', '313408 total pixels placed on the canvas. (Down 329,235 pixels from 2024, but the canvas was twice as big in 2024)')
+            new ContentPair('p', '308439 total pixels placed on the canvas. (Down 334,204 pixels from 2024, but the canvas was twice as big in 2024)')
         ]
     ),
     new YearStat(
@@ -33,23 +33,23 @@ export const canvas2025: YearStat[] = [
     new YearStat(
         'userList', 'left', undefined, 'The users that contributed to the top pixel were:',
         [
-            new ContentPair('li', 'Dexruus@chaos.social',),
-            new ContentPair('li', 'DmMacniel@feddit.org',),
-            new ContentPair('li', 'Sonne@feddit.org',),
-            new ContentPair('li', 'adlerweb@social.adlerweb.info'),
-            new ContentPair('li', 'flughoernchen@feddit.org'),
-            new ContentPair('li', 'hazyskies@toast.ooo'),
-            new ContentPair('li', 'Adopon@lemmy.world'),
-            new ContentPair('li', 'nuko147@lemmy.world'),
-            new ContentPair('li', 'xantater@fbsweb.de'),
-            new ContentPair('li', 'marius851000@mariusdavid.fr'),
-            new ContentPair('li', 'irelephant@app.wafrn.net'),
-            new ContentPair('li', 'Lokloy@lemmy.world'),
-            new ContentPair('li', 'D_a_X@feddit.org'),
-            new ContentPair('li', 'viviansequeira@mastodon.world'),
-            new ContentPair('li', 'elvith@feddit.org'),
-            new ContentPair('li', 'ace_garp@lemmy.world'),
-            new ContentPair('li', 'rrconkle@lemmy.zip'),
+            new ContentPair('Dexruus@chaos.social', '31 times'),
+            new ContentPair('DmMacniel@feddit.org', '32 times'),
+            new ContentPair('Sonne@feddit.org', '1 times'),
+            new ContentPair('adlerweb@social.adlerweb.info', '27 times'),
+            new ContentPair('flughoernchen@feddit.org', '28 times'),
+            new ContentPair('hazyskies@toast.ooo', '3 times'),
+            new ContentPair('Adopon@lemmy.world', '2 times'),
+            new ContentPair('nuko147@lemmy.world', '12 times'),
+            new ContentPair('xantater@fbsweb.de', '6 times'),
+            new ContentPair('marius851000@mariusdavid.fr', '2 times'),
+            new ContentPair('irelephant@app.wafrn.net', '4 times'),
+            new ContentPair('Lokloy@lemmy.world', '2 times'),
+            new ContentPair('D_a_X@feddit.org', '2 times'),
+            new ContentPair('viviansequeira@mastodon.world', '2 times'),
+            new ContentPair('elvith@feddit.org', '2 times'),
+            new ContentPair('ace_garp@lemmy.world', '1 time'),
+            new ContentPair('rrconkle@lemmy.zip', '1 time')
         ]
     ),
     new YearStat(
@@ -65,12 +65,7 @@ export const canvas2025: YearStat[] = [
         [new ContentPair('p', '0 users undid every pixel they placed. (Last year there were 13 users)')]
     ),
     new YearStat(
-        'image', 'left', undefined, undefined, [
-            new ContentPair('img', '<a href="https://raw.githubusercontent.com/TheRealMonte/images/refs/heads/main/2025/final.png" target="_blank" title="Click to enlarge"><img class="canvas" src="https://raw.githubusercontent.com/TheRealMonte/images/refs/heads/main/2025/final.png" alt="Canvas 2025 at the end of the event" /></a>')
-        ]
-    ),
-    new YearStat(
-        'generate', 'right', 'dashboard_customize', 'Generate Custom Canvas Image',
+        'generate', 'left', 'dashboard_customize', 'Generate Custom Canvas Image',
         [
             new ContentPair('Canvas at end of event', 'final'),
             new ContentPair('Just the pixels that where undone', 'undo'),
@@ -82,10 +77,11 @@ export const canvas2025: YearStat[] = [
         ]
     ),
     new YearStat(
-        'externalLinks', 'left', undefined, undefined, [
+        'externalLinks', 'right', 'link', undefined, [
             new ContentPair('View the 2025 Atlas', 'https://atlas2025.mariusdavid.fr/')
         ]
-    )
+    ),
+    new YearStat('social', 'left', undefined, undefined, [])
 ];
 
 export const colorCounts2025: ColorCount[] = [
@@ -152,13 +148,13 @@ export const canvas2024: YearStat[] = [
     new YearStat(
         'userList', 'left', undefined, 'The users that contributed to the top pixel were:',
         [
-            new ContentPair('li', '142446@toast.ooo: 1414 times'),
-            new ContentPair('li', 'Kelo@lemmy.world: 7 times'),
-            new ContentPair('li', 'hemko@lemmy.dbzer0.com: 2 times'),
-            new ContentPair('li', 'ategon@programming.dev: 1 time'),
-            new ContentPair('li', 'grant@grants.cafe: 1 time'),
-            new ContentPair('li', 'EXtremeExploit@lemmy.world: 1 time'),
-            new ContentPair('li', 'hdggDalton@toast.ooo: 1 time'),
+            new ContentPair('142446@toast.ooo', '1414 times'),
+            new ContentPair('Kelo@lemmy.world', '7 times'),
+            new ContentPair('hemko@lemmy.dbzer0.com', '2 times'),
+            new ContentPair('ategon@programming.dev', '1 time'),
+            new ContentPair('grant@grants.cafe', '1 time'),
+            new ContentPair('EXtremeExploit@lemmy.world', '1 time'),
+            new ContentPair('hdggDalton@toast.ooo', '1 time'),
         ]
     ),
     new YearStat(
@@ -174,10 +170,7 @@ export const canvas2024: YearStat[] = [
         [new ContentPair('p', '13 users undid every pixel they placed. (Up 9 users from 2023)')]
     ),
     new YearStat(
-        'image', 'left', undefined, undefined, [new ContentPair('img', '<a href="https://raw.githubusercontent.com/TheRealMonte/images/refs/heads/main/2024/final2024.png" target="_blank" title="Click to enlarge"><img class="canvas" src="https://raw.githubusercontent.com/TheRealMonte/images/refs/heads/main/2024/final2024.png" alt="Canvas 2024 at the end of the event" /></a>')]
-    ),
-    new YearStat(
-        'generate', 'right', 'dashboard_customize', 'Generate Custom Canvas Image',
+        'generate', 'left', 'dashboard_customize', 'Generate Custom Canvas Image',
         [
             new ContentPair('Canvas at end of event', 'final'),
             // new ContentPair('Reverse Order', 'reverse'),
@@ -188,10 +181,11 @@ export const canvas2024: YearStat[] = [
         ]
     ),
     new YearStat(
-        'externalLinks', 'left', undefined, undefined, [
+        'externalLinks', 'right', 'link', undefined, [
             new ContentPair('View the 2024 Atlas', 'https://atlas.mariusdavid.fr/')
         ]
-    )
+    ),
+    new YearStat('social', 'left', undefined, undefined, [])
 ];
 
 export const colorCounts2024: ColorCount[] = [
@@ -257,13 +251,13 @@ export const canvas2023: YearStat[] = [
     new YearStat(
         'userList', 'left', undefined, 'The users that contributed to the top pixel were:',
         [
-            new ContentPair('li', 'Depress_mode@lemmy.world: 83 times'),
-            new ContentPair('li', 'Kalcifer@lemmy.world: 77 times'),
-            new ContentPair('li', 'anonymous1691293996@lemmy.world: 4 times'),
-            new ContentPair('li', 'anonymous1691294527@lemmy.world: 3 times'),
-            new ContentPair('li', 'anonymous1691296202@lemmy.world: 1 time'),
-            new ContentPair('li', 'bstix@feddit.dk: 1 time'),
-            new ContentPair('li', 'Wilker@lemmy.blahaj.zone: 1 time'),
+            new ContentPair('Depress_mode@lemmy.world', '83 times'),
+            new ContentPair('Kalcifer@lemmy.world', '77 times'),
+            new ContentPair('anonymous1691293996@lemmy.world', '4 times'),
+            new ContentPair('anonymous1691294527@lemmy.world', '3 times'),
+            new ContentPair('anonymous1691296202@lemmy.world', '1 time'),
+            new ContentPair('bstix@feddit.dk', '1 time'),
+            new ContentPair('Wilker@lemmy.blahaj.zone', '1 time'),
         ]
     ),
     new YearStat(
@@ -279,10 +273,7 @@ export const canvas2023: YearStat[] = [
         [new ContentPair('p', '4 users undid every pixel they placed')]
     ),
     new YearStat(
-        'image', 'left', undefined, undefined, [new ContentPair('img', '<a href="https://raw.githubusercontent.com/TheRealMonte/images/main/2023/final2023.png" target="_blank" title="Click to enlarge"><img class="canvas" src="https://raw.githubusercontent.com/TheRealMonte/images/main/2023/final2023.png" alt="Canvas 2023 at the end of the event" /></a>')]
-    ),
-    new YearStat(
-        'generate', 'right', 'dashboard_customize', 'Generate Custom Canvas Image',
+        'generate', 'left', 'dashboard_customize', 'Generate Custom Canvas Image',
         [
             new ContentPair('Canvas at end of event', 'final'),
             // new ContentPair('Reverse Order', 'reverse'),
@@ -292,6 +283,7 @@ export const canvas2023: YearStat[] = [
             // new ContentPair('any more to add?', '')
         ]
     ),
+    new YearStat('social', 'right', undefined, undefined, [])
 ];
 
 export const colorCounts2023: ColorCount[] = [

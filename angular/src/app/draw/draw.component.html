@@ -21,9 +21,9 @@
                 </span> Back to your {{year}} stats</button>
             }
             @else {
-                <a class="btn blue" routerLink=""><span class="material-symbols-outlined">
+                <button class="btn blue" (click)="goToYearHome()"><span class="material-symbols-outlined">
                     arrow_back
-                </span> Back</a>
+                </span> Back</button>
             }
             <button (click)="downloadImage()" class="btn mauve">Download {{filename}}</button>
         </section>

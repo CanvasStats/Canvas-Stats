@@ -24,13 +24,15 @@
         <h3>{{stat?.header}}</h3>
         <div class="colors-wrapper clickable">
             @for (color of colorCounts; track $index) {
-                @if (color.colorVariable === 'white') {
-                    <span [className]="color.colorVariable" (click)="showColorIMG(color.colorName, 1)">{{color.colorName}}: {{color.count}}</span>
-                }
-                @else {
-                    <span [className]="color.colorVariable" (click)="showColorIMG(color.colorName, 2)">{{color.colorName}}: {{color.count}}</span>
-                }
-            
+            @if (color.colorVariable === 'white') {
+            <span [className]="color.colorVariable" (click)="showColorIMG(color.colorName, 1)">{{color.colorName}}:
+                {{color.count}}</span>
+            }
+            @else {
+            <span [className]="color.colorVariable" (click)="showColorIMG(color.colorName, 2)">{{color.colorName}}:
+                {{color.count}}</span>
+            }
+
             }
         </div>
     </section>
@@ -43,7 +45,8 @@
         <h3>{{stat?.header}}</h3>
         <ul class="top-users">
             @for (user of stat?.content; track $index) {
-            <li>{{user.contentValue}}</li>
+            <li><a (click)="goToUser(user.contentKey)" class="clickable-text">{{user.contentKey}}</a>:
+                {{user.contentValue}}</li>
             }
         </ul>
     </section>
@@ -51,18 +54,18 @@
 }
 
 @if (stat?.type === 'image') {
-    <article [class]="stat?.direction">
-        <section>
-            <h3>{{stat?.header}}</h3>
-                @for (image of stat?.content; track $index) {
-                    <div class="center" [innerHTML]="image.contentValue"></div>
-                }
-        </section>
-    </article>
+<article [class]="stat?.direction">
+    <section>
+        <h3>{{stat?.header}}</h3>
+        @for (image of stat?.content; track $index) {
+        <div class="center" [innerHTML]="image.contentValue"></div>
+        }
+    </section>
+</article>
 }
 @if (stat?.type === 'generate') {
-    <article [class]="stat?.direction">
-        @if (stat?.icon) {
+<article [class]="stat?.direction">
+    @if (stat?.icon) {
     <div class="icon">
         <span class="material-symbols-outlined">
             {{stat?.icon}}
@@ -72,19 +75,62 @@
     <section>
         <h3>{{stat?.header}}</h3>
         @if (showCustomPrompt === 1) {
-            <div class="btn-wrapper">
+        <div class="btn-wrapper">
             @for (button of stat?.content; track $index) {
-                <button [class]="getColor($index)" (click)="generateCustom(button.contentValue)">{{button.contentKey}}</button>
+            <button [class]="getColor($index)"
+                (click)="generateCustom(button.contentValue)">{{button.contentKey}}</button>
             }
         </div>
         }
         @if (showCustomPrompt === 2) {
-            <div class="btn-wrapper">
-                <button class="btn white" (click)="generateCustom('white')">With white background</button>
-                <button class="btn black" (click)="generateCustom('black')">With black background</button>
-                <button class="btn dark-gray" (click)="generateCustom('transparent')">With transparent background</button>
-            </div>
+        <div class="btn-wrapper">
+            <button class="btn white" (click)="generateCustom('white')">With white background</button>
+            <button class="btn black" (click)="generateCustom('black')">With black background</button>
+            <button class="btn dark-gray" (click)="generateCustom('transparent')">With transparent background</button>
+        </div>
         }
     </section>
+</article>
+}
+
+@if (stat?.type === 'externalLinks') {
+<article [class]="stat?.direction">
+    @if (stat?.icon) {
+    <div class="icon">
+        <span class="material-symbols-outlined">
+            {{stat?.icon}}
+        </span>
+    </div>
+    }
+    <section>
+        @if (stat?.header) {
+        <h3>{{stat?.header}}</h3>
+        }
+        <div class="btn-wrapper">
+            @for (link of stat?.content; track $index) {
+                <a [href]="link.contentValue" target="_blank" [classList]="getColor($index)">{{link.contentKey}}</a>
+            }
+        </div>
+    </section>
+</article>
+}
+
+@if (stat?.type === 'social') {
+    <article [class]="stat?.direction">
+        <div class="icon">
+        <span class="material-symbols-outlined">
+            public
+        </span>
+    </div>
+        <section>
+            <h3>Stay connected:</h3>
+            <ul>
+                <li><a href="https://toast.ooo/c/canvas" target="_blank">Lemmy</a></li>
+                <li><a href="https://social.fediverse.events/@canvas" target="_blank">mastodon</a></li>
+                <li><a href="https://matrix.to/#/#canvas:aftermath.gg?via=matrix.org" target="_blank">Matrix Space</a></li>
+                <li><a href="https://discord.gg/XrDSJ2WJqa">Discord Server <span class="large-screens-only">(bridged to matrix)</span></a></li>
+                <li>More inforamtion about Canvas on <a href="https://fediverse.events/">fediverse.events</a></li>
+            </ul>
+        </section>
     </article>
 }

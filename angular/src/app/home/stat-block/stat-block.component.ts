@@ -99,5 +99,9 @@ export class StatBlockComponent implements OnInit, OnDestroy {
         array[randomIndex], array[currentIndex]];
     }
     return array;
-};
+}
+
+goToUser(username: string) {
+    this.router.navigate([`./users/${username}`], { queryParams: { year: this.year } });
+  }
 }

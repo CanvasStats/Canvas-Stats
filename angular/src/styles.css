@@ -342,8 +342,12 @@ a {
     border-radius: 4px;
 }
 
-.clickable {
+.clickable, .clickable-text {
     cursor: pointer;
+}
+
+.clickable-text:hover {
+    text-decoration: underline;
 }
 
 .changeYearContainer {

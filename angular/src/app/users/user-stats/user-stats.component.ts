@@ -29,7 +29,7 @@ export class UserStatsComponent implements OnInit {
   userColors!: ColorsCounts;
   wasUserFound: boolean = true;
   loading: boolean = true;
-  years = [new YearStats(2025, 638), new YearStats(2024, 1914), new YearStats(2023, 2208)];
+  years = [new YearStats(2025, 638), new YearStats(2024, 1912), new YearStats(2023, 2204)];
   otherYearsForUser: number[] = [];
   yearStat!: YearStats;
   buttonColors: string[] = ['btn magenta', 'btn azure', 'btn rust', 'btn red'];

@@ -222,6 +222,7 @@ export class DrawComponent implements AfterViewInit, OnInit, OnDestroy {
             )
             .subscribe({
                 next: (pixels) => {
+                    console.log(`The draw component got ${pixels?.length} pixels.`)
                     setTimeout(() => { // Keep setTimeout for ExpressionChangedAfterItHasBeenCheckedError safety
                         if (!pixels || pixels.length === 0) {
                             this.errorMessage = `Pixels didn't load or length of zero`;
@@ -301,5 +302,9 @@ export class DrawComponent implements AfterViewInit, OnInit, OnDestroy {
         }
 
         this.router.navigate([`/users/${navigateValue}`], { queryParams: { year: this.year } })
+    }
+
+    goToYearHome(): void {
+        this.router.navigate(['/'], { queryParams: { year: this.year } })
     }
 }
