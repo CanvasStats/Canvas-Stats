@@ -69,16 +69,18 @@ export const canvas2025: YearStat[] = [
             new ContentPair('img', '<a href="https://raw.githubusercontent.com/TheRealMonte/images/refs/heads/main/2025/final.png" target="_blank" title="Click to enlarge"><img class="canvas" src="https://raw.githubusercontent.com/TheRealMonte/images/refs/heads/main/2025/final.png" alt="Canvas 2025 at the end of the event" /></a>')
         ]
     ),
-    // new YearStat(
-    //     'customCanvas', 'right', undefined, 'Generate Custom Canvas Image',
-    //     [
-    //         new ContentPair('Pixels that made it from the "megatemplate" to the end of the even', 'compare'),
-    //         new ContentPair('Reverse Order', 'reverse'),
-    //         new ContentPair('Uncontested pixels', ''),
-    //         new ContentPair('just the pixels that where undone', ''),
-    //         new ContentPair('any more to add?', '')
-    //     ]
-    // ),
+    new YearStat(
+        'generate', 'right', 'dashboard_customize', 'Generate Custom Canvas Image',
+        [
+            new ContentPair('Canvas at end of event', 'final'),
+            new ContentPair('Just the pixels that where undone', 'undo'),
+            new ContentPair('Pixels that made it from the "megatemplate" to the end of the event', 'compare'),
+            // new ContentPair('Reverse Order', 'reverse'),
+            // new ContentPair('Uncontested pixels', ''),
+            // new ContentPair('Generate somthing else', 'more')
+            // new ContentPair('any more to add?', '')
+        ]
+    ),
     new YearStat(
         'externalLinks', 'left', undefined, undefined, [
             new ContentPair('View the 2025 Atlas', 'https://atlas2025.mariusdavid.fr/')
@@ -174,7 +176,17 @@ export const canvas2024: YearStat[] = [
     new YearStat(
         'image', 'left', undefined, undefined, [new ContentPair('img', '<a href="https://raw.githubusercontent.com/TheRealMonte/images/refs/heads/main/2024/final2024.png" target="_blank" title="Click to enlarge"><img class="canvas" src="https://raw.githubusercontent.com/TheRealMonte/images/refs/heads/main/2024/final2024.png" alt="Canvas 2024 at the end of the event" /></a>')]
     ),
-    // Do I want to do custom images for 2024?
+    new YearStat(
+        'generate', 'right', 'dashboard_customize', 'Generate Custom Canvas Image',
+        [
+            new ContentPair('Canvas at end of event', 'final'),
+            // new ContentPair('Reverse Order', 'reverse'),
+            // new ContentPair('Uncontested pixels', ''),
+            new ContentPair('Just the pixels that where undone', 'undo'),
+            // new ContentPair('Generate somthing else', 'more')
+            // new ContentPair('any more to add?', '')
+        ]
+    ),
     new YearStat(
         'externalLinks', 'left', undefined, undefined, [
             new ContentPair('View the 2024 Atlas', 'https://atlas.mariusdavid.fr/')
@@ -269,7 +281,17 @@ export const canvas2023: YearStat[] = [
     new YearStat(
         'image', 'left', undefined, undefined, [new ContentPair('img', '<a href="https://raw.githubusercontent.com/TheRealMonte/images/main/2023/final2023.png" target="_blank" title="Click to enlarge"><img class="canvas" src="https://raw.githubusercontent.com/TheRealMonte/images/main/2023/final2023.png" alt="Canvas 2023 at the end of the event" /></a>')]
     ),
-    // Do I want to do custom images for 2023?
+    new YearStat(
+        'generate', 'right', 'dashboard_customize', 'Generate Custom Canvas Image',
+        [
+            new ContentPair('Canvas at end of event', 'final'),
+            // new ContentPair('Reverse Order', 'reverse'),
+            // new ContentPair('Uncontested pixels', ''),
+            new ContentPair('Just the pixels that where undone', 'undo'),
+            // new ContentPair('Generate somthing else', 'more')
+            // new ContentPair('any more to add?', '')
+        ]
+    ),
 ];
 
 export const colorCounts2023: ColorCount[] = [

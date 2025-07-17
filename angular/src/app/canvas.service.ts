@@ -36,7 +36,7 @@ export class CanvasService {
 
      getPixelDataForYear(year: number): Observable<Pixel[]> {
         this.year = year;
-        let url = `${this.baseURL}/${year}/pixels.csv`
+        let url = `${this.baseURL}/${year}/pixels${year}.csv`
         console.log(`Getting pixels for ${year} from ${url}`)
         return this.http.get(url, { responseType: 'text' })
             .pipe(
@@ -52,11 +52,15 @@ export class CanvasService {
             console.log("can't find headers");
             return [];
         }
+        //username,xCoordinate,yCoordinate,colorHex,isTop,isUndo,isSpecial
         const header = lines[0].split(',').map(h => h.trim());
         const usernameIndex = header.indexOf('username');
         const xCoordinateIndex = header.indexOf('xCoordinate');
         const yCoordinateIndex = header.indexOf('yCoordinate');
         const colorHexIndex = header.indexOf('colorHex');
+        const isTopIndex = header.indexOf('isTop');
+        const isUndoIndex = header.indexOf('isUndo');
+        const isSpecialIndex = header.indexOf('isSpecial');
 
         const pixelList: Pixel[] = [];
         for (let i = 1; i < lines.length; i++) {
@@ -66,7 +70,10 @@ export class CanvasService {
                     username: values[usernameIndex]?.trim() || '',
                     xCoordinate: +values[xCoordinateIndex]?.trim() || 0,
                     yCoordinate: +values[yCoordinateIndex]?.trim() || 0,
-                    colorHex: values[colorHexIndex]?.trim() || ''
+                    colorHex: values[colorHexIndex]?.trim() || '',
+                    isTop: +values[isTopIndex]?.trim() == 1 || false,
+                    isUndo: +values[isUndoIndex]?.trim() == 1 || false,
+                    isSpecial: +values[isSpecialIndex]?.trim() == 1 || false
                 }
                 pixelList.push(pixel)
             } else {
@@ -77,16 +84,50 @@ export class CanvasService {
         return pixelList;
     }
 
-    getPixelsForUser(year: number, username: string): Observable<Pixel[] | undefined> {
+    getPixelsForDraw(year: number, key: string, value: string): Observable<Pixel[] | undefined> {
+        console.log(`fetching pixels to draw the canvas with ${key}: ${value}`)
         if (this.year === year && this.pixelDataCache) {
-            return of(this.pixelDataCache.filter(pixel => pixel.username.toLowerCase() === username.toLowerCase()));
+            if (key === 'username') {
+                console.log(`Pixel cache already loaded. Getting pixels for user ${value}`)
+                return of(this.pixelDataCache.filter(pixel => pixel.username.toLowerCase() === value.toLowerCase()));
+            } else if (key === 'color') {
+                console.log(`Pixel cache already loaded. Getting pixels for color ${value}`)
+                return of(this.pixelDataCache.filter(pixel => pixel.colorHex === value));
+            } else if (key === 'compare') {
+                console.log(`Pixel cache already loaded. Getting pixels for compare`)
+                return of(this.pixelDataCache.filter(pixel => pixel.isSpecial === true));
+            } else if (key === 'undo') {
+                console.log(`Pixel cache already loaded. Getting undone pixels`)
+                return of(this.pixelDataCache.filter(pixel => pixel.isUndo === true));
+            } else {
+                console.log(`Pixel cache already loaded. Getting isTop pixels`)
+                return of(this.pixelDataCache.filter(pixel => pixel.isTop === true));
+            }
         } else {
-            this.year = year;
-            return this.getPixelDataForYear(this.year).pipe(
-                map(pixels => pixels.filter(pixel => pixel.username.toLowerCase() === username.toLowerCase())),
-                catchError(this.handleError<Pixel[] | undefined>('getPixelsForUser', undefined))
-            );
-        }
+                this.year = year;
+                return this.getPixelDataForYear(this.year).pipe(
+                    map(pixels => {
+                        if (key === 'username') {
+                            console.log(`Pixel cache not loaded. Loading pixel cache and filtering for user: ${value}`)
+                            return pixels.filter(pixel => pixel.username.toLowerCase() === value.toLowerCase());
+                        } else if (key === 'color') {
+                            console.log(`Pixel cache not loaded. Loading pixel cache and filtering for color: ${value}`)
+                            return pixels.filter(pixel => pixel.colorHex === value);
+                        } else if (key === 'compare') {
+                            console.log(`Pixel cache not loaded. Loading pixel cache and filtering for compare`)
+                            return pixels.filter(pixel => pixel.isSpecial === true);
+                        } else if (key === 'undo') {
+                            console.log(`Pixel cache not loaded. Loading pixel cache and filtering for undone pixels`)
+                            return pixels.filter(pixel => pixel.isUndo === true);
+                        }
+                         else {
+                            console.log(`Pixel cache not loaded. Loading pixel cache and filtering for isTop pixels`)
+                            return pixels.filter(pixel => pixel.isTop === true);
+                        }
+                    }),
+                    catchError(this.handleError<Pixel[] | undefined>('GetPixelsForDraw', undefined))
+                );
+            }
     }
 
     getAllUsers(): Observable<UserMain[]> {

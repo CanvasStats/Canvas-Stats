@@ -15,15 +15,22 @@
 <main>
     <div id="main-canvas">
         <section id="space-between-wrapper">
-            <button class="btn blue" (click)="sendUserToStats()"><span class="material-symbols-outlined">
+            @if (drawParams.key === 'username') {
+                <button class="btn blue" (click)="sendUserToStats()"><span class="material-symbols-outlined">
                     arrow_back
                 </span> Back to your {{year}} stats</button>
-            <button (click)="downloadImage()" class="btn mauve">Download your pixels as a PNG</button>
+            }
+            @else {
+                <a class="btn blue" routerLink=""><span class="material-symbols-outlined">
+                    arrow_back
+                </span> Back</a>
+            }
+            <button (click)="downloadImage()" class="btn mauve">Download {{filename}}</button>
         </section>
         <article class="left">
             <section>
                 <p class="text">
-                    The image below is all of the pixels {{username}} placed during the {{year}} event
+                    {{message}}
                 </p>
             </section>
         </article>

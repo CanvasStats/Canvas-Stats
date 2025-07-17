@@ -24,8 +24,13 @@
         <h3>{{stat?.header}}</h3>
         <div class="colors-wrapper clickable">
             @for (color of colorCounts; track $index) {
-            <span [className]="color.colorVariable" (click)="showColorIMG(color.colorVariable)">{{color.colorName}}:
-                {{color.count}}</span>
+                @if (color.colorVariable === 'white') {
+                    <span [className]="color.colorVariable" (click)="showColorIMG(color.colorName, 1)">{{color.colorName}}: {{color.count}}</span>
+                }
+                @else {
+                    <span [className]="color.colorVariable" (click)="showColorIMG(color.colorName, 2)">{{color.colorName}}: {{color.count}}</span>
+                }
+            
             }
         </div>
     </section>
@@ -53,5 +58,33 @@
                     <div class="center" [innerHTML]="image.contentValue"></div>
                 }
         </section>
+    </article>
+}
+@if (stat?.type === 'generate') {
+    <article [class]="stat?.direction">
+        @if (stat?.icon) {
+    <div class="icon">
+        <span class="material-symbols-outlined">
+            {{stat?.icon}}
+        </span>
+    </div>
+    }
+    <section>
+        <h3>{{stat?.header}}</h3>
+        @if (showCustomPrompt === 1) {
+            <div class="btn-wrapper">
+            @for (button of stat?.content; track $index) {
+                <button [class]="getColor($index)" (click)="generateCustom(button.contentValue)">{{button.contentKey}}</button>
+            }
+        </div>
+        }
+        @if (showCustomPrompt === 2) {
+            <div class="btn-wrapper">
+                <button class="btn white" (click)="generateCustom('white')">With white background</button>
+                <button class="btn black" (click)="generateCustom('black')">With black background</button>
+                <button class="btn dark-gray" (click)="generateCustom('transparent')">With transparent background</button>
+            </div>
+        }
+    </section>
     </article>
 }

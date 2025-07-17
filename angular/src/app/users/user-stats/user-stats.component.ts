@@ -104,12 +104,11 @@ export class UserStatsComponent implements OnInit {
   sendUserToDraw(backgroundChoice: number) {
     if (backgroundChoice == 1) {
       //send to white background
-      this.router.navigate([`./users/${this.username}/draw`], { queryParams: { year: this.year, background: 'white' } });
+      this.router.navigate(['./draw'], { queryParams: { year: this.year, background: 'white', username: this.username } });
     } else {
       //send to transparent background
-      this.router.navigate([`./users/${this.username}/draw`], { queryParams: { year: this.year, background: 'transparent' } });
+      this.router.navigate(['./draw'], { queryParams: { year: this.year, background: 'transparent', username: this.username } });
     }
-    
   }
 
   getRanking(): string {

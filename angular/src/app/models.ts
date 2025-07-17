@@ -3,7 +3,10 @@ export class Pixel {
         public username: string,
         public xCoordinate: number,
         public yCoordinate: number,
-        public colorHex: string
+        public colorHex: string,
+        public isTop: boolean,
+        public isUndo: boolean,
+        public isSpecial: boolean
     ) {}
 }
 

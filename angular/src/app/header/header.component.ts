@@ -1,17 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CanvasService } from '../canvas.service';
 
 @Component({
   selector: 'app-header',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
 export class HeaderComponent implements OnInit {
-  @Input() selectedYear: number = 2024;
+  @Input() selectedYear: number = 2025;
   @Input() username: string = '';
   @Input() showSearch: boolean = true;
   years: number[] = [];
