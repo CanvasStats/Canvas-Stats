@@ -17,7 +17,7 @@ import { FooterComponent } from '../footer/footer.component';
 export class DrawComponent implements AfterViewInit, OnInit, OnDestroy {
   @ViewChild('pixelCanvas', { static: false }) canvas!: ElementRef<HTMLCanvasElement>;
   private context!: CanvasRenderingContext2D;
-  private destroy$ = new Subject<void>(); // Used to unsubscribe from all observables
+  private destroy$ = new Subject<void>();
   finishedDrawing = false;
   year: number = 0;
   drawParams: {key: string, value: string} = {key: 'final', value: 'final'};
@@ -28,7 +28,6 @@ export class DrawComponent implements AfterViewInit, OnInit, OnDestroy {
   backgroundColor: string | undefined;
   message: string = "Data not loaded. Please go to the previous page and try again.";
   filename: string = "notLoaded.png";
-  // queryParamsSubscription: Subscription | undefined; // We'll use takeUntil for this too
 
   constructor(
     private canvasService: CanvasService,
@@ -38,22 +37,17 @@ export class DrawComponent implements AfterViewInit, OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    // IMPORTANT: Subscribe to queryParams here to react to changes.
-    // Use takeUntil(this.destroy$) for automatic unsubscription.
     this.route.queryParams
       .pipe(takeUntil(this.destroy$))
       .subscribe(params => {
         // Reset state for new drawing operation
         this.loading = true;
         this.finishedDrawing = false;
-        this.errorMessage = null; // Clear previous errors
+        this.errorMessage = null;
 
-        // Update year based on route param
-        // Ensure paramYear is a number for strict comparison
         const paramYear = Number(params['year']);
-        this.year = this.canvasService.checkIfYearHasStats(paramYear || 0); // Use the validated year
+        this.year = this.canvasService.checkIfYearHasStats(paramYear || 0);
 
-        // Set canvas dimensions based on year
         if (this.year === 2023) {
             this.canvasHeight = 1000;
             this.canvasWidth = 1000;
@@ -64,8 +58,7 @@ export class DrawComponent implements AfterViewInit, OnInit, OnDestroy {
             this.canvasHeight = 500;
             this.canvasWidth = 500;
         } else {
-            // Default or error state if year is invalid
-            this.canvasHeight = 500; // sensible defaults
+            this.canvasHeight = 500;
             this.canvasWidth = 500;
         }
 
@@ -88,31 +81,31 @@ export class DrawComponent implements AfterViewInit, OnInit, OnDestroy {
             this.drawParams = {key: 'username', value: paramUsername};
             this.message = `The image below is all of the pixels ${paramUsername} placed during the ${this.year} event`
             this.filename = `${paramUsername.split('@')[0]}${this.year}.png`
-        } else if (paramColor) { // Use else if for mutually exclusive params
+        } else if (paramColor) {
             this.drawParams = {key: 'color', value: this.getHexForColor(paramColor)};
             this.message = `The image below is all of the ${paramColor} pixels placed during the ${this.year} event`
             this.filename = `only-${paramColor}${this.year}.png`
-        } else if (paramSpecial) { // Use else if for mutually exclusive params
-            this.drawParams = {key: paramSpecial, value: paramSpecial} // value could be empty string for 'compare'/'undo'
+        } else if (paramSpecial) {
+            this.drawParams = {key: paramSpecial, value: paramSpecial}
             if (paramSpecial === 'compare') {
                 this.message = `The image below is all of the pixels that made it from the "megatemplate" created before the event onto the final canvas`
                 this.filename = `compare4${this.year}.png`;
             } else if (paramSpecial === 'undo') {
                 this.message = `The image below is all of the pixels that were undone by users during the ${this.year} event`;
                 this.filename = `oops-all-mistakes${this.year}.png`
-            } else { // Default for 'special' if not compare/undo, e.g., 'final'
+            } else if (paramSpecial === 'reverse') {
+                this.message = `The image below is all of the pixels placed during the ${this.year} event in reverse order`;
+                this.filename = `reverse${this.year}.png`
+            } else {
                 this.message = `Displaying the ${this.year} Canvas`
-                this.filename = `canvas-${this.year}-final.png` // Fixed typo: .ong -> .png
+                this.filename = `canvas-${this.year}-final.png`
             }
         } else {
-            // Default drawParams if no specific filter is applied (e.g., show entire canvas)
             this.drawParams = {key: 'final', value: 'final'};
             this.message = `Displaying the final ${this.year} Canvas`;
             this.filename = `canvas-${this.year}-final.png`;
         }
 
-        // After all parameters are updated, re-draw the canvas
-        // Only call drawPixels if context is available (i.e., after ngAfterViewInit has run once)
         if (this.context) {
             this.drawPixels();
         }
@@ -142,16 +135,12 @@ export class DrawComponent implements AfterViewInit, OnInit, OnDestroy {
             return;
         }
         this.context = context;
-
-        // On initial load, after context is set, trigger drawPixels
-        // This handles the very first load of the component
         this.drawPixels();
     }
 
     ngOnDestroy(): void {
         this.destroy$.next();
         this.destroy$.complete();
-        // this.queryParamsSubscription?.unsubscribe(); // Not needed if using takeUntil
     }
 
     getHexForColor(color: string) {
@@ -195,12 +184,9 @@ export class DrawComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
     private drawPixels(): void {
-        // Clear the canvas before drawing new pixels
-        // This is crucial when redrawing for new parameters
         if (this.context && this.canvasHeight && this.canvasWidth) {
             this.context.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
         } else {
-            // Handle case where context might not be ready yet (should be caught by ngAfterViewInit checks)
             console.warn("Canvas context or dimensions not ready for drawing.");
             this.errorMessage = 'Canvas not ready for drawing.';
             setTimeout(() => {
@@ -214,7 +200,7 @@ export class DrawComponent implements AfterViewInit, OnInit, OnDestroy {
         // Set initial loading state for the new drawing cycle
         this.loading = true;
         this.finishedDrawing = false;
-        this.errorMessage = null; // Clear any previous error
+        this.errorMessage = null;
 
         this.canvasService.getPixelsForDraw(this.year, this.drawParams.key, this.drawParams.value)
             .pipe(
@@ -223,12 +209,11 @@ export class DrawComponent implements AfterViewInit, OnInit, OnDestroy {
             .subscribe({
                 next: (pixels) => {
                     console.log(`The draw component got ${pixels?.length} pixels.`)
-                    setTimeout(() => { // Keep setTimeout for ExpressionChangedAfterItHasBeenCheckedError safety
+                    setTimeout(() => {
                         if (!pixels || pixels.length === 0) {
                             this.errorMessage = `Pixels didn't load or length of zero`;
                             this.loading = false;
                             this.finishedDrawing = true;
-                            // No return needed here as we're inside setTimeout
                             return;
                         }
                         console.log(`Got ${pixels.length} rows of data`);
@@ -240,14 +225,21 @@ export class DrawComponent implements AfterViewInit, OnInit, OnDestroy {
                         }
 
                         // Draw individual pixels
-                        pixels.forEach(pixel => {
+                        if (this.drawParams.value !== 'reverse') {
+                            pixels.forEach(pixel => {
                             this.context.fillStyle = pixel.colorHex;
                             this.context.fillRect(pixel.xCoordinate, pixel.yCoordinate, 1, 1);
                         });
+                        } else {
+                            for (let i = pixels.length - 1; i >= 0; i--) {
+                                let pixel = pixels[i];
+                                this.context.fillStyle = pixel.colorHex;
+                                this.context.fillRect(pixel.xCoordinate, pixel.yCoordinate, 1, 1);
+                            }
+                        }
 
                         this.loading = false;
                         this.finishedDrawing = true;
-                        // this.cdr.detectChanges(); // Not needed with default change detection unless OnPush
                     }, 0);
                 },
                 error: (error) => {
@@ -256,7 +248,6 @@ export class DrawComponent implements AfterViewInit, OnInit, OnDestroy {
                         this.errorMessage = 'Failed to load pixel data. Please try again later.';
                         this.loading = false;
                         this.finishedDrawing = true;
-                        // this.cdr.detectChanges(); // Not needed with default change detection unless OnPush
                     }, 0);
                 },
                 complete: () => {
@@ -286,18 +277,8 @@ export class DrawComponent implements AfterViewInit, OnInit, OnDestroy {
     }
 
     sendUserToStats(): void {
-        // Ensure this.drawParams.value is the username for navigation
-        // If drawParams.key is 'username', then drawParams.value is the username.
-        // If it's 'color' or 'special', drawParams.value might not be the username.
-        // You might need a separate 'username' property if it's always relevant for navigation.
-        // For now, assuming drawParams.value is the username for this route.
         let navigateValue = this.drawParams.value;
         if (this.drawParams.key !== 'username' && this.drawParams.key !== 'final') {
-             // If navigating to /users/:username, you need the actual username, not a color or special key
-             // You'll need to store the actual username in a separate property if it's independent of drawParams.value
-             // For example:
-             // this.router.navigate([`/users/${this.usernameForNavigation}`], { queryParams: { year: this.year } })
-             // For now, using the current filename or a default if username isn't available
              navigateValue = this.filename.split('-')[0].replace('.png', '') || 'default_user';
         }
 

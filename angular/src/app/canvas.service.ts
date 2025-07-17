@@ -99,9 +99,12 @@ export class CanvasService {
             } else if (key === 'undo') {
                 console.log(`Pixel cache already loaded. Getting undone pixels`)
                 return of(this.pixelDataCache.filter(pixel => pixel.isUndo === true));
-            } else {
+            } else if (key === 'top'){
                 console.log(`Pixel cache already loaded. Getting isTop pixels`)
                 return of(this.pixelDataCache.filter(pixel => pixel.isTop === true));
+            } else {
+                console.log(`Pixel cache already loaded. Getting all pixels`)
+                return of(this.pixelDataCache);
             }
         } else {
                 this.year = year;
@@ -120,9 +123,12 @@ export class CanvasService {
                             console.log(`Pixel cache not loaded. Loading pixel cache and filtering for undone pixels`)
                             return pixels.filter(pixel => pixel.isUndo === true);
                         }
-                         else {
+                         else if (key === 'top') {
                             console.log(`Pixel cache not loaded. Loading pixel cache and filtering for isTop pixels`)
                             return pixels.filter(pixel => pixel.isTop === true);
+                        } else {
+                            console.log(`Pixel cache not loaded. Loading pixel cache and returning all pixels`)
+                            return pixels;
                         }
                     }),
                     catchError(this.handleError<Pixel[] | undefined>('GetPixelsForDraw', undefined))
