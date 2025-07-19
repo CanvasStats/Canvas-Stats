@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 import { CanvasService } from '../../canvas.service';
 import { ColorsCounts, User } from '../../models';
 import { HeaderComponent } from "../../header/header.component";
@@ -17,7 +17,7 @@ class YearStats {
 
 @Component({
   selector: 'app-user-stats',
-  imports: [HeaderComponent, LoadingComponent, CommonModule, FooterComponent],
+  imports: [HeaderComponent, LoadingComponent, CommonModule, FooterComponent, RouterModule],
   templateUrl: './user-stats.component.html',
   styleUrl: './user-stats.component.css'
 })
@@ -104,10 +104,10 @@ export class UserStatsComponent implements OnInit {
   sendUserToDraw(backgroundChoice: number) {
     if (backgroundChoice == 1) {
       //send to white background
-      this.router.navigate(['./draw'], { queryParams: { year: this.year, background: 'white', username: this.username } });
+      this.router.navigate(['./draw'], { queryParams: { sentFrom: 'user', year: this.year, background: 'white', username: this.username } });
     } else {
       //send to transparent background
-      this.router.navigate(['./draw'], { queryParams: { year: this.year, background: 'transparent', username: this.username } });
+      this.router.navigate(['./draw'], { queryParams: { sentFrom: 'user', year: this.year, background: 'transparent', username: this.username } });
     }
   }
 

@@ -8,6 +8,7 @@
 
 
 }
+<!-- UNCOMMENT LINE BELOW ABOUT GOING TO GENERATE CUSTOM CANVAS PAGE -->
 @if (errorMessage) {
 <div class="error rose clickable" (click)="sendUserToStats()">{{errorMessage}}</div>
 }
@@ -15,15 +16,22 @@
 <main>
     <div id="main-canvas">
         <section id="space-between-wrapper">
-            @if (drawParams.key === 'username') {
+            @if (sentFrom === 'user') {
                 <button class="btn blue" (click)="sendUserToStats()"><span class="material-symbols-outlined">
                     arrow_back
                 </span> Back to your {{year}} stats</button>
             }
             @else {
-                <button class="btn blue" (click)="goToYearHome()"><span class="material-symbols-outlined">
+                @if (sentFrom === 'custom') {
+                    <button class="btn blue" routerLink="/custom"><span class="material-symbols-outlined">
                     arrow_back
-                </span> Back</button>
+                </span> Return to Generate page</button>
+                }
+                @else { 
+                    <button class="btn blue" (click)="goToYearHome()"><span class="material-symbols-outlined">
+                    arrow_back
+                </span> Back to {{this.year}} overview</button>
+                }
             }
             <button (click)="downloadImage()" class="btn mauve">Download {{filename}}</button>
         </section>
@@ -37,10 +45,8 @@
         <canvas #pixelCanvas id="myCanvas" [height]="canvasHeight" [width]="canvasWidth"></canvas>
         <article class="left">
             <section>
-                <p class="text">If you would like an image created such as the top 100 users, the canvas in reversed order, all
-                    pixels from an
-                    instance, all pixels within an area, or really any other combination of pixels you can think of,
-                    just message <a href="https://sh.itjust.works/u/the_real_monte">&#64;the_real_monte</a>
+                <!-- <p class="text">If you want to generate an image of the canvas with even more customization, go to <a routerLink="/custom">Generate Custom Images</a> page</p> -->
+                <p class="text">If you would like an image generated that can't be made with this page, just message <a href="https://sh.itjust.works/u/the_real_monte">&#64;the_real_monte</a>
                     and we'll send you an image of your request.</p>
             </section>
         </article>

@@ -12,8 +12,7 @@ import { Subscription } from 'rxjs';
 })
 export class StatBlockComponent implements OnInit, OnDestroy {
   @Input() stat: YearStat | undefined;
-  colors: string[] = ['white', 'light-grey', 'medium-grey', 'peach', 'beige', 'pink', 'magenta', 'mauve', 'purple', 'dark-purple', 'navy', 'blue', 'azure', 'aqua', 'light-teal', 'dark-teal', 'forest', 'dark-green', 'green', 'lime', 'pastel-yellow', 'yellow', 'orange', 'rust', 'maroon', 'rose', 'red', 'watermelon'];
-  colorsShuffled = this.shuffle(this.colors);
+  colorsShuffled = this.shuffle(['white', 'light-grey', 'medium-grey', 'peach', 'beige', 'pink', 'magenta', 'mauve', 'purple', 'dark-purple', 'navy', 'blue', 'azure', 'aqua', 'light-teal', 'dark-teal', 'forest', 'dark-green', 'green', 'lime', 'pastel-yellow', 'yellow', 'orange', 'rust', 'maroon', 'rose', 'red', 'watermelon']);
   colorCounts: ColorCount[] | undefined;
   year: number = 0;
   customKey: string = "";
@@ -65,18 +64,12 @@ export class StatBlockComponent implements OnInit, OnDestroy {
   showColorIMG(color: string, backgroundColor: number) {
     //year, color, background
     if (backgroundColor === 0) {
-      this.router.navigate(['./draw'], { queryParams: { year: this.year, color: color, background: 'transparent' } });
+      this.router.navigate(['./draw'], { queryParams: { sentFrom: 'home', year: this.year, color: color, background: 'transparent' } });
     } else if (backgroundColor === 1) {
-      this.router.navigate(['./draw'], { queryParams: { year: this.year, color: color, background: 'black' } });
+      this.router.navigate(['./draw'], { queryParams: { sentFrom: 'home', year: this.year, color: color, background: 'black' } });
     } else {
-      this.router.navigate(['./draw'], { queryParams: { year: this.year, color: color, background: 'white' } });
+      this.router.navigate(['./draw'], { queryParams: { sentFrom: 'home', year: this.year, color: color, background: 'white' } });
     }
-  }
-
-  getColor(index: number) {
-    
-    return `btn ${this.colorsShuffled[index]}`;
-
   }
 
   generateCustom(value: string) {
@@ -86,12 +79,12 @@ export class StatBlockComponent implements OnInit, OnDestroy {
     } else if (this.showCustomPrompt === 2) {
       this.customBackground = value;
       this.showCustomPrompt = 1;
-      this.router.navigate(['./draw'], { queryParams: { year: this.year, special: this.customKey, background: this.customBackground } });
+      this.router.navigate(['./draw'], { queryParams: { sentFrom: 'home', year: this.year, special: this.customKey, background: this.customBackground } });
     }
   }
 
   shuffle(array: string[]): string[] {
-    let currentIndex = array.length,  randomIndex;
+    let currentIndex = array.length, randomIndex;
     while (currentIndex != 0) {
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
@@ -99,7 +92,11 @@ export class StatBlockComponent implements OnInit, OnDestroy {
         array[randomIndex], array[currentIndex]];
     }
     return array;
-}
+  }
+
+  getColor(index: number) {
+    return `btn ${this.colorsShuffled[index]}`;
+  }
 
 goToUser(username: string) {
     this.router.navigate([`./users/${username}`], { queryParams: { year: this.year } });

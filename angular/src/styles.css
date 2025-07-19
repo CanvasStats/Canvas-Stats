@@ -482,7 +482,7 @@ section {
         justify-content: space-around;
     }
 
-    nav a, .changeYear {
+    nav a, .header-link {
         margin: 0 10px;
         color: white;
         font-size: 20px;
@@ -490,7 +490,7 @@ section {
         position: relative;
     }
 
-    .changeYear {
+    .header-link {
         background-color: transparent;
         border: 0;
         cursor: pointer;
@@ -499,14 +499,14 @@ section {
     nav a,
     nav a:after,
     nav a:before,
-    .changeYear,
-    .changeYear:after,
-    .changeYear:before {
+    .header-link,
+    .header-link:after,
+    .header-link:before {
         transition: all 0.5s;
     }
 
     nav a:after,
-    .changeYear:after {
+    .header-link:after {
         position: absolute;
         bottom: 0;
         left: 0;
@@ -520,7 +520,7 @@ section {
     }
 
     nav a:hover:after,
-    .changeYear:hover:after {
+    .header-link:hover:after {
         width: 100%;
     }
     .btn {
@@ -566,7 +566,7 @@ section {
         border-radius: 5px;
     }
 
-    nav a, .changeYear {
+    nav a, .header-link {
         background-color: var(--nav-background-color);
         color: white;
         display: flex;
@@ -592,4 +592,79 @@ section {
     .large-screens-only {
         display: none;
     }
+}
+
+@media only screen and (max-width: 720px) {
+        .search-form-group {
+        flex-wrap: wrap;
+        width: 92%;
+        margin: 0 auto;
+    }
+
+    .search-bar-container {
+        flex-grow: 1;
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 721px) {
+    .search-form-group {
+        margin: 20px auto;
+    }
+}
+
+.search-form-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    max-width: 900px;
+}
+
+.search-bar-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--body-color);
+    background-color: var(--main-background-color);
+    padding: 8px 15px;
+    flex-grow: 1;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s ease-in-out,
+                border-color 0.3s ease-in-out,
+                background-color 0.3s ease-in-out;
+}
+
+.search-bar-container:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.search-bar-container:focus-within {
+    border-color: var(--accent-color, #007bff);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    background-color: var(--main-background-color-focused, var(--main-background-color));
+}
+
+.search-bar-container .material-symbols-outlined {
+    font-size: 24px;
+    color: var(--body-color);
+    transition: color 0.3s ease-in-out;
+}
+
+.search-bar-container:focus-within .material-symbols-outlined {
+    color: var(--accent-color, #007bff);
+}
+
+.search-bar {
+    background-color: transparent;
+    border: 0;
+    outline: none;
+    flex-grow: 1;
+    font-size: 1rem;
+    padding: 0;
+    color: var(--body-color);
+}
+
+.search-bar::placeholder {
+    color: var(--body-color);
+    opacity: 0.7;
 }

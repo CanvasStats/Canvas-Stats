@@ -8,12 +8,12 @@
 
 </header>
 <nav>
-    <button class="changeYear" (click)="goToYearHomepage()">Home</button>
-    <button class="changeYear" (click)="showYearSelection()">Change Year</button>
+    <button class="header-link" (click)="goToYearHomepage()">Home</button>
+    <button class="header-link" (click)="showYearSelection()">Change Year</button>
 
     <a href="https://2025.canvas.fediverse.events">Go to Canvas</a>
-    <!-- <a routerLink="custom">Generate Custom Images</a> -->
-    <a routerLink="faq">F.A.Q.</a>
+    <!-- <button class="header-link" ((click)="sendTo('custom')")>Generate Custom Images</button> -->
+    <button class="header-link" (click)="sendTo('faq')">F.A.Q.</button>
 </nav>
 @if (showSearch) {
 <div class="search-form-group">
@@ -25,7 +25,7 @@
             class="search-bar" (keydown.enter)="onSubmit()" />
     </div>
     <button (click)="onSubmit()" class="btn green mobile">Search</button>
-    <button (click)="seeAllUser()" class="btn blue mobile">All Users</button>
+    <button (click)="sendTo('users')" class="btn blue mobile">All Users</button>
 </div>
 }
 

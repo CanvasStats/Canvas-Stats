@@ -28,6 +28,9 @@ export class DrawComponent implements AfterViewInit, OnInit, OnDestroy {
   backgroundColor: string | undefined;
   message: string = "Data not loaded. Please go to the previous page and try again.";
   filename: string = "notLoaded.png";
+  sentFrom: string = "";
+  top: boolean = false;
+  undo: boolean = false;
 
   constructor(
     private canvasService: CanvasService,
@@ -76,6 +79,7 @@ export class DrawComponent implements AfterViewInit, OnInit, OnDestroy {
         const paramUsername = params['username'];
         const paramColor = params['color'];
         const paramSpecial = params['special'];
+        this.sentFrom = params['sentFrom'] || "home";
 
         if (paramUsername) {
             this.drawParams = {key: 'username', value: paramUsername};
@@ -227,8 +231,12 @@ export class DrawComponent implements AfterViewInit, OnInit, OnDestroy {
                         // Draw individual pixels
                         if (this.drawParams.value !== 'reverse') {
                             pixels.forEach(pixel => {
-                            this.context.fillStyle = pixel.colorHex;
+                            if (this.undo !== true) {
+                                if (pixel.isUndo === false) {
+                                    this.context.fillStyle = pixel.colorHex;
                             this.context.fillRect(pixel.xCoordinate, pixel.yCoordinate, 1, 1);
+                                }
+                            }
                         });
                         } else {
                             for (let i = pixels.length - 1; i >= 0; i--) {

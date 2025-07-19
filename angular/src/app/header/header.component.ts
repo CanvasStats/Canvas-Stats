@@ -35,9 +35,28 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['./users'], { queryParams: { year: this.selectedYear, search: this.searchString } });
     }
   }
-
+  sendTo(page: string) {
+    switch(page) {
+      case 'users': {
+        this.router.navigate(['./users'], {queryParams: { year: this.selectedYear }});
+        break;
+      }
+      case 'faq': {
+        this.router.navigate(['./faq'], {queryParams: { year: this.selectedYear }});
+        break;
+      }
+      case 'custom': {
+        this.router.navigate(['./custom'], {queryParams: { year: this.selectedYear }});
+        break;
+      }
+      default: {
+        this.router.navigate(['./'], {queryParams: { year: this.selectedYear }});
+        break;
+      }
+    }
+  }
   seeAllUser() {
-    this.router.navigate(['./users'], {queryParams: { year: this.selectedYear }});
+    
   }
 
   getLogoYear() {

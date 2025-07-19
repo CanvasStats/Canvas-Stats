@@ -1,5 +1,103 @@
-<app-header [showSearch]="false" />
+<app-header [selectedYear]="year" [showSearch]="false" />
 <main>
+    @if (errorMessage) {
+<div class="error rose">{{errorMessage}}</div>
+}
+    @if (showStep > 1) {
+    <h3>Year Selected: {{year}}</h3>
+    <hr />
+    }
+    @if (showStep > 2 &&selectedPixels === 'all' ) {
+    <h3>Generate image containing all pixels</h3>
+    <hr />
+    }
+    @if (showStep > 3) {
+    @if (username) {
+    <h3>Generate image containing pixels placed by {{username}}</h3>
+    <hr />
+    }
+    @if (instance) {
+    <h3>Generate image containing pixels place by users from {{instance}}</h3>
+    <hr />
+    }
+    }
+    @if (showStep > 4) {
+        <p>Step 4 should be here {{special}}</p>
+        @if (special === 'all') {
+            <h3>All pixels for instance</h3>
+        }
+        @if (special === 'reverse') {
+            <h3>In reverse order</h3>
+        }
+        @if (special === 'top') {
+            <h3>Pixels in the final canvas</h3>
+        }
+        @if (special === 'undo') {
+            <h3>Pixels that where undone</h3>
+        }
+        <hr />
+    }
+    @if (showStep === 1) {
+    <h3>Select a year:</h3>
+    <div class="btn-wrapper">
+        @for (setYear of years; track $index) {
+        <button (click)="onSubmit(1, setYear)" [class]="getColor($index)">{{setYear}}</button>
+        }
+    </div>
+    }
+    @if (showStep === 2) {
+    <h3>Generate image containing:</h3>
+    <div class="btn-wrapper">
+        <button class="btn green" (click)="onSubmit(2, 'all')">all pixels</button>
+        <button class="btn blue" (click)="onSubmit(2, 'user')">pixels placed by user</button>
+        <button class="btn orange" (click)="onSubmit(2, 'instance')">pixels placed by instance</button>
+    </div>
+    }
+    @if (showStep === 3) {
+    <h3>Enter username or instance name:</h3>
+    @if (selectedPixels === 'user') {
+    <div class="search-form-group">
+        <div class="search-bar-container">
+            <span class="material-symbols-outlined">
+                search
+            </span>
+            <input [(ngModel)]="username" [value]="username" type="text" placeholder="username" class="search-bar"
+                (keydown.enter)="onSubmit(3, '')" />
+        </div>
+        <button class="btn green" (click)="onSubmit(3, '')">Submit</button>
+    </div>
+    }
+    @else {
+    <div class="search-form-group">
+        <div class="search-bar-container">
+            <span class="material-symbols-outlined">
+                search
+            </span>
+            <input [(ngModel)]="instance" [value]="instance" type="text" placeholder="instance" class="search-bar"
+                (keydown.enter)="onSubmit(3, '')" />
+        </div>
+        <button class="btn green" (click)="onSubmit(3, '')">Submit</button>
+    </div>
+    }
+    }
+    @if (showStep === 4) {
+    <div class="btn-wrapper">
+        <button class="btn red" (click)="onSubmit(4, 'reverse')">Draw pixels in reverse order</button>
+        <button class="btn purple" (click)="onSubmit(4, 'top')">Draw pixel in final canvas</button>
+        <button class="btn lime" (click)="onSubmit(4, 'undo')">Draw pixels that where undone</button>
+        @if (instance) {
+            <button class="btn dark-teal" (click)="onSubmit(4, 'all')">Draw all pixels for instance</button>
+        }
+    </div>
+    }
+    @if (showStep === 5) {
+        <h3>Select background color:</h3>
+        <div class="btn-wrapper">
+            <button class="btn white" (click)="onSubmit(5, 'white')">White</button>
+            <button class="btn black" (click)="onSubmit(5, 'black')">Black</button>
+            <button class="btn dark-grey" (click)="onSubmit(5, 'transparent')">Transparent</button>
+        </div>
+    }
 
 </main>
 <app-footer />

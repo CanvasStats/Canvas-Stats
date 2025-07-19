@@ -88,8 +88,8 @@ export class CanvasService {
         console.log(`fetching pixels to draw the canvas with ${key}: ${value}`)
         if (this.year === year && this.pixelDataCache) {
             if (key === 'username') {
-                console.log(`Pixel cache already loaded. Getting pixels for user ${value}`)
-                return of(this.pixelDataCache.filter(pixel => pixel.username.toLowerCase() === value.toLowerCase()));
+                console.log(`Pixel cache already loaded. Getting pixels for user '${value}'`)
+                return of(this.pixelDataCache.filter(pixel => pixel.username.toLowerCase().includes(value.toLowerCase())));
             } else if (key === 'color') {
                 console.log(`Pixel cache already loaded. Getting pixels for color ${value}`)
                 return of(this.pixelDataCache.filter(pixel => pixel.colorHex === value));
@@ -348,5 +348,19 @@ export class CanvasService {
             console.error(`${operation} failed: ${error.message}`);
             return of(result as T);
         };
+    }
+
+    checkForInstanceOrUser(name: string): Observable<boolean> {
+        if (this.allUsersCache && this.allUsersCache.length > 0) {
+            const found = this.allUsersCache.filter(user => user.username.includes(name)).length > 0;
+            return of(found);
+        } else {
+            return this.getAllUsers().pipe(
+                map(userList => {
+                    const numFound = userList.filter(user => user.username.includes(name));
+                    return numFound.length > 0;
+                })
+            );
+        }
     }
 }
