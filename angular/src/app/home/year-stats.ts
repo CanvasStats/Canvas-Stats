@@ -64,21 +64,17 @@ export const canvas2025: YearStat[] = [
         'text', 'right', 'delete_forever', undefined,
         [new ContentPair('p', '0 users undid every pixel they placed. (Last year there were 13 users)')]
     ),
-    // new YearStat(
-    //     'generate', 'left', 'dashboard_customize', 'Generate Custom Canvas Image',
-    //     [
-    //         new ContentPair('Canvas at end of event', 'final'),
-    //         new ContentPair('Just the pixels that where undone', 'undo'),
-    //         new ContentPair('Pixels that made it from the "megatemplate" to the end of the event', 'compare'),
-    //         new ContentPair('Reverse Order', 'reverse'),
-    //         // new ContentPair('Uncontested pixels', ''),
-    //         // new ContentPair('Generate somthing else', 'more')
-    //         // new ContentPair('any more to add?', '')
-    //     ]
-    // ),
-    //replace the line below with the lines above.
     new YearStat(
-        'generate', 'left', undefined, undefined, [new ContentPair('View the Canvas at end of event', 'final'),]
+        'generate', 'left', 'dashboard_customize', 'Generate Custom Canvas Image',
+        [
+            new ContentPair('Canvas at end of event', 'final'),
+            // new ContentPair('Just the pixels that where undone', 'undo'),
+            new ContentPair('Pixels that made it from the "megatemplate" to the end of the event', 'compare'),
+            new ContentPair('Reverse Order', 'reverse'),
+            // new ContentPair('Uncontested pixels', ''),
+            // new ContentPair('Generate somthing else', 'more')
+            // new ContentPair('any more to add?', '')
+        ]
     ),
     new YearStat(
         'externalLinks', 'right', 'link', undefined, [
@@ -173,20 +169,16 @@ export const canvas2024: YearStat[] = [
         'text', 'right', 'delete_forever', undefined,
         [new ContentPair('p', '13 users undid every pixel they placed. (Up 9 users from 2023)')]
     ),
-    // new YearStat(
-    //     'generate', 'left', 'dashboard_customize', 'Generate Custom Canvas Image',
-    //     [
-    //         new ContentPair('Canvas at end of event', 'final'),
-    //         new ContentPair('Reverse Order', 'reverse'),
-    //         // new ContentPair('Uncontested pixels', ''),
-    //         new ContentPair('Just the pixels that where undone', 'undo'),
-    //         // new ContentPair('Generate somthing else', 'more')
-    //         // new ContentPair('any more to add?', '')
-    //     ]
-    // ),
-    //replace the line below with the lines above.
     new YearStat(
-        'generate', 'left', undefined, undefined, [new ContentPair('View the Canvas at end of event', 'final'),]
+        'generate', 'left', 'dashboard_customize', 'Generate Custom Canvas Image',
+        [
+            new ContentPair('Canvas at end of event', 'final'),
+            new ContentPair('Reverse Order', 'reverse'),
+            // new ContentPair('Uncontested pixels', ''),
+            // new ContentPair('Just the pixels that where undone', 'undo'),
+            // new ContentPair('Generate somthing else', 'more')
+            // new ContentPair('any more to add?', '')
+        ]
     ),
     new YearStat(
         'externalLinks', 'right', 'link', undefined, [
@@ -280,20 +272,16 @@ export const canvas2023: YearStat[] = [
         'text', 'right', 'delete_forever', undefined,
         [new ContentPair('p', '4 users undid every pixel they placed')]
     ),
-    // new YearStat(
-    //     'generate', 'left', 'dashboard_customize', 'Generate Custom Canvas Image',
-    //     [
-    //         new ContentPair('Canvas at end of event', 'final'),
-    //         new ContentPair('Reverse Order', 'reverse'),
-    //         // new ContentPair('Uncontested pixels', ''),
-    //         new ContentPair('Just the pixels that where undone', 'undo'),
-    //         // new ContentPair('Generate somthing else', 'more')
-    //         // new ContentPair('any more to add?', '')
-    //     ]
-    // ),
-    //replace the line below with the lines above.
     new YearStat(
-        'generate', 'left', undefined, undefined, [new ContentPair('View the Canvas at end of event', 'final'),]
+        'generate', 'left', 'dashboard_customize', 'Generate Custom Canvas Image',
+        [
+            new ContentPair('Canvas at end of event', 'final'),
+            new ContentPair('Reverse Order', 'reverse'),
+            // new ContentPair('Uncontested pixels', ''),
+            // new ContentPair('Just the pixels that where undone', 'undo'),
+            // new ContentPair('Generate somthing else', 'more')
+            // new ContentPair('any more to add?', '')
+        ]
     ),
     new YearStat('social', 'right', undefined, undefined, [])
 ];
