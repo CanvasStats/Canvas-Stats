@@ -17,6 +17,6 @@ export const routes: Routes = [
     {path: 'beta', component: BetaComponent},
     {path: 'not-found', component: NotFoundComponent},
     {path: 'faq', component: FaqComponent},
-    {path: 'custom', component: CustomComponent},
+    {path: 'advanced', component: CustomComponent},
     {path: '**', component: NotFoundComponent}
 ];

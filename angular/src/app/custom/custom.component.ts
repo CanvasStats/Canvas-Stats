@@ -5,10 +5,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CanvasService } from '../canvas.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CoordinatePair } from '../models';
+import { LoadingComponent } from "../loading/loading.component";
 
 @Component({
   selector: 'app-custom',
-  imports: [FooterComponent, HeaderComponent, FormsModule, CommonModule,],
+  imports: [FooterComponent, HeaderComponent, FormsModule, CommonModule, LoadingComponent],
   templateUrl: './custom.component.html',
   styleUrl: './custom.component.css'
 })
@@ -25,6 +27,12 @@ export class CustomComponent implements OnInit {
   top: boolean = false;
   reverse: boolean = false;
   undo: boolean = false;
+  atlasUrls: string[] = ["https://atlas2025.mariusdavid.fr/", "https://atlas.mariusdavid.fr/", ""];
+  atlasForYear: string | undefined;
+  topLeft: CoordinatePair = new CoordinatePair(0, 0); 
+  bottomRight: CoordinatePair = new CoordinatePair(0, 0); 
+  usersInArea: string[] = [];
+  loading: boolean = false;
 
   constructor(
     private canvasService: CanvasService,
@@ -55,7 +63,15 @@ export class CustomComponent implements OnInit {
   onSubmit(step: number, value: string | number) {
     this.errorMessage = undefined;
     if (step === 1) {
+      let yearIndex = this.years.indexOf(+value);
+      if (this.atlasUrls[yearIndex].length > 0) {
+        this.atlasForYear = this.atlasUrls[yearIndex];
+      } else {
+        this.atlasForYear = undefined;
+      }
       this.year = +value;
+      this.topLeft = new CoordinatePair(0, 0);
+      this.bottomRight = new CoordinatePair(0, 0);
       this.showStep++;
     } else if (step === 2) {
       this.selectedPixels = value.toString();
@@ -121,6 +137,30 @@ export class CustomComponent implements OnInit {
           });
       }
     }
+  }
+
+  searchUsersInArea() {
+    this.errorMessage = undefined;
+    if (this.topLeft.xCoordinate > this.bottomRight.xCoordinate || this.topLeft.yCoordinate > this.bottomRight.yCoordinate) {
+      this.errorMessage = "Error! Bottom right coordinate should not be smaller than top left coordinate. Please try again.";
+    } else {
+      this.loading = true;
+    this.canvasService.searchUsersInArea(this.year, this.topLeft!, this.bottomRight!).subscribe({
+      next: (data) => {
+        data?.forEach((pixel) => {
+          if (!this.usersInArea.includes(pixel.username)) {
+            this.usersInArea.push(pixel.username);
+          }
+        });
+        this.showStep = 0;
+        this.loading = false;
+      }
+    });
+    }
+  }
+
+  goToUser(username: string) {
+    this.router.navigate([`./users/${username}`], { queryParams: { year: this.year } });
   }
 
 }

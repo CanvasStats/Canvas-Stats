@@ -21,3 +21,14 @@ footer span {
     margin: 2px !important;
     font-size: 19px !important;
 }
+
+.footer-link {
+    margin: 0 10px;
+    color: var(--body-color);
+    font-size: 20px;
+    text-decoration: none;
+    position: relative;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+}

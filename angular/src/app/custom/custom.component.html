@@ -1,5 +1,10 @@
 <app-header [selectedYear]="year" [showSearch]="false" />
-<main>
+ @if (loading) {
+        <app-loading />
+    }
+@if (!loading) {
+    <main>
+    <p>(More search options coming soon)</p>
     @if (errorMessage) {
 <div class="error rose">{{errorMessage}}</div>
 }
@@ -46,12 +51,27 @@
     </div>
     }
     @if (showStep === 2) {
-    <h3>Generate image containing:</h3>
+    <!-- <h3>Generate image containing:</h3>
     <div class="btn-wrapper">
         <button class="btn green" (click)="onSubmit(2, 'all')">all pixels</button>
         <button class="btn blue" (click)="onSubmit(2, 'user')">pixels placed by user</button>
         <button class="btn orange" (click)="onSubmit(2, 'instance')">pixels placed by instance</button>
     </div>
+    <h3>Or search for users within an area:</h3> -->
+    <h3>Search for users who placed pixels within an area:</h3>
+    @if (atlasForYear) {
+        <p>(Use <a [href]="atlasForYear" target="_blank">the {{year}} Fediverse Canvas Atlas</a> to find the top left and bottom right coordinates)</p>
+    }
+    @else {
+        <p>(Unfortunately there is no Atlas for 2023, so there is no easy way to find coordinates. Message <a href="https://sh.itjust.works/u/the_real_monte">the_real_monte on Lemmy</a> for help finding coordinates).</p>
+    }
+    <p>Top Left Coordinates</p>
+    <input placeholder="X coordinate" type="number" [(ngModel)]="topLeft.xCoordinate"/>
+    <input placeholder="Y coordinate" type="number" [(ngModel)]="topLeft.yCoordinate"/>
+    <p>Bottom Right Coordinates</p>
+    <input placeholder="X coordinate" type="number" [(ngModel)]="bottomRight.xCoordinate"/>
+    <input placeholder="Y coordinate" type="number" [(ngModel)]="bottomRight.yCoordinate"/>
+    <button class="btn green" (click)="searchUsersInArea()">Search</button>
     }
     @if (showStep === 3) {
     <h3>Enter username or instance name:</h3>
@@ -98,6 +118,16 @@
             <button class="btn dark-grey" (click)="onSubmit(5, 'transparent')">Transparent</button>
         </div>
     }
+    @if (showStep === 0) {
+        <p>{{usersInArea.length}} users placed pixels with in ({{topLeft.xCoordinate}}, {{topLeft.yCoordinate}}) - ({{bottomRight.xCoordinate}}, {{bottomRight.yCoordinate}})</p>
+        <ul>
+            @for (user of usersInArea; track $index) {
+                <li><a (click)="goToUser(user)" class="clickable-text">{{user}}</a></li>
+            }
+        </ul>
+        <button class="btn blue" (click)="showStep = 1">Search Again</button>
+    }
 
 </main>
+}
 <app-footer />

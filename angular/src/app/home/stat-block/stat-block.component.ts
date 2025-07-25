@@ -98,7 +98,7 @@ export class StatBlockComponent implements OnInit, OnDestroy {
     return `btn ${this.colorsShuffled[index]}`;
   }
 
-goToUser(username: string) {
+  goToUser(username: string) {
     this.router.navigate([`./users/${username}`], { queryParams: { year: this.year } });
   }
 }

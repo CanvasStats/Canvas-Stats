@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { ColorsCounts, Pixel, User, UserMain } from "./models";
+import { ColorsCounts, Pixel, User, UserMain, CoordinatePair } from "./models";
 import { Observable, throwError, catchError, of, forkJoin, map, tap, switchMap  } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
@@ -134,6 +134,18 @@ export class CanvasService {
                     catchError(this.handleError<Pixel[] | undefined>('GetPixelsForDraw', undefined))
                 );
             }
+    }
+
+    searchUsersInArea(year: number, topLeft: CoordinatePair, bottomRight: CoordinatePair): Observable<Pixel[] | undefined> {
+        console.log(`Searching the ${year} canvas for users in (${topLeft.xCoordinate}, ${topLeft.yCoordinate}) - (${bottomRight.xCoordinate}, ${bottomRight.yCoordinate})`);
+        if (this.year === year && this.pixelDataCache) {
+            return of(this.pixelDataCache.filter(pixel => topLeft.xCoordinate <= pixel.xCoordinate && bottomRight.xCoordinate >= pixel.xCoordinate && topLeft.yCoordinate <= pixel.yCoordinate && bottomRight.yCoordinate >= pixel.yCoordinate))
+        } else {
+            return this.getPixelDataForYear(year).pipe(
+                map(pixels => pixels.filter(pixel => topLeft.xCoordinate <= pixel.xCoordinate && bottomRight.xCoordinate >= pixel.xCoordinate && topLeft.yCoordinate <= pixel.yCoordinate && bottomRight.yCoordinate >= pixel.yCoordinate))
+            )
+        }
+
     }
 
     getAllUsers(): Observable<UserMain[]> {

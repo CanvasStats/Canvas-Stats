@@ -45,8 +45,8 @@ export class HeaderComponent implements OnInit {
         this.router.navigate(['./faq'], {queryParams: { year: this.selectedYear }});
         break;
       }
-      case 'custom': {
-        this.router.navigate(['./custom'], {queryParams: { year: this.selectedYear }});
+      case 'advanced': {
+        this.router.navigate(['./advanced'], {queryParams: { year: this.selectedYear }});
         break;
       }
       default: {

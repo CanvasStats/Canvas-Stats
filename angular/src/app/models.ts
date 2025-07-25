@@ -142,3 +142,10 @@ export class StatImage {
         public imageClass: string
     ) {}
 }
+
+export class CoordinatePair {
+    constructor(
+        public xCoordinate: number,
+        public yCoordinate: number
+    ) {}
+}
