@@ -68,7 +68,7 @@ export const canvas2025: YearStat[] = [
         'generate', 'left', 'dashboard_customize', 'Generate Custom Canvas Image',
         [
             new ContentPair('Canvas at end of event', 'final'),
-            // new ContentPair('Just the pixels that where undone', 'undo'),
+            new ContentPair('Just the pixels that where undone', 'undo'),
             new ContentPair('Pixels that made it from the "megatemplate" to the end of the event', 'compare'),
             new ContentPair('Reverse Order', 'reverse'),
             // new ContentPair('Uncontested pixels', ''),
@@ -175,7 +175,7 @@ export const canvas2024: YearStat[] = [
             new ContentPair('Canvas at end of event', 'final'),
             new ContentPair('Reverse Order', 'reverse'),
             // new ContentPair('Uncontested pixels', ''),
-            // new ContentPair('Just the pixels that where undone', 'undo'),
+            new ContentPair('Just the pixels that where undone', 'undo'),
             // new ContentPair('Generate somthing else', 'more')
             // new ContentPair('any more to add?', '')
         ]
@@ -278,7 +278,7 @@ export const canvas2023: YearStat[] = [
             new ContentPair('Canvas at end of event', 'final'),
             new ContentPair('Reverse Order', 'reverse'),
             // new ContentPair('Uncontested pixels', ''),
-            // new ContentPair('Just the pixels that where undone', 'undo'),
+            new ContentPair('Just the pixels that where undone', 'undo'),
             // new ContentPair('Generate somthing else', 'more')
             // new ContentPair('any more to add?', '')
         ]

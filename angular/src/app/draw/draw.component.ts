@@ -31,6 +31,7 @@ export class DrawComponent implements AfterViewInit, OnInit, OnDestroy {
   sentFrom: string = "";
   top: boolean = false;
   undo: boolean = false;
+  reverse: boolean = false;
 
   constructor(
     private canvasService: CanvasService,
@@ -79,7 +80,11 @@ export class DrawComponent implements AfterViewInit, OnInit, OnDestroy {
         const paramUsername = params['username'];
         const paramColor = params['color'];
         const paramSpecial = params['special'];
+        this.undo = params['undo'] === 'true';
+        this.top = params['top'] === 'true';
+        this.reverse = params['reverse'] === 'true';
         this.sentFrom = params['sentFrom'] || "home";
+
 
         if (paramUsername) {
             this.drawParams = {key: 'username', value: paramUsername};
@@ -95,6 +100,7 @@ export class DrawComponent implements AfterViewInit, OnInit, OnDestroy {
                 this.message = `The image below is all of the pixels that made it from the "megatemplate" created before the event onto the final canvas`
                 this.filename = `compare4${this.year}.png`;
             } else if (paramSpecial === 'undo') {
+                this.undo = true;
                 this.message = `The image below is all of the pixels that were undone by users during the ${this.year} event`;
                 this.filename = `oops-all-mistakes${this.year}.png`
             } else if (paramSpecial === 'reverse') {
@@ -213,6 +219,7 @@ export class DrawComponent implements AfterViewInit, OnInit, OnDestroy {
             .subscribe({
                 next: (pixels) => {
                     console.log(`The draw component got ${pixels?.length} pixels.`)
+                    console.log(`Undo is set to ${this.undo}`)
                     setTimeout(() => {
                         if (!pixels || pixels.length === 0) {
                             this.errorMessage = `Pixels didn't load or length of zero`;
@@ -234,7 +241,12 @@ export class DrawComponent implements AfterViewInit, OnInit, OnDestroy {
                             if (this.undo !== true) {
                                 if (pixel.isUndo === false) {
                                     this.context.fillStyle = pixel.colorHex;
-                            this.context.fillRect(pixel.xCoordinate, pixel.yCoordinate, 1, 1);
+                                    this.context.fillRect(pixel.xCoordinate, pixel.yCoordinate, 1, 1);
+                                }
+                            } else {
+                                if (pixel.isUndo === true) {
+                                    this.context.fillStyle = pixel.colorHex;
+                                    this.context.fillRect(pixel.xCoordinate, pixel.yCoordinate, 1, 1);
                                 }
                             }
                         });

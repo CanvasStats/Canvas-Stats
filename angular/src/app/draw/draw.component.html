@@ -22,10 +22,10 @@
                 </span> Back to your {{year}} stats</button>
             }
             @else {
-                @if (sentFrom === 'custom') {
-                    <button class="btn blue" routerLink="/custom"><span class="material-symbols-outlined">
+                @if (sentFrom === 'advanced') {
+                    <button class="btn blue" routerLink="/advanced"><span class="material-symbols-outlined">
                     arrow_back
-                </span> Return to Generate page</button>
+                </span> Return to Advanced Search</button>
                 }
                 @else { 
                     <button class="btn blue" (click)="goToYearHome()"><span class="material-symbols-outlined">

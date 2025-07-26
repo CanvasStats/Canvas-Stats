@@ -104,6 +104,15 @@ export class CustomComponent implements OnInit {
     }
     if (step === 4) {
       this.special = value.toString();
+      if (value.toString() === 'undo') {
+        this.undo = true;
+      }
+      if (value.toString() === 'reverse') {
+        this.reverse = true;
+      }
+      if (value.toString() === 'top') {
+        this.top = true;
+      }
       this.showStep++;
     }
     if (step === 5) {
@@ -111,7 +120,7 @@ export class CustomComponent implements OnInit {
         this.router.navigate(['./draw'],
           {
             queryParams: {
-              sentFrom: 'custom',
+              sentFrom: 'advanced',
               year: this.year,
               username: this.username,
               special: this.special,
@@ -125,7 +134,7 @@ export class CustomComponent implements OnInit {
         this.router.navigate(['./draw'],
           {
             queryParams: {
-              sentFrom: 'custom',
+              sentFrom: 'advanced',
               year: this.year,
               username: this.instance,
               special: this.special,
