@@ -84,7 +84,7 @@ export class CustomComponent implements OnInit {
       if (this.username) {
         this.canvasService.checkForInstanceOrUser(this.username).subscribe(found => {
           if (found) {
-            this.showStep++;
+            this.showStep = 5;
           } else {
             this.username = undefined;
             this.errorMessage = "User not found, please try again"
@@ -94,7 +94,7 @@ export class CustomComponent implements OnInit {
       if (this.instance) {
         this.canvasService.checkForInstanceOrUser(this.instance).subscribe(found => {
           if (found) {
-            this.showStep++;
+            this.showStep = 5;
           } else {
             this.instance = undefined;
             this.errorMessage = "Instance not found, please try again"
@@ -137,6 +137,19 @@ export class CustomComponent implements OnInit {
               sentFrom: 'advanced',
               year: this.year,
               username: this.instance,
+              special: this.special,
+              background: value,
+              undo: this.undo,
+              reverse: this.reverse,
+              top: this.top
+            }
+          });
+      } else {
+        this.router.navigate(['./draw'],
+          {
+            queryParams: {
+              sentFrom: 'advanced',
+              year: this.year,
               special: this.special,
               background: value,
               undo: this.undo,

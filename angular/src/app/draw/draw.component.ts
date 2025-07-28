@@ -211,7 +211,6 @@ export class DrawComponent implements AfterViewInit, OnInit, OnDestroy {
         this.loading = true;
         this.finishedDrawing = false;
         this.errorMessage = null;
-
         this.canvasService.getPixelsForDraw(this.year, this.drawParams.key, this.drawParams.value)
             .pipe(
                 takeUntil(this.destroy$)
@@ -219,10 +218,9 @@ export class DrawComponent implements AfterViewInit, OnInit, OnDestroy {
             .subscribe({
                 next: (pixels) => {
                     console.log(`The draw component got ${pixels?.length} pixels.`)
-                    console.log(`Undo is set to ${this.undo}`)
                     setTimeout(() => {
                         if (!pixels || pixels.length === 0) {
-                            this.errorMessage = `Pixels didn't load or length of zero`;
+                            this.errorMessage = `Pixels didn't load or length of zero. Please try again`;
                             this.loading = false;
                             this.finishedDrawing = true;
                             return;

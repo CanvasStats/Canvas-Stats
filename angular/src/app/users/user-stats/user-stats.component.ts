@@ -104,7 +104,12 @@ export class UserStatsComponent implements OnInit {
   sendUserToDraw(backgroundChoice: number) {
     if (backgroundChoice == 1) {
       //send to white background
-      this.router.navigate(['./draw'], { queryParams: { sentFrom: 'user', year: this.year, background: 'white', username: this.username } });
+      this.router.navigate(['./draw'], { 
+        queryParams: { 
+          sentFrom: 'user', 
+          year: this.year, 
+          background: 'white', 
+          username: this.username} });
     } else {
       //send to transparent background
       this.router.navigate(['./draw'], { queryParams: { sentFrom: 'user', year: this.year, background: 'transparent', username: this.username } });

@@ -10,7 +10,7 @@
 }
 <!-- UNCOMMENT LINE BELOW ABOUT GOING TO GENERATE CUSTOM CANVAS PAGE -->
 @if (errorMessage) {
-<div class="error rose clickable" (click)="sendUserToStats()">{{errorMessage}}</div>
+<div class="error rose clickable" routerLink="/advanced">{{errorMessage}}</div>
 }
 @if (!errorMessage) {
 <main>
