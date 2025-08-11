@@ -53,10 +53,6 @@ export const canvas2025: YearStat[] = [
         ]
     ),
     new YearStat(
-        'image', 'right', undefined, 'Pixel Heat Map', 
-        [new ContentPair('img', '<a href="https://raw.githubusercontent.com/TheRealMonte/images/refs/heads/main/2025/heatmapPlaceholder.png" target="_blank" title="Click to enlarge"><img class="graph" src="https://raw.githubusercontent.com/TheRealMonte/images/refs/heads/main/2025/heatmapPlaceholder.png" alt="2025 Pixel Heat Map" /></a>')]
-    ),
-    new YearStat(
         'text', 'left', 'undo', undefined,
         [new ContentPair('p', '4969 pixels were undone by 360 users. (Down 10,755 pixels from 2024)')]
     ),
